@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default dark theme values as specified in brand identity */
+  --bg-main: 224 71% 4%;            /* #030712 / deep dark navy */
+  --bg-surface: 222 47% 8%;         /* #091226 */
+  --bg-surface-elevated: 222 45% 12%;/* #111d38 */
+  --bg-glass: 224 71% 6% / 0.75;
+  --border-subtle: 217 33% 20% / 0.6;
+  --border-accent: 183 100% 50% / 0.3;
+
+  --text-main: 210 40% 98%;          /* soft white #f8fafc */
+  --text-muted: 215 20% 65%;         /* slate gray-blue #94a3b8 */
+  --text-dim: 215 16% 47%;           /* #64748b */
+
+  --accent-cyan: 183 100% 50%;       /* #00f0ff electric cyan */
+  --accent-violet: 263 90% 66%;      /* #8b5cf6 violet */
+  --accent-emerald: 142 71% 45%;     /* #10b981 accessible green */
+
+  --glow-cyan: 0 0 25px rgba(0, 240, 255, 0.25);
+  --glow-violet: 0 0 25px rgba(139, 92, 246, 0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.light {
+  --bg-main: 210 40% 98%;            /* #f8fafc */
+  --bg-surface: 0 0% 100%;           /* #ffffff */
+  --bg-surface-elevated: 214 32% 93%;/* #e2e8f0 */
+  --bg-glass: 0 0% 100% / 0.85;
+  --border-subtle: 214 32% 85% / 0.8;
+  --border-accent: 183 100% 40% / 0.4;
+
+  --text-main: 222 47% 11%;          /* #0f172a */
+  --text-muted: 215 16% 40%;         /* #475569 */
+  --text-dim: 215 14% 60%;
+
+  --accent-cyan: 190 95% 39%;        /* readable cyan in light mode */
+  --accent-violet: 263 70% 55%;
+  --accent-emerald: 158 64% 38%;
+
+  --glow-cyan: 0 4px 20px rgba(6, 182, 212, 0.15);
+  --glow-violet: 0 4px 20px rgba(139, 92, 246, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--bg-main));
+  color: hsl(var(--text-main));
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: hsl(var(--bg-glass));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid hsl(var(--border-subtle));
+}
+
+.glass-panel-glow {
+  background: hsl(var(--bg-glass));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(var(--border-accent));
+  box-shadow: var(--glow-cyan);
+}
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--bg-surface) / 0.85) 0%,
+    hsl(var(--bg-surface-elevated) / 0.6) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border-subtle));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: hsl(var(--border-accent));
+}
+
+/* Subtle gradient text */
+.gradient-text-cyan-violet {
+  background: linear-gradient(135deg, #00f0ff 0%, #38bdf8 40%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-subtle {
+  background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--bg-main));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--bg-surface-elevated));
+  border-radius: 4px;
+  border: 1px solid hsl(var(--border-subtle));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent-cyan) / 0.5);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--accent-cyan));
+  outline-offset: 2px;
+}
+
+/* Accessible reduced-motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

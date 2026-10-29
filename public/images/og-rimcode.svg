@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgOg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#050d21"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgOg)"/>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="200" cy="150" r="300" fill="#00f0ff" opacity="0.08" filter="blur(80px)"/>
+  <circle cx="1000" cy="450" r="350" fill="#8b5cf6" opacity="0.08" filter="blur(80px)"/>
+
+  <!-- Brand Symbol -->
+  <rect x="100" y="100" width="70" height="70" rx="18" fill="url(#glowGrad)"/>
+  <text x="135" y="145" fill="#020617" font-family="monospace" font-size="34" font-weight="900" text-anchor="middle">&gt;_</text>
+
+  <!-- Brand Name -->
+  <text x="190" y="148" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" letter-spacing="-1">
+    Rim<tspan fill="#00f0ff">Code</tspan>
+  </text>
+
+  <!-- Main Headline -->
+  <text x="100" y="270" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="800" letter-spacing="-1.5">
+    Soluciones Digitales &amp; Sistemas ERP
+  </text>
+  <text x="100" y="340" fill="url(#glowGrad)" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700">
+    Desarrollo Full-Stack a Medida
+  </text>
+
+  <!-- Description -->
+  <text x="100" y="420" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="400">
+    Samir Jhoner Gómez Alarcón • Next.js, React, TypeScript, NestJS &amp; PostgreSQL
+  </text>
+
+  <!-- Badges -->
+  <g transform="translate(100, 480)">
+    <rect x="0" y="0" width="220" height="46" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="110" y="29" fill="#00f0ff" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">⚡ Control de Stock &amp; POS</text>
+
+    <rect x="240" y="0" width="200" height="46" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="340" y="29" fill="#8b5cf6" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">🌐 Next.js 15 App Router</text>
+
+    <rect x="460" y="0" width="190" height="46" rx="12" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="555" y="29" fill="#10b981" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">🔒 Código Mantenible</text>
+  </g>
+</svg>
+
