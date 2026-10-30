@@ -4,7 +4,6 @@ import { useReducer, useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
 import {
   initialDemoProducts,
   initialDemoSalesHistory,
@@ -22,7 +21,6 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
 import {
-  RotateCcw,
   DollarSign,
   Package,
   AlertTriangle,
@@ -286,33 +284,14 @@ export function LiveDemoSection() {
           />
         </motion.div>
 
-        {/* Role Switcher and Reset Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-6">
-          <div className="flex-1">
-            <RoleSwitcher
-              currentRole={state.currentRole}
-              onRoleChange={(role) => dispatch({ type: "SET_ROLE", role })}
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              disabled={!permissions.canReset}
-              onClick={handleReset}
-              title={
-                !permissions.canReset
-                  ? "Solo el rol de Administrador puede reiniciar los datos simulados"
-                  : "Restablecer todos los datos iniciales"
-              }
-              className="text-xs"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Restablecer Datos</span>
-            </Button>
-          </div>
+        {/* Role Switcher and Header Control Bar */}
+        <div className="mb-6">
+          <RoleSwitcher
+            currentRole={state.currentRole}
+            onRoleChange={(role) => dispatch({ type: "SET_ROLE", role })}
+            onReset={handleReset}
+            canReset={permissions.canReset}
+          />
         </div>
 
         {/* KPI Metrics Summary Cards */}
@@ -391,39 +370,39 @@ export function LiveDemoSection() {
           <button
             type="button"
             onClick={() => setActiveTab("inventory")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${
               activeTab === "inventory"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-4 h-4 shrink-0" />
             <span>Inventario & POS</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("chart")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${
               activeTab === "chart"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            <BarChart3 className="w-4 h-4" />
+            <BarChart3 className="w-4 h-4 shrink-0" />
             <span>Gráfico de Ventas</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("kardex")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${
               activeTab === "kardex"
                 ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            <History className="w-4 h-4" />
+            <History className="w-4 h-4 shrink-0" />
             <span>Kardex Histórico</span>
           </button>
         </div>

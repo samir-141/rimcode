@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  Suspense,
+} from "react";
 import Image from "next/image";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sparkles, RoundedBox, Environment } from "@react-three/drei";
@@ -77,10 +84,12 @@ function CyberRobotModel({
   isHovered,
   isGreeting,
   onRobotClick,
+  onHoverChange,
 }: {
   isHovered: boolean;
   isGreeting: boolean;
   onRobotClick: () => void;
+  onHoverChange: (hovered: boolean) => void;
 }) {
   const headRef = useRef<THREE.Group>(null);
   const bodyRef = useRef<THREE.Group>(null);
@@ -375,10 +384,10 @@ function CyberRobotModel({
       }}
       onPointerOver={(e) => {
         e.stopPropagation();
-        document.body.style.cursor = "pointer";
+        onHoverChange(true);
       }}
       onPointerOut={() => {
-        document.body.style.cursor = "auto";
+        onHoverChange(false);
       }}
     >
       <Float speed={2.5} rotationIntensity={0.15} floatIntensity={0.35}>
@@ -607,14 +616,29 @@ export function AvatarStaticFallback() {
 }
 
 export function Avatar3D() {
-  const [mounted, setMounted] = useState(false);
-  const [hasWebGL, setHasWebGL] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [hasWebGL] = useState(() => {
+    if (typeof window === "undefined") return true;
+    try {
+      const canvas = document.createElement("canvas");
+      return !!(
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl")
+      );
+    } catch {
+      return false;
+    }
+  });
+
+  const [prefersReducedMotion] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
   const [isHovered, setIsHovered] = useState(false);
   const [isGreeting, setIsGreeting] = useState(false);
 
   // Playful high-tech robotic chirp (Web Audio API)
-  const playChirpSound = () => {
+  const playChirpSound = useCallback(() => {
     try {
       const AudioContextClass =
         window.AudioContext ||
@@ -646,7 +670,7 @@ export function Avatar3D() {
     } catch {
       // Audio unavailable or autoplay restricted
     }
-  };
+  }, []);
 
   const handleTriggerGreet = useCallback(() => {
     setIsGreeting(true);
@@ -654,22 +678,9 @@ export function Avatar3D() {
     setTimeout(() => {
       setIsGreeting(false);
     }, 3400);
-  }, []);
+  }, [playChirpSound]);
 
   useEffect(() => {
-    setMounted(true);
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    try {
-      const canvas = document.createElement("canvas");
-      const gl =
-        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) setHasWebGL(false);
-    } catch {
-      setHasWebGL(false);
-    }
-
     // Trigger initial robotic greeting animation upon page load
     const timer = setTimeout(() => {
       handleTriggerGreet();
@@ -677,10 +688,6 @@ export function Avatar3D() {
 
     return () => clearTimeout(timer);
   }, [handleTriggerGreet]);
-
-  if (!mounted) {
-    return <div className="w-full h-[480px] sm:h-[550px]" />;
-  }
 
   if (!hasWebGL || prefersReducedMotion) {
     return (
@@ -692,9 +699,7 @@ export function Avatar3D() {
 
   return (
     <div
-      className="w-full h-[480px] sm:h-[550px] relative select-none"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="w-full h-[480px] sm:h-[550px] relative select-none cursor-pointer"
       role="img"
       aria-label="Avatar 3D interactivo de RimCode con animación robótica de saludo"
     >
@@ -709,20 +714,22 @@ export function Avatar3D() {
         }}
       >
         {/* Physical Lighting with Titanium Chrome Specular Highlights */}
-        <ambientLight intensity={0.65} />
-        <directionalLight position={[0, 4, 3]} intensity={1.5} color="#e2e8f0" />
-        <pointLight position={[3.5, 2.5, 3]} intensity={34} color="#00ffff" />
-        <pointLight position={[-3.5, -2, 3]} intensity={34} color="#d946ef" />
-        <pointLight position={[0, -3, 2]} intensity={15} color="#38bdf8" />
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[0, 4, 3]} intensity={1.8} color="#e2e8f0" />
+        <pointLight position={[3.5, 2.5, 3]} intensity={36} color="#00ffff" />
+        <pointLight position={[-3.5, -2, 3]} intensity={36} color="#d946ef" />
+        <pointLight position={[0, -3, 2]} intensity={16} color="#38bdf8" />
 
-        {/* Environment map provides true mirror chrome reflections */}
-        <Environment preset="city" />
-
-        <CyberRobotModel
-          isHovered={isHovered}
-          isGreeting={isGreeting}
-          onRobotClick={handleTriggerGreet}
-        />
+        {/* Suspense boundary inside Canvas catches Drei loaders without touching React DOM */}
+        <Suspense fallback={null}>
+          <Environment preset="city" />
+          <CyberRobotModel
+            isHovered={isHovered}
+            isGreeting={isGreeting}
+            onRobotClick={handleTriggerGreet}
+            onHoverChange={setIsHovered}
+          />
+        </Suspense>
 
         {/* Bloom Post-Processing for Glowing Neon Radiance */}
         <EffectComposer>

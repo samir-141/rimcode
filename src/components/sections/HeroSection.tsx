@@ -21,11 +21,11 @@ const Avatar3D = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-[460px] sm:h-[520px] flex items-center justify-center">
+      <div className="w-full h-[480px] sm:h-[550px] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-16 h-16 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
+          <div className="w-14 h-14 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin" />
           <span className="text-xs font-mono text-cyan-300">
-            Cargando avatar 3D procedural...
+            Iniciando interfaz 3D...
           </span>
         </div>
       </div>
