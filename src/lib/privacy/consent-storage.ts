@@ -20,10 +20,6 @@ const CONSENT_SOURCES: ConsentSource[] = [
     "revoked",
 ];
 
-function isConsentCategoryId(value: string): value is ConsentCategoryId {
-    return (CONSENT_CATEGORY_IDS as string[]).includes(value);
-}
-
 function parseRecord(value: unknown): ConsentRecord | null {
     if (typeof value !== "object" || value === null) return null;
 

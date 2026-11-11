@@ -1,6 +1,10 @@
 import companyJson from "../../../db/company.json";
 import contactJson from "../../../db/contact.json";
-import faqJson from "../../../db/faq.json";
+import faqComercialJson from "../../../db/faq/comercial.json";
+import faqEmpresaJson from "../../../db/faq/empresa.json";
+import faqProyectosJson from "../../../db/faq/proyectos.json";
+import faqServiciosJson from "../../../db/faq/servicios.json";
+import faqTecnologiasJson from "../../../db/faq/tecnologias.json";
 import methodologyJson from "../../../db/methodology.json";
 import projectsJson from "../../../db/projects.json";
 import rimyJson from "../../../db/rimy.json";
@@ -13,6 +17,7 @@ import type {
     Contact,
     Currency,
     FaqData,
+    FaqItem,
     MethodologyData,
     Project,
     ProjectStatus,
@@ -28,7 +33,15 @@ export * from "./types";
 
 const company = companyJson as Company;
 const contactBase = contactJson as Contact;
-const faq = faqJson as FaqData;
+const faq: FaqData = {
+    items: [
+        ...(faqEmpresaJson.items as FaqItem[]),
+        ...(faqServiciosJson.items as FaqItem[]),
+        ...(faqProyectosJson.items as FaqItem[]),
+        ...(faqTecnologiasJson.items as FaqItem[]),
+        ...(faqComercialJson.items as FaqItem[]),
+    ],
+};
 const methodology = methodologyJson as MethodologyData;
 const projectsData = projectsJson as ProjectsData;
 const rimy = rimyJson as RimyData;
@@ -104,6 +117,7 @@ export function validateProject(project: unknown): string[] {
 function normalizeProject(project: Project): Project {
     return {
         ...project,
+        targetAudience: project.targetAudience ?? project.client ?? "",
         objectives: Array.isArray(project.objectives) ? project.objectives : [],
         gallery: Array.isArray(project.gallery) ? project.gallery : [],
         challenges: Array.isArray(project.challenges) ? project.challenges : [],
@@ -123,6 +137,20 @@ function normalizeProject(project: Project): Project {
             github: project.links?.github ?? "",
             documentation: project.links?.documentation ?? "",
         },
+        seo: project.seo
+            ? {
+                  metaTitle: project.seo.metaTitle || project.name,
+                  metaDescription: project.seo.metaDescription || project.shortDescription,
+                  keywords: Array.isArray(project.seo.keywords) ? project.seo.keywords : [],
+                  canonicalUrl: project.seo.canonicalUrl || `/projects/${project.slug}`,
+                  ogTitle: project.seo.ogTitle || `${project.name} | RimCode`,
+                  ogDescription: project.seo.ogDescription || project.shortDescription,
+                  ogImage: project.seo.ogImage || project.thumbnail,
+                  ogType: project.seo.ogType === "website" ? "website" : "article",
+                  twitterCard: project.seo.twitterCard === "summary" ? "summary" : "summary_large_image",
+                  altText: project.seo.altText || `Imagen de referencia de ${project.name}`,
+              }
+            : undefined,
     };
 }
 

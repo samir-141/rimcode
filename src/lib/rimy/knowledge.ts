@@ -6,9 +6,10 @@ import {
     getProjects,
     getRimy,
     getServices,
+    getSettings,
     getTechnologies,
 } from "@/lib/db";
-import type { Currency, Project } from "@/lib/db/types";
+import type { Currency, FaqItem, FaqTableType, Project } from "@/lib/db/types";
 
 export type KnowledgeEntry = {
     id: string;
@@ -18,10 +19,17 @@ export type KnowledgeEntry = {
     source: string;
 };
 
+export type AnswerTable = {
+    headers: string[];
+    rows: string[][];
+};
+
 export type LocalAnswer = {
     reply: string;
+    table?: AnswerTable;
     suggestions: string[];
     matched: string[];
+    category?: string;
     inScope: boolean;
 };
 
@@ -32,23 +40,17 @@ const methodology = getMethodology();
 const projects = getProjects();
 const rimy = getRimy();
 const services = getServices();
+const settings = getSettings();
 const technologies = getTechnologies();
 
 const STOPWORDS = new Set([
     "que",
-    "qué",
     "como",
-    "cómo",
     "cual",
-    "cuál",
     "cuales",
-    "cuáles",
     "donde",
-    "dónde",
     "cuando",
-    "cuándo",
     "porque",
-    "porqué",
     "para",
     "por",
     "con",
@@ -56,7 +58,6 @@ const STOPWORDS = new Set([
     "los",
     "las",
     "del",
-    "las",
     "una",
     "uno",
     "unos",
@@ -67,7 +68,6 @@ const STOPWORDS = new Set([
     "estos",
     "estas",
     "sobre",
-    "más",
     "mas",
     "muy",
     "hay",
@@ -75,11 +75,8 @@ const STOPWORDS = new Set([
     "tienen",
     "puedo",
     "pueden",
-    "hace",
-    "hacen",
     "soy",
     "eres",
-    "es",
     "son",
     "me",
     "mi",
@@ -90,9 +87,6 @@ const STOPWORDS = new Set([
     "la",
     "de",
     "en",
-    "y",
-    "o",
-    "a",
     "al",
     "un",
     "se",
@@ -103,9 +97,36 @@ const STOPWORDS = new Set([
     "te",
     "ti",
     "yo",
-    "él",
     "ella",
+    "ustedes",
+    "tu",
+    "tus",
+    "su",
+    "sus",
 ]);
+
+const SYNONYM_GROUPS: string[][] = [
+    ["servicios", "servicio", "hacen", "dedican", "ofrecen", "ofrece", "brindan", "soluciones", "desarrollan", "crean"],
+    ["erp", "gestion", "inventario", "pos", "kardex", "botica", "farmacia", "almacen", "facturacion", "ventas"],
+    ["tienda", "tiendas", "virtual", "virtuales", "ecommerce", "comercio", "carrito", "checkout", "catalogo"],
+    ["proyectos", "proyecto", "portafolio", "casos", "ejemplos", "experiencia", "trabajos", "desarrollado"],
+    ["tecnologias", "tecnologia", "stack", "lenguaje", "lenguajes", "framework", "frameworks", "herramientas"],
+    ["metodologia", "trabajan", "trabajas", "proceso", "fases", "etapas", "sprints", "forma"],
+    ["cuesta", "costo", "costos", "precio", "precios", "cotizar", "cotizacion", "presupuesto", "inversion", "tarifa", "vale", "cuanto"],
+    ["tarda", "tiempo", "plazo", "semanas", "demora", "duracion", "entrega", "cuando"],
+    ["contratar", "contacto", "contactar", "contactarlos", "whatsapp", "correo", "email", "hablar", "escribir", "reunion", "telefono"],
+    ["demo", "demostracion", "demostraciones", "probar", "prueba", "muestra", "vivo", "ver"],
+    ["codigo", "propiedad", "fuente", "repositorio", "garantia"],
+    ["fundador", "creador", "samir", "jhoner", "gomez", "alarcon", "arquitecto"],
+];
+
+const SYNONYM_LOOKUP = new Map<string, Set<string>>();
+for (const group of SYNONYM_GROUPS) {
+    const groupSet = new Set(group);
+    for (const word of group) {
+        SYNONYM_LOOKUP.set(word, groupSet);
+    }
+}
 
 export function normalize(value: string): string {
     return value
@@ -120,235 +141,195 @@ export function normalize(value: string): string {
 function tokenize(value: string): string[] {
     return normalize(value)
         .split(" ")
-        .filter((token) => token.length > 2 && !STOPWORDS.has(token));
+        .filter((token) => token.length > 1 && !STOPWORDS.has(token));
 }
 
-function projectEntry(project: Project): KnowledgeEntry {
-    const parts = [
-        `${project.name} es un proyecto de RimCode en la categoría ${project.category}.`,
-        project.shortDescription,
-        project.problem ? `Problema que resuelve: ${project.problem}` : "",
-        project.features.length
-            ? `Funcionalidades documentadas: ${project.features.join(", ")}.`
-            : "",
-        project.technologies.length
-            ? `Tecnologías: ${project.technologies.join(", ")}.`
-            : "",
-        project.results.length
-            ? `Resultados documentados: ${project.results.join(", ")}.`
-            : "Los resultados ampliados de este proyecto aún no están documentados.",
-    ].filter(Boolean);
-
-    return {
-        id: `project:${project.slug}`,
-        title: project.name,
-        text: parts.join(" "),
-        keywords: [
-            project.name,
-            project.slug,
-            project.category,
-            "proyecto",
-            ...project.technologies,
-        ],
-        source: "db/projects.json",
-    };
+function expandTokens(tokens: string[]): Set<string> {
+    const expanded = new Set<string>(tokens);
+    for (const token of tokens) {
+        const group = SYNONYM_LOOKUP.get(token);
+        if (group) {
+            for (const syn of group) {
+                expanded.add(syn);
+            }
+        }
+    }
+    return expanded;
 }
 
-export function getKnowledgeEntries(): KnowledgeEntry[] {
-    const entries: KnowledgeEntry[] = [
-        {
-            id: "company:about",
-            title: "RimCode",
-            text: `${company.name}: ${company.description} ${company.valueProposition} Misión: ${company.mission}`,
-            keywords: ["rimcode", "empresa", "compañia", "negocio", "sobre"],
-            source: "db/company.json",
-        },
-        {
-            id: "company:founder",
-            title: "Fundador",
-            text: `RimCode fue fundada por ${company.founder.name}, ${company.founder.role}. ${company.founder.quote}`,
-            keywords: [
-                "fundador",
-                "creador",
-                "samir",
-                "gomez",
-                "alarcon",
-                "detras",
-            ],
-            source: "db/company.json",
-        },
-        {
-            id: "services:list",
-            title: "Servicios",
-            text: `Servicios documentados: ${services.services
-                .map((service) => `${service.name} (${service.description})`)
-                .join("; ")}.`,
-            keywords: [
-                "servicio",
-                "servicios",
-                "ofrecen",
-                "hacen",
-                "desarrollo",
-                "saas",
-                "ecommerce",
-                "erp",
-                "landing",
-                "web",
-                "plataforma",
-            ],
-            source: "db/services.json",
-        },
-        {
-            id: "services:budget",
-            title: "Presupuestos",
-            text: `Los precios del simulador son referenciales: ${services.services
-                .filter((service) => service.basePriceUSD > 0)
-                .map(
-                    (service) =>
-                        `${service.name} desde ${service.basePriceUSD} USD`
-                )
-                .join("; ")}. El presupuesto final depende del alcance y se confirma en una propuesta formal.`,
-            keywords: [
-                "precio",
-                "precios",
-                "cuesta",
-                "costo",
-                "cotizar",
-                "cotizacion",
-                "presupuesto",
-                "inversion",
-                "simulador",
-                "tarifa",
-            ],
-            source: "db/services.json",
-        },
-        {
-            id: "technologies:stack",
-            title: "Tecnologías",
-            text: `Stack documentado: ${technologies.items
-                .map((item) => item.name)
-                .join(", ")}. ${technologies.intro}`,
-            keywords: [
-                "tecnologia",
-                "tecnologias",
-                "stack",
-                "lenguaje",
-                "framework",
-                "herramientas",
-                "next",
-                "react",
-                "postgres",
-                "docker",
-                "python",
-            ],
-            source: "db/technologies.json",
-        },
-        {
-            id: "methodology:process",
-            title: "Metodología",
-            text: `Proceso de trabajo: ${methodology.steps
-                .map(
-                    (step) =>
-                        `${step.num}. ${step.title}: ${step.description}`
-                )
-                .join(" ")}`,
-            keywords: [
-                "metodologia",
-                "proceso",
-                "etapas",
-                "fases",
-                "sprints",
-                "trabajan",
-                "entrega",
-            ],
-            source: "db/methodology.json",
-        },
-        {
-            id: "contact:channels",
-            title: "Contacto",
-            text: `Puedes contactar a RimCode en ${contact.email}. ${
-                contact.whatsapp.enabled
-                    ? `WhatsApp: +${contact.whatsapp.number}.`
-                    : ""
-            } ${contact.responseTime}`,
-            keywords: [
-                "contacto",
-                "contactar",
-                "correo",
-                "email",
-                "escribir",
-                "reunion",
-                "hablar",
-                "contratar",
-                "whatsapp",
-            ],
-            source: "db/contact.json",
-        },
-        {
-            id: "company:values",
-            title: "Valores",
-            text: `Valores de RimCode: ${company.values
-                .map((value) => `${value.name} (${value.description})`)
-                .join("; ")}.`,
-            keywords: ["valores", "garantia", "propiedad", "codigo", "calidad"],
-            source: "db/company.json",
-        },
-        {
-            id: "projects:list",
-            title: "Proyectos",
-            text: `Proyectos documentados: ${projects
-                .map((project) => `${project.name} (${project.category})`)
-                .join("; ")}.`,
-            keywords: [
-                "proyecto",
-                "proyectos",
-                "portafolio",
-                "casos",
-                "experiencia",
-            ],
-            source: "db/projects.json",
-        },
-    ];
+const STATUS_LABELS: Record<Project["status"], string> = {
+    production: "En Producción",
+    development: "Implementación Activa",
+    prototype: "Fase Final",
+    archived: "Histórico",
+};
 
-    for (const project of projects) {
-        entries.push(projectEntry(project));
+function buildTable(tableType: FaqTableType | undefined, currency: Currency): AnswerTable | undefined {
+    if (!tableType) return undefined;
+
+    if (tableType === "services") {
+        return {
+            headers: ["Servicio", "Descripción", "Base (USD)"],
+            rows: services.services.map((srv) => [
+                srv.name,
+                srv.description,
+                srv.basePriceUSD > 0 ? `Desde $${srv.basePriceUSD}` : "A medida",
+            ]),
+        };
     }
 
-    for (const item of faq.items) {
-        entries.push({
-            id: `faq:${item.id}`,
-            title: item.question,
-            text: item.answer,
-            keywords: [item.question, ...item.keywords],
-            source: "db/faq.json",
-        });
+    if (tableType === "pricing") {
+        const rate = settings.currency.fallbackRates[currency] ?? 1;
+        const symbol = currency === "PEN" ? "S/" : currency === "EUR" ? "€" : "$";
+        return {
+            headers: ["Solución", `Referencia (${currency})`, "Base USD"],
+            rows: services.services
+                .filter((srv) => srv.basePriceUSD > 0)
+                .map((srv) => [
+                    srv.name,
+                    `Desde ${symbol} ${Math.round(srv.basePriceUSD * rate).toLocaleString("es-PE")}`,
+                    `$${srv.basePriceUSD} USD`,
+                ]),
+        };
     }
 
-    return entries;
+    if (tableType === "projects") {
+        return {
+            headers: ["Proyecto", "Categoría", "Estado"],
+            rows: projects.map((proj) => [
+                proj.name,
+                proj.category,
+                STATUS_LABELS[proj.status],
+            ]),
+        };
+    }
+
+    if (tableType === "technologies") {
+        const catMap = new Map(
+            technologies.categories.map((cat) => [cat.id, cat.label])
+        );
+        const grouped = new Map<string, string[]>();
+        for (const item of technologies.items) {
+            const label = catMap.get(item.category) ?? item.category;
+            const list = grouped.get(label) ?? [];
+            list.push(item.name);
+            grouped.set(label, list);
+        }
+        return {
+            headers: ["Área", "Tecnologías"],
+            rows: Array.from(grouped.entries()).map(([area, list]) => [
+                area,
+                list.join(", "),
+            ]),
+        };
+    }
+
+    if (tableType === "methodology") {
+        return {
+            headers: ["Fase", "Etapa", "Entregable"],
+            rows: methodology.steps.map((step) => [
+                step.num,
+                step.title,
+                step.deliverable,
+            ]),
+        };
+    }
+
+    if (tableType === "contact") {
+        const rows: string[][] = [["Correo", contact.email]];
+        if (contact.whatsapp.enabled && contact.whatsapp.number) {
+            rows.push(["WhatsApp", `+${contact.whatsapp.number}`]);
+        }
+        if (contact.phone) {
+            rows.push(["Teléfono", contact.phone]);
+        }
+        rows.push(["Tiempo de respuesta", contact.responseTime]);
+        return {
+            headers: ["Canal", "Detalle"],
+            rows,
+        };
+    }
+
+    return undefined;
 }
 
-function scoreEntry(entry: KnowledgeEntry, message: string): number {
-    const normalizedMessage = normalize(message);
-    const messageTokens = new Set(tokenize(message));
+function scoreFaqItem(item: FaqItem, normalizedMsg: string, rawTokens: string[], expandedTokens: Set<string>): number {
+    const normQuestion = normalize(item.question);
+    if (normalizedMsg === normQuestion) return 100;
+
+    const normVariations = (item.variations ?? []).map(normalize);
+    if (normVariations.includes(normalizedMsg)) return 95;
+
     let score = 0;
 
-    for (const keyword of entry.keywords) {
-        const normalizedKeyword = normalize(keyword);
-        if (!normalizedKeyword) continue;
-
-        if (normalizedKeyword.includes(" ")) {
-            if (normalizedMessage.includes(normalizedKeyword)) score += 6;
-        } else if (messageTokens.has(normalizedKeyword)) {
-            score += 4;
+    if (normalizedMsg.length >= 6 && normQuestion.includes(normalizedMsg)) {
+        score += 24;
+    }
+    for (const variation of normVariations) {
+        if (normalizedMsg.includes(variation) || (normalizedMsg.length >= 6 && variation.includes(normalizedMsg))) {
+            score += 26;
         }
     }
 
-    const titleTokens = tokenize(entry.title);
-    for (const token of titleTokens) {
-        if (messageTokens.has(token)) score += 2;
+    const questionTokens = new Set([
+        ...tokenize(item.question),
+        ...(item.variations ?? []).flatMap(tokenize),
+    ]);
+
+    for (const token of rawTokens) {
+        if (questionTokens.has(token)) score += 7;
+    }
+
+    for (const kw of item.keywords) {
+        const normKw = normalize(kw);
+        if (!normKw) continue;
+        if (normKw.includes(" ")) {
+            if (normalizedMsg.includes(normKw)) score += 16;
+        } else if (rawTokens.includes(normKw)) {
+            score += 9;
+        } else if (expandedTokens.has(normKw)) {
+            score += 5;
+        }
     }
 
     return score;
+}
+
+function matchSpecificProject(normalizedMsg: string, rawTokens: string[]): Project | null {
+    let best: { project: Project; score: number } | null = null;
+
+    for (const project of projects) {
+        const normName = normalize(project.name);
+        const normSlug = normalize(project.slug.replace(/-/g, " "));
+        let score = 0;
+
+        if (normalizedMsg.includes(normName) || normalizedMsg.includes(normSlug)) {
+            score += 40;
+        }
+
+        const nameTokens = tokenize(project.name);
+        for (const token of rawTokens) {
+            if (token.length >= 4 && nameTokens.includes(token)) {
+                score += 14;
+            }
+        }
+
+        if (project.slug === "angibotica" && normalizedMsg.includes("marifarma")) {
+            score += 35;
+        }
+        if (project.slug === "donde-florecen-los-sentimientos" && normalizedMsg.includes("flores")) {
+            score += 28;
+        }
+        if (project.slug === "cincit-2026" && (normalizedMsg.includes("cincit") || normalizedMsg.includes("cencit"))) {
+            score += 35;
+        }
+
+        if (score >= 14 && (!best || score > best.score)) {
+            best = { project, score };
+        }
+    }
+
+    return best?.project ?? null;
 }
 
 const OUT_OF_SCOPE_HINTS = [
@@ -358,9 +339,7 @@ const OUT_OF_SCOPE_HINTS = [
     "clima",
     "chiste",
     "politica",
-    "elecciones",
-    "presidente",
-    "novia",
+    "elecciones presidenciales",
     "horoscopo",
     "traduce",
     "tarea",
@@ -385,108 +364,121 @@ export function answerLocally(
 
     if (GREETING_PATTERN.test(normalized) && normalized.length < 40) {
         return {
-            reply: `${rimy.chat.welcome} Puedo ayudarte con información sobre RimCode.`,
+            reply: rimy.chat.welcome,
             suggestions: buildSuggestions(),
             matched: ["greeting"],
+            category: "empresa",
             inScope: true,
         };
     }
 
-    if (THANKS_PATTERN.test(normalized) && normalized.length < 40) {
+    if (THANKS_PATTERN.test(normalized) && normalized.length < 45) {
         return {
-            reply: "¡Gracias a ti! Si quieres, puedo contarte más sobre nuestros servicios o proyectos. 🤖",
+            reply: "Con gusto. Si tienes otra pregunta sobre RimCode, nuestros servicios o proyectos, escríbela aquí o revisa las sugerencias.",
             suggestions: buildSuggestions(),
             matched: ["thanks"],
+            category: "empresa",
             inScope: true,
         };
     }
 
-    const offTopic = OUT_OF_SCOPE_HINTS.find((hint) =>
-        normalized.includes(hint)
-    );
+    const offTopic = OUT_OF_SCOPE_HINTS.find((hint) => normalized.includes(hint));
     if (offTopic) {
         return {
-            reply: rimy.projectExplainer.outOfScope,
+            reply: `${rimy.projectExplainer.outOfScope} Si necesitas consultar un proyecto a medida, aquí tienes nuestros canales directos:`,
+            table: buildTable("contact", currency),
             suggestions: buildSuggestions(),
             matched: [],
             inScope: false,
         };
     }
 
-    const entries = getKnowledgeEntries();
-    const ranked = entries
-        .map((entry) => ({ entry, score: scoreEntry(entry, message) }))
-        .filter((item) => item.score > 0)
+    const rawTokens = tokenize(message);
+    const expandedTokens = expandTokens(rawTokens);
+
+    // 1. Verificar si consulta por un proyecto específico del portafolio
+    const specificProject = matchSpecificProject(normalized, rawTokens);
+    if (specificProject) {
+        const rows: string[][] = [
+            ["Categoría", specificProject.category],
+            ["Estado", STATUS_LABELS[specificProject.status]],
+            ["Tecnologías", specificProject.technologies.join(", ")],
+            [
+                "Público objetivo",
+                specificProject.targetAudience || specificProject.client || "RimCode",
+            ],
+        ];
+        if (specificProject.links.website) {
+            rows.push(["Sitio en vivo", specificProject.links.website]);
+        }
+
+        return {
+            reply: `${specificProject.name}: ${specificProject.description}`,
+            table: {
+                headers: ["Ficha", "Detalle"],
+                rows,
+            },
+            suggestions: [
+                "¿Qué proyectos han desarrollado?",
+                "¿Puedo solicitar una demostración?",
+                "¿Cuánto cuesta desarrollar un sistema?",
+                "¿Cómo puedo contratar sus servicios?",
+            ],
+            matched: [`project:${specificProject.slug}`],
+            category: "proyectos",
+            inScope: true,
+        };
+    }
+
+    // 2. Buscar mejor coincidencia en db/faq/*.json
+    const rankedFaq = faq.items
+        .map((item) => ({
+            item,
+            score: scoreFaqItem(item, normalized, rawTokens, expandedTokens),
+        }))
+        .filter((entry) => entry.score > 0)
         .sort((a, b) => b.score - a.score);
 
-    if (ranked.length === 0) {
+    const bestFaq = rankedFaq[0];
+    if (bestFaq && bestFaq.score >= 7) {
         return {
-            reply: `${rimy.projectExplainer.outOfScope} ${rimy.chat.scopeNotice}`,
-            suggestions: buildSuggestions(),
-            matched: [],
-            inScope: false,
+            reply: bestFaq.item.answer,
+            table: buildTable(bestFaq.item.tableType, currency),
+            suggestions:
+                bestFaq.item.relatedQuestions?.slice(0, 4) ?? buildSuggestions(),
+            matched: [`faq:${bestFaq.item.id}`],
+            category: bestFaq.item.category,
+            inScope: true,
         };
     }
 
-    const best = ranked[0].entry;
-    const top = ranked
-        .filter((item) => item.score >= Math.max(4, ranked[0].score * 0.6))
-        .slice(0, 3);
-
-    let reply = best.text;
-
-    if (best.id === "services:list") {
-        reply += ` ${services.helpText}`;
-    }
-
-    if (best.id === "services:budget") {
-        reply += ` La moneda activa en el sitio es ${currency}; el simulador muestra la conversión referencial. Para una cotización formal, usa el formulario de contacto.`;
-    }
-
-    if (
-        best.id.startsWith("project:") ||
-        best.id === "projects:list"
-    ) {
-        reply += " Puedes abrir cada proyecto en su página individual para ver el detalle documentado.";
-    }
-
-    if (best.id === "contact:channels") {
-        reply += ` También tienes el formulario de la sección de contacto.`;
-    }
-
-    const extra = top
-        .slice(1)
-        .map((item) => item.entry.text)
-        .join(" ");
-
-    if (extra && reply.length < 700) {
-        reply = `${reply} ${extra}`;
-    }
-
+    // 3. Fallback sin inventar datos: sugerir preguntas + contacto
     return {
-        reply,
+        reply: "No encontré un detalle exacto para esa consulta. Puedes elegir una de las preguntas sugeridas o comunicarte directamente con nuestro equipo:",
+        table: buildTable("contact", currency),
         suggestions: buildSuggestions(),
-        matched: top.map((item) => item.entry.id),
-        inScope: true,
+        matched: [],
+        inScope: false,
     };
 }
 
-export function buildAiContext(message: string): string {
-    const entries = getKnowledgeEntries();
-    const ranked = entries
-        .map((entry) => ({ entry, score: scoreEntry(entry, message) }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 8)
-        .filter((item) => item.score > 0);
-
-    const selected = ranked.length > 0 ? ranked.map((item) => item.entry) : entries.slice(0, 5);
-
-    return selected
-        .map(
-            (entry) =>
-                `[${entry.source}] ${entry.title}\n${entry.text}`
-        )
-        .join("\n\n");
+export function getKnowledgeEntries(): KnowledgeEntry[] {
+    return [
+        {
+            id: "company:about",
+            title: company.name,
+            text: `${company.name}: ${company.description}`,
+            keywords: ["rimcode", "empresa"],
+            source: "db/company.json",
+        },
+        ...faq.items.map((item) => ({
+            id: `faq:${item.id}`,
+            title: item.question,
+            text: item.answer,
+            keywords: [item.question, ...(item.variations ?? []), ...item.keywords],
+            source: `db/faq/${item.category}.json`,
+        })),
+    ];
 }
 
 export function getOutOfScopeReply(): string {

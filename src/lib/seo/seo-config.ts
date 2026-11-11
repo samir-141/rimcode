@@ -185,17 +185,25 @@ export function getProjectsIndexMetadata(): Metadata {
 
 export function getProjectMetadata(project: Project): Metadata {
     const siteUrl = getSiteUrl();
-    const thumbnail = resolveProjectImage(project.thumbnail);
+    const seo = project.seo;
+    const ogImagePath = resolveProjectImage(seo?.ogImage || project.thumbnail);
+    const ogImageUrl = absoluteUrl(ogImagePath, siteUrl);
+    const altText = seo?.altText || `Imagen de referencia de ${project.name}`;
+    const metaTitle = seo?.metaTitle || project.name;
+    const metaDescription = seo?.metaDescription || project.shortDescription;
+    const ogTitle = seo?.ogTitle || `${project.name} | RimCode`;
+    const ogDescription = seo?.ogDescription || metaDescription;
+    const canonicalPath = seo?.canonicalUrl || `/projects/${project.slug}`;
 
-    return buildPageMetadata({
-        title: project.name,
-        description: project.shortDescription,
-        path: `/projects/${project.slug}`,
-        type: "article",
+    const base = buildPageMetadata({
+        title: metaTitle,
+        description: metaDescription,
+        path: canonicalPath,
+        type: seo?.ogType ?? "article",
         images: [
             {
-                url: absoluteUrl(thumbnail, siteUrl),
-                alt: `Imagen de referencia de ${project.name}`,
+                url: ogImageUrl,
+                alt: altText,
                 width: 1200,
                 height: 630,
             },
@@ -203,13 +211,31 @@ export function getProjectMetadata(project: Project): Metadata {
         publishedTime: /^\d{4}-\d{2}-\d{2}/.test(project.publishedAt)
             ? project.publishedAt
             : undefined,
-        keywords: [
-            project.name,
-            project.category,
-            "desarrollo de software",
-            ...project.technologies.slice(0, 5),
-        ],
+        keywords:
+            seo?.keywords && seo.keywords.length > 0
+                ? seo.keywords
+                : [
+                      project.name,
+                      project.category,
+                      "desarrollo de software",
+                      ...project.technologies.slice(0, 5),
+                  ],
     });
+
+    return {
+        ...base,
+        openGraph: {
+            ...base.openGraph,
+            title: ogTitle,
+            description: ogDescription,
+        },
+        twitter: {
+            ...base.twitter,
+            card: seo?.twitterCard ?? "summary_large_image",
+            title: ogTitle,
+            description: ogDescription,
+        },
+    };
 }
 
 export function getLegalMetadata(

@@ -126,9 +126,10 @@ export function useScrollBehavior(callbacks: ScrollBehaviorCallbacks) {
 
         // En rutas sin Hero (por ejemplo /projects/[slug]) RIMY debe nacer
         // acoplada a la esquina y no intentar buscar un hueco inexistente.
-        const hasHero = Boolean(document.getElementById("hero"));
+        let hasHero = Boolean(document.getElementById("hero"));
 
         const updateDock = (y: number) => {
+            hasHero = Boolean(document.getElementById("hero"));
             const viewportHeight = window.innerHeight || 1;
             const shouldDock = !hasHero
                 ? true
@@ -141,6 +142,22 @@ export function useScrollBehavior(callbacks: ScrollBehaviorCallbacks) {
                 callbacksRef.current.onDockChange?.(docked);
             }
         };
+
+        let domObserver: MutationObserver | null = null;
+        if (!hasHero && pathname === "/") {
+            domObserver = new MutationObserver(() => {
+                const hero = document.getElementById("hero");
+                if (!hero) return;
+                observer.observe(hero);
+                domObserver?.disconnect();
+                domObserver = null;
+                updateDock(window.scrollY);
+            });
+            domObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+            });
+        }
 
         const onScroll = () => {
             if (frame) return;
@@ -218,6 +235,7 @@ export function useScrollBehavior(callbacks: ScrollBehaviorCallbacks) {
 
         return () => {
             observer.disconnect();
+            domObserver?.disconnect();
             if (frame) cancelAnimationFrame(frame);
             if (dwellTimer) clearTimeout(dwellTimer);
             window.removeEventListener("scroll", onScroll);

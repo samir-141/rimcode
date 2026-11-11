@@ -1,0 +1,64 @@
+{
+  "category": "comercial",
+  "items": [
+    {
+      "id": "costo-proyecto",
+      "category": "comercial",
+      "question": "¿Cuánto cuesta desarrollar un sistema?",
+      "variations": [
+        "cuanto cuesta una pagina web",
+        "cuales son sus precios",
+        "como cotizar un proyecto",
+        "cual es la inversion o presupuesto",
+        "cuanto vale un sistema erp"
+      ],
+      "keywords": ["cuesta", "costo", "costos", "precio", "precios", "cotizar", "cotizacion", "presupuesto", "inversion", "tarifa", "vale", "simulador"],
+      "answer": "La inversión depende del tipo de solución, los módulos y el plazo de entrega. Aquí tienes los valores base referenciales de nuestro simulador (sujetos a confirmación en propuesta formal):",
+      "tableType": "pricing",
+      "relatedQuestions": [
+        "¿Cuánto tarda un proyecto?",
+        "¿Cómo puedo contratar sus servicios?",
+        "¿Qué servicios ofrecen?"
+      ]
+    },
+    {
+      "id": "tiempo-entrega",
+      "category": "comercial",
+      "question": "¿Cuánto tarda un proyecto?",
+      "variations": [
+        "en cuanto tiempo entregan",
+        "cual es el plazo de desarrollo",
+        "cuantas semanas demora",
+        "tienen entrega express"
+      ],
+      "keywords": ["tarda", "tiempo", "plazo", "semanas", "demora", "duracion", "express", "estandar", "rapido"],
+      "answer": "Como referencia en nuestro simulador, la entrega estándar se estima entre 3 y 4 semanas y la modalidad express prioritaria entre 1 y 2 semanas según complejidad. El cronograma exacto se confirma tras definir el alcance técnico en la sesión inicial.",
+      "relatedQuestions": [
+        "¿Cuánto cuesta desarrollar un sistema?",
+        "¿Cómo trabajan?",
+        "¿Cómo puedo contratar sus servicios?"
+      ]
+    },
+    {
+      "id": "contratar-contacto",
+      "category": "comercial",
+      "question": "¿Cómo puedo contratar sus servicios?",
+      "variations": [
+        "como me contacto con ustedes",
+        "cual es su whatsapp o correo",
+        "quiero cotizar o agendar una reunion",
+        "como hablar con samir o rimcode",
+        "canales de atencion"
+      ],
+      "keywords": ["contratar", "contacto", "contactar", "contactarlos", "whatsapp", "correo", "email", "hablar", "escribir", "reunion", "telefono"],
+      "answer": "Puedes escribirnos directamente por nuestros canales oficiales o enviar tus requerimientos mediante el formulario de la sección Contacto (te responderemos en menos de 24 horas):",
+      "tableType": "contact",
+      "relatedQuestions": [
+        "¿Cuánto cuesta desarrollar un sistema?",
+        "¿Puedo solicitar una demostración?",
+        "¿Cómo trabajan?"
+      ]
+    }
+  ]
+}
+

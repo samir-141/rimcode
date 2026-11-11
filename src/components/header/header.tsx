@@ -167,7 +167,6 @@ export default function HeadLanding() {
     // 5. Observador de sección activa y seguimiento de scroll en la landing
     useEffect(() => {
         if (pathname !== "/") {
-            setActiveSection("");
             return;
         }
         const handleScroll = () => {
@@ -308,6 +307,8 @@ export default function HeadLanding() {
         };
     }, []);
 
+    const effectiveActiveSection = pathname === "/" ? activeSection : "";
+
     return (
         <>
             <header
@@ -351,10 +352,10 @@ export default function HeadLanding() {
                                     key={item.id}
                                     type="button"
                                     onClick={() => navigateTo(item.id)}
-                                    className={`nav-link ${activeSection === item.id ? "active" : ""
+                                    className={`nav-link ${effectiveActiveSection === item.id ? "active" : ""
                                         }`}
                                     aria-current={
-                                        activeSection === item.id ? "page" : undefined
+                                        effectiveActiveSection === item.id ? "page" : undefined
                                     }
                                 >
                                     <span className="nav-node">
@@ -435,8 +436,36 @@ export default function HeadLanding() {
                             aria-expanded={menuOpen}
                             aria-controls="mobile-navigation"
                         >
-                            <span />
-                            <span />
+                            {menuOpen ? (
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                >
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            ) : (
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                >
+                                    <line x1="4" y1="6" x2="20" y2="6" />
+                                    <line x1="4" y1="12" x2="20" y2="12" />
+                                    <line x1="4" y1="18" x2="20" y2="18" />
+                                </svg>
+                            )}
                         </button>
                     </div>
                 </div>
@@ -452,13 +481,30 @@ export default function HeadLanding() {
                             key={item.id}
                             type="button"
                             onClick={() => navigateTo(item.id)}
-                            className={activeSection === item.id ? "active" : ""}
+                            className={effectiveActiveSection === item.id ? "active" : ""}
                         >
                             <span>{String(index + 1).padStart(2, "0")}</span>
                             {item.label}
                             <span className="mobile-arrow" aria-hidden="true">↗</span>
                         </button>
                     ))}
+
+                    {/* DETALLE DE TIPO DE CAMBIO EN MÓVIL */}
+                    <div className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-black/10 bg-black/5 px-3.5 py-2.5 text-xs dark:border-white/10 dark:bg-white/5">
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--header-muted)]">
+                            {loadingRates ? "Actualizando..." : "Tipo de cambio"}
+                        </span>
+                        <div className="text-right font-mono">
+                            <strong className="text-[var(--header-text)]">
+                                1 USD = {(rates[currency] ?? 1).toFixed(3)} {currency}
+                            </strong>
+                            {lastUpdate && (
+                                <small className="block text-[9px] text-[var(--header-muted)]">
+                                    Actualizado {lastUpdate}
+                                </small>
+                            )}
+                        </div>
+                    </div>
 
                     <div className="mobile-nav-footer">
                         RIMCODE / DIGITAL SOLUTIONS

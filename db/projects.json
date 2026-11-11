@@ -1,8 +1,8 @@
 {
   "meta": {
-    "lastUpdated": "2026-11-09",
-    "source": "Contenido documentado y portafolio oficial de RimCode",
-    "note": "Los campos vacíos o ausentes no se renderizan como si existieran. No se han inventado enlaces, métricas, galerías ni demostraciones."
+    "lastUpdated": "2026-11-11",
+    "source": "Contenido verificado mediante auditoría web y repositorios oficiales de RimCode",
+    "note": "Los campos vacíos o pendientes se declaran de forma explícita. No se han inventado métricas ni URLs."
   },
   "projects": [
     {
@@ -13,60 +13,83 @@
       "status": "production",
       "featured": true,
       "published": true,
-      "shortDescription": "Experiencia web interactiva y narrativa romántica inspirada en las flores amarillas.",
-      "description": "Aplicación web temática diseñada para transformar el significado de las flores amarillas en una experiencia digital romántica, mediante una narrativa visual que busca transmitir emociones, cariño y conexión a través de una interfaz inmersiva.",
-      "problem": "Los mensajes románticos tradicionales suelen limitarse a textos, imágenes estáticas o dedicatorias convencionales. Este proyecto busca ofrecer una alternativa más personal e inmersiva, convirtiendo una dedicatoria en una experiencia digital que invite al usuario a explorar, descubrir y conectar emocionalmente con la historia.",
+      "shortDescription": "Experiencia web poética e interactiva por capítulos con música ambiental, animaciones en canvas y narrativa visual inspirada en las flores amarillas.",
+      "description": "Aplicación web temática diseñada para transformar el simbolismo de las flores amarillas en una experiencia digital romántica organizada en 8 capítulos visuales, con motor de sonido ambiental, reproductor musical integrado, progreso persistente y tarjetas de recuerdos interactivas.",
+      "problem": "Los mensajes románticos digitales suelen limitarse a textos o imágenes estáticas. Este proyecto ofrece una narrativa interactiva por capítulos donde la persona explora visualmente el crecimiento de una flor mientras descubre recuerdos y dedicatorias personalizadas.",
+      "targetAudience": "Proyectos creativos, dedicatorias digitales interactivas y experiencias web con narrativa visual.",
       "objectives": [
-        "Presentación narrativa para transmitir emociones mediante experiencia digital",
-        "Interfaz visual interactiva con identidad propia y diseño inmersivo",
-        "Experiencia web accesible y optimizada desde navegadores modernos"
+        "Narrativa interactiva estructurada en 8 capítulos progresivos",
+        "Motor de audio ambiental, cursor personalizado y confeti en canvas",
+        "Interfaz inmersiva optimizada para navegadores móviles y de escritorio"
       ],
       "technologies": [
-        "React",
+        "React 19",
         "TypeScript",
-        "Tailwind CSS",
-        "JavaScript",
+        "Tailwind CSS v4",
+        "Vite",
+        "Canvas Confetti",
+        "Lucide React",
         "Vercel"
       ],
-      "thumbnail": "/images/projects/flores-amarillas-preview.png",
+      "thumbnail": "/images/seo/projects/donde-florecen-los-sentimientos-og.png",
       "gallery": [],
       "demo": {
         "type": "external",
         "url": "https://flores-amarrillaslvoe-delta.vercel.app/",
         "enabled": true,
         "title": "Ver Experiencia en Vivo",
-        "description": "Despliegue activo en Vercel.",
+        "description": "Despliegue público activo en Vercel (HTTP 200 verificado).",
         "aspectRatio": "16 / 9"
       },
       "links": {
         "website": "https://flores-amarrillaslvoe-delta.vercel.app/",
-        "github": "https://github.com/samir-141",
+        "github": "https://github.com/samir-141/flores-amarrillaslvoe",
         "documentation": ""
       },
       "features": [
-        "Diseño visual inspirado en las flores amarillas y su simbolismo romántico",
-        "Presentación narrativa orientada a transmitir emociones mediante experiencia digital",
-        "Interfaz visual diseñada para generar una conexión emocional con el usuario",
-        "Experiencia web accesible y optimizada desde navegadores modernos",
-        "Enfoque en la combinación de estética, contenido y exploración interactiva"
+        "Recorrido interactivo en 8 capítulos: Semilla, Tierra, Brote, Crecimiento, Recuerdos, Floración, Jardín y Carta",
+        "Selector de modo Historia Visual y Capítulos con progreso persistente",
+        "Reproductor musical y motor de sonido ambiental integrado (AmbientSoundEngine)",
+        "Tarjetas flotantes de recuerdos, modales poéticos y efectos con canvas-confetti"
       ],
       "challenges": [
-        "Composición estética e interactiva fluida para transmitir emociones",
-        "Optimización de rendimiento en dispositivos móviles"
+        "Sincronizar animaciones narrativas, audio ambiental y transiciones fluidas entre capítulos",
+        "Mantener legibilidad y control táctil en pantallas móviles sin perder inmersión"
       ],
       "solutions": [
-        "Componentes interactivos en React con animaciones sutiles",
-        "Despliegue global en Edge con Vercel"
+        "Arquitectura modular de capítulos en React 19 con Tailwind CSS v4",
+        "Motor de audio dedicado y persistencia de avance en el navegador"
       ],
       "results": [
-        "Experiencia en vivo y disponible públicamente",
-        "Navegación inmersiva y fluida"
+        "Desplegado en producción en Vercel con respuesta HTTP 200 verificada",
+        "Experiencia interactiva continua adaptable a escritorio y móvil"
       ],
       "metrics": "En Vivo • Vercel",
-      "client": "Proyecto Personal / Creativo",
+      "client": "Proyecto Creativo / Narrativa Digital",
       "publishedAt": "2026",
       "accent": "#eab308",
-      "pending": []
+      "pending": [
+        "Agregar metadatos Open Graph dedicados directamente en el sitio desplegado"
+      ],
+      "seo": {
+        "metaTitle": "Donde Florecen los Sentimientos | Experiencia Web Interactiva",
+        "metaDescription": "Experiencia web poética e interactiva desarrollada con React 19 y TypeScript: 8 capítulos visuales, audio ambiental y animaciones en canvas.",
+        "keywords": [
+          "experiencia web interactiva",
+          "narrativa visual web",
+          "React 19",
+          "TypeScript",
+          "flores amarillas web",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/donde-florecen-los-sentimientos",
+        "ogTitle": "Donde Florecen los Sentimientos — Experiencia Web Interactiva | RimCode",
+        "ogDescription": "Narrativa visual interactiva en 8 capítulos con audio ambiental, reproductor integrado y diseño inmersivo en React y Tailwind CSS.",
+        "ogImage": "/images/seo/projects/donde-florecen-los-sentimientos-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Tarjeta de presentación SEO del proyecto Donde Florecen los Sentimientos con vista previa de su interfaz en Vercel"
+      }
     },
     {
       "id": "beeflow-auditor",
@@ -76,29 +99,32 @@
       "status": "production",
       "featured": true,
       "published": true,
-      "shortDescription": "Sistema de auditoría de servicio, registro de campo y generación de reportes apícolas.",
-      "description": "Aplicación web orientada a digitalizar el registro y la auditoría de colmenas, permitiendo organizar información de campo, gestionar lotes de registros y generar documentos estandarizados para su impresión y revisión operativa. La interfaz contempla captura desde dispositivos móviles y tablets, junto con vista previa de documentos en formato A4.",
-      "problem": "Los procesos de auditoría realizados mediante formularios físicos dificultan la consolidación de información, aumentan el riesgo de errores de transcripción y requieren tiempo adicional para organizar los datos y preparar informes. BEEFLOW Auditor centraliza estos registros en una interfaz digital y facilita su conversión en documentos listos para imprimir.",
+      "shortDescription": "Sistema web para captura digital de auditorías apícolas en campo, gestión por lotes de colmenas y generación de reportes PDF en formato A4.",
+      "description": "Herramienta web diseñada para digitalizar el Formulario de Auditoría de Servicio BEEFLOW con fidelidad visual orientada a OCR. Permite registrar metadatos de campo, gestionar hojas de 40 colmenas, realizar operaciones masivas, importar/exportar JSON y CSV, y generar documentos PDF listos para imprimir en formato A4 horizontal.",
+      "problem": "El registro de auditorías apícolas en formularios físicos dificulta consolidar información de campo, aumenta los errores de transcripción y retrasa la preparación de reportes estandarizados.",
+      "targetAudience": "Auditores de servicio apícola, apicultores, técnicos de campo y empresas agroindustriales.",
       "objectives": [
-        "Digitalizar el registro y auditoría de colmenas en campo",
-        "Automatizar la generación de reportes estandarizados e imprimibles en A4",
-        "Habilitar importación y exportación de datos en JSON y CSV"
+        "Digitalizar el registro en campo desde móviles, tablets y escritorio",
+        "Estandarizar hojas de 40 colmenas con vista previa oficial en formato A4 horizontal",
+        "Facilitar exportación de documentos PDF e intercambio de datos en JSON y CSV"
       ],
       "technologies": [
-        "JavaScript",
         "HTML5",
         "CSS3",
-        "Netlify",
-        "JSON / CSV"
+        "JavaScript",
+        "html2canvas",
+        "jsPDF",
+        "html2pdf.js",
+        "Netlify"
       ],
-      "thumbnail": "/images/projects/beeflow-preview.png",
+      "thumbnail": "/images/seo/projects/beeflow-auditor-og.png",
       "gallery": [],
       "demo": {
         "type": "external",
         "url": "https://superlative-choux-f30238.netlify.app/",
         "enabled": true,
-        "title": "Ver Sistema BEEFLOW en Vivo",
-        "description": "Despliegue activo en Netlify.",
+        "title": "Ver Sistema BEEFLOW Auditor en Vivo",
+        "description": "Despliegue público operativo en Netlify (HTTP 200 verificado).",
         "aspectRatio": "16 / 9"
       },
       "links": {
@@ -107,351 +133,479 @@
         "documentation": ""
       },
       "features": [
-        "Gestión de auditorías: registro de campo, apicultor, fecha, proyecto y lote",
-        "Registro de colmenas: identificación individual y control de atributos de colmena",
-        "Procesamiento por lotes: carga de muestras y aplicación masiva de valores",
-        "Búsqueda y organización: localización de colmenas y hojas de registro",
-        "Generación de documentos: vista previa de reportes, exportación a PDF e impresión A4",
-        "Intercambio de información: importación y exportación vía JSON y CSV",
-        "Interfaz multidispositivo: optimizado para móviles y tablets"
+        "Registro de metadatos de auditoría: campo, apicultor, fecha, proyecto y lote",
+        "Generador rápido y gestor de hojas por bloques de 40 colmenas (20 col. izquierda + 20 col. derecha)",
+        "Registro individual por colmena: identificador, marcos (0-10), muertas, Maxpoll, ToBEE y Torta P.",
+        "Vista previa de impresión oficial A4 horizontal con zoom ajustable (Auto, 50%, 70%, 85%, 100%)",
+        "Exportación de PDF de alta resolución en cliente (html2canvas / jsPDF) e impresión directa",
+        "Importación y exportación de lotes mediante archivos JSON y CSV"
       ],
       "challenges": [
-        "Captura rápida y sin fricción de datos en condiciones de campo",
-        "Formateo exacto de reportes para impresión horizontal A4"
+        "Reproducir con exactitud milimétrica el formato físico A4 compatible con lectura OCR desde el navegador",
+        "Agilizar la carga de decenas de colmenas en condiciones de campo"
       ],
       "solutions": [
-        "Diseño mobile-first para operaciones masivas con un solo toque",
-        "Motor de vista previa CSS paged media para exportación perfecta a PDF"
+        "Generador por lotes con prefijo configurable, valores iniciales y botones de aplicación masiva",
+        "Modo dual de Captura (Móvil/Tablet) y Vista Previa Oficial A4 con exportación PDF directa"
       ],
       "results": [
-        "En Vivo • Netlify",
-        "Eliminación de formularios físicos de campo"
+        "Sistema operativo en producción sobre Netlify con soporte de captura en campo e impresión A4",
+        "Indicadores en tiempo real de total de colmenas, promedio de marcos, muertas y hojas A4"
       ],
-      "metrics": "En Vivo • Netlify • A4 Print Ready",
-      "client": "Sector Agropecuario / Apícola",
+      "metrics": "En Vivo • Netlify • A4 & PDF Export",
+      "client": "Sector Agropecuario / Auditoría Apícola",
       "publishedAt": "2026",
       "accent": "#f59e0b",
-      "pending": []
+      "pending": [
+        "Confirmar URL del repositorio público dedicado"
+      ],
+      "seo": {
+        "metaTitle": "BEEFLOW Auditor | Sistema de Auditoría Apícola y Reportes A4",
+        "metaDescription": "Aplicación web para registro digital de colmenas en campo, procesamiento por lotes, exportación JSON/CSV y generación de reportes PDF en formato A4.",
+        "keywords": [
+          "sistema de auditoría web",
+          "gestión apícola digital",
+          "generador reportes PDF A4",
+          "formularios de campo móviles",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/beeflow-auditor",
+        "ogTitle": "BEEFLOW Auditor — Auditoría de Campo y Reportes PDF A4 | RimCode",
+        "ogDescription": "Digitalización de auditorías de colmenas con generador de hojas por lotes, importación/exportación JSON y CSV y vista previa oficial A4.",
+        "ogImage": "/images/seo/projects/beeflow-auditor-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Tarjeta de presentación SEO de BEEFLOW Auditor mostrando la interfaz real de registro de colmenas y reportes"
+      }
     },
     {
       "id": "angibotica",
       "slug": "angibotica",
-      "name": "AngiBotica",
+      "name": "AngiBotica (Botica Marifarma)",
       "category": "Sistemas ERP & Gestión",
       "status": "development",
       "featured": true,
       "published": true,
-      "shortDescription": "Sistema de gestión, punto de venta y control operativo de inventario para farmacias.",
-      "description": "Plataforma integral diseñada para centralizar el control de inventario farmacéutico, ventas de mostrador, control de lotes y trazabilidad de movimientos en pequeñas y medianas boticas.",
-      "problem": "Las pequeñas boticas y farmacias locales enfrentan discrepancias frecuentes entre el inventario físico y registrado, vencimiento desapercibido de medicamentos y lentitud en la atención por falta de un punto de venta conectado al kardex en tiempo real.",
+      "shortDescription": "Plataforma POS farmacéutica e inventario FEFO por lotes y fechas de vencimiento, con escáner QR/barras, impresión térmica y control por roles.",
+      "description": "Sistema integral de punto de venta (POS) y gestión operativa para boticas y farmacias (desplegado como Botica Marifarma). Integra control de stock bajo criterio FEFO (First Expired, First Out), gestión de lotes y vencimientos, escáner por cámara y escáner remoto en tiempo real con Socket.IO, impresión de tickets con QZ Tray y consulta pública de comprobantes mediante token.",
+      "problem": "Las boticas y farmacias independientes enfrentan quiebres o mermas por vencimiento no detectado a tiempo, lentitud al buscar medicamentos y desfase entre las ventas en mostrador y el inventario.",
+      "targetAudience": "Boticas, farmacias independientes y cadenas farmacéuticas pequeñas y medianas.",
       "objectives": [
-        "Modelado de datos relacionales robusto con PostgreSQL y Prisma",
-        "Backend modular escalable con NestJS",
-        "Punto de venta y kardex en tiempo real con React y Tailwind CSS"
-      ],
-      "technologies": [
-        "React",
-        "NestJS",
-        "PostgreSQL",
-        "Prisma ORM",
-        "TypeScript",
-        "Tailwind CSS"
-      ],
-      "thumbnail": "/images/projects/angibotica-preview.png",
-      "gallery": [],
-      "demo": {
-        "type": "iframe",
-        "url": "",
-        "enabled": false,
-        "title": "Demostración de AngiBotica",
-        "description": "Entorno de desarrollo controlado.",
-        "aspectRatio": "16 / 9"
-      },
-      "links": {
-        "website": "",
-        "github": "https://github.com/samir-141",
-        "documentation": ""
-      },
-      "features": [
-        "Control de inventario por lotes y alertas automáticas de stock mínimo",
-        "Módulo de punto de venta rápido (POS) con registro directo en el kardex",
-        "Búsqueda instantánea de medicamentos por nombre comercial y principio activo",
-        "Registro de movimientos con trazabilidad por rol de usuario",
-        "Generación de reportes operativos de ventas y rotación de productos"
-      ],
-      "challenges": [
-        "Consistencia de inventario en ventas concurrentes de mostrador",
-        "Alertas preventivas de vencimiento de lotes"
-      ],
-      "solutions": [
-        "Transacciones ACID en PostgreSQL con Prisma ORM",
-        "Arquitectura hexagonal y modular en NestJS"
-      ],
-      "results": [
-        "En Desarrollo Activo",
-        "Kardex y POS sincronizados en milisegundos"
-      ],
-      "metrics": "En Desarrollo Activo • PostgreSQL + NestJS",
-      "client": "Boticas & Farmacias Locales",
-      "publishedAt": "2026",
-      "accent": "#06b6d4",
-      "pending": [
-        "Módulo de facturación electrónica",
-        "Despliegue a producción"
-      ]
-    },
-    {
-      "id": "posfarma",
-      "slug": "posfarma",
-      "name": "PosFarma",
-      "category": "Software de gestión",
-      "status": "production",
-      "featured": true,
-      "published": true,
-      "shortDescription": "Sistema de gestión de stock e inventario para pequeñas farmacias y boticas.",
-      "description": "Sistema de gestión de inventario, ventas y kardex valorizado diseñado para pequeñas farmacias y boticas independientes.",
-      "problem": "Las pequeñas farmacias y boticas requieren controlar fechas de vencimiento, lotes y stock crítico sin la complejidad ni costos de un ERP corporativo.",
-      "objectives": [
-        "Control estricto de vencimiento de lotes farmacéuticos",
-        "Punto de venta ágil con cálculo de vuelto y tickets",
-        "Reportes de rotación de medicamentos y kardex valorizado"
-      ],
-      "technologies": [
-        "Next.js",
-        "NestJS",
-        "PostgreSQL",
-        "Prisma"
-      ],
-      "thumbnail": "/images/projects/posfarma.svg",
-      "gallery": [],
-      "demo": {
-        "type": "iframe",
-        "url": "",
-        "enabled": false,
-        "title": "Demostración de PosFarma",
-        "description": "Demostración en entorno controlado previa solicitud.",
-        "aspectRatio": "16 / 9"
-      },
-      "links": {
-        "website": "",
-        "github": "",
-        "documentation": ""
-      },
-      "features": [
-        "Gestión de inventario y lotes",
-        "Control de fechas de caducidad",
-        "Punto de venta y facturación",
-        "Reportes de kardex valorizado"
-      ],
-      "challenges": [
-        "Manejo estricto de fechas de vencimiento por lote",
-        "Sincronización rápida en horas punta de atención"
-      ],
-      "solutions": [
-        "Alertas preventivas a 30, 60 y 90 días",
-        "Arquitectura desacoplada con Next.js y NestJS"
-      ],
-      "results": [
-        "Reducción del 95% de mermas por vencimiento",
-        "Atención en caja < 15 segundos"
-      ],
-      "metrics": "Reducción 95% mermas • Caja < 15s",
-      "client": "Boticas & Farmacias Independientes",
-      "publishedAt": "",
-      "accent": "#10b981",
-      "pending": [
-        "Galería de capturas en producción",
-        "URL de demostración pública"
-      ]
-    },
-    {
-      "id": "rimbill-pro",
-      "slug": "rimbill-pro",
-      "name": "RimBill Pro",
-      "category": "Fintech & Enterprise",
-      "status": "production",
-      "featured": true,
-      "published": true,
-      "shortDescription": "Plataforma SaaS multi-empresa para facturación electrónica, conciliación bancaria y cobranzas.",
-      "description": "Plataforma multi-empresa con facturación electrónica automática (SUNAT/Stripe), conciliación bancaria y dashboards financieros en tiempo real.",
-      "problem": "Las empresas necesitan emitir comprobantes electrónicos, conciliar pagos y gestionar cobranzas sin dispersar la información entre múltiples sistemas.",
-      "objectives": [
-        "Emisión automatizada masiva con validación tributaria",
-        "Conciliación bancaria en tiempo real",
-        "Disminución de tiempos de cobro con recordatorios automáticos"
-      ],
-      "technologies": [
-        "Next.js 16",
-        "PostgreSQL",
-        "Docker",
-        "Stripe API"
-      ],
-      "thumbnail": "/images/projects/rimbill-pro.svg",
-      "gallery": [],
-      "demo": {
-        "type": "iframe",
-        "url": "",
-        "enabled": false,
-        "title": "Demostración de RimBill Pro",
-        "description": "Demostración disponible para clientes corporativos.",
-        "aspectRatio": "16 / 9"
-      },
-      "links": {
-        "website": "",
-        "github": "",
-        "documentation": ""
-      },
-      "features": [
-        "Emisión masiva de comprobantes",
-        "Pasarela multimoneda automática",
-        "Módulo de cobranzas con recordatorios IA"
-      ],
-      "challenges": [
-        "Procesamiento asíncrono de alto volumen sin bloqueos",
-        "Seguridad financiera y auditoría de transacciones"
-      ],
-      "solutions": [
-        "Colas de procesamiento en segundo plano con Redis",
-        "Trazabilidad completa de auditoría e integridad transaccional"
-      ],
-      "results": [
-        "+250,000 comprobantes / mes",
-        "99.99% Uptime"
-      ],
-      "metrics": "+250,000 comprobantes / mes • 99.99% Uptime",
-      "client": "Fintech B2B Perú & Latam",
-      "publishedAt": "",
-      "accent": "#a3e635",
-      "pending": [
-        "Galería de imágenes",
-        "Enlaces y demostración pública"
-      ]
-    },
-    {
-      "id": "datarim-ai",
-      "slug": "datarim-ai",
-      "name": "DataRim AI",
-      "category": "Data & Artificial Intelligence",
-      "status": "production",
-      "featured": true,
-      "published": true,
-      "shortDescription": "Panel ejecutivo de inteligencia de negocios con análisis en vivo y proyección de ventas.",
-      "description": "Panel ejecutivo de inteligencia de negocios con análisis de datos en vivo, proyección de ventas con modelos LLM y alertas inteligentes con WebSockets.",
-      "problem": "Los equipos necesitan convertir datos dispersos en decisiones oportunas, con proyecciones y alertas que lleguen al canal donde trabajan.",
-      "objectives": [
-        "Centralizar métricas de ventas y logística en tableros en vivo",
-        "Proyecciones predictivas de demanda utilizando IA",
-        "Alertas en tiempo real vía WebSockets a canales de mensajería"
+        "Control estricto de inventario farmacéutico por lotes, stock mínimo y vencimiento FEFO",
+        "Agilizar ventas en mostrador con escáner de códigos de barras por cámara o móvil remoto",
+        "Centralizar reportes de ventas, comprobantes, gastos y administración multi-sucursal"
       ],
       "technologies": [
         "React 19",
-        "Python FastAPI",
-        "Redis",
-        "Supabase"
+        "TypeScript",
+        "Tailwind CSS v4",
+        "PrimeReact",
+        "TanStack Query",
+        "NestJS",
+        "Socket.IO",
+        "ZXing",
+        "Recharts",
+        "Netlify"
       ],
-      "thumbnail": "/images/projects/datarim-ai.svg",
+      "thumbnail": "/images/seo/projects/angibotica-og.png",
       "gallery": [],
       "demo": {
         "type": "iframe",
         "url": "",
         "enabled": false,
-        "title": "Demostración de DataRim AI",
-        "description": "Demostración analítica disponible bajo solicitud estratégica.",
+        "title": "Acceso al Sistema AngiBotica / Botica Marifarma",
+        "description": "El entorno en producción requiere credenciales de acceso en /login.",
         "aspectRatio": "16 / 9"
       },
       "links": {
-        "website": "",
-        "github": "",
+        "website": "https://angibotica.netlify.app/login",
+        "github": "https://github.com/samir-141/SystemBotica",
         "documentation": ""
       },
       "features": [
-        "Conexión a múltiples fuentes de datos",
-        "Asistente conversacional RimBot analítico",
-        "Alertas automáticas a WhatsApp y Slack"
+        "Autenticación segura y rutas protegidas por capacidades y roles (Dashboard, POS, Inventario, Reportes, Administración)",
+        "Módulo de punto de venta (/ventas/nueva) e historial de ventas y comprobantes",
+        "Gestión de productos y control de stock farmacéutico con criterio FEFO por lotes y vencimientos",
+        "Escáner de códigos de barras por cámara y escáner remoto sincronizado en tiempo real por Socket.IO",
+        "Soporte PWA instalable, impresión térmica con QZ Tray y consulta pública de comprobantes (/c/:token)",
+        "Módulos de clientes, gastos, sucursales, series de documentos y paneles analíticos con Recharts"
       ],
       "challenges": [
-        "Procesamiento de grandes volúmenes de eventos con latencia mínima",
-        "Generación de reportes ejecutivos con lenguaje natural"
+        "Integrar dispositivos móviles como lectores de códigos de barras remotos sin hardware costoso",
+        "Garantizar impresión directa de tickets y control de permisos por rol operativo"
       ],
       "solutions": [
-        "Canales Pub/Sub en memoria con Redis",
-        "Pipelines asíncronos en FastAPI con modelos LLM locales"
+        "Canal WebSocket dedicado con Socket.IO para vincular cámara móvil y terminal POS",
+        "Control granular por capacidades, PWA offline-ready e integración de impresión QZ Tray"
       ],
       "results": [
-        "Latencia < 50ms",
-        "+40% eficiencia en decisiones"
+        "Pantalla de acceso e infraestructura frontend desplegadas en Netlify y Vercel",
+        "Arquitectura modular y control de acceso por roles habilitados para demostración guiada"
       ],
-      "metrics": "Latencia < 50ms • +40% eficiencia en decisiones",
-      "client": "Retail & Logística",
-      "publishedAt": "",
-      "accent": "#22d3ee",
+      "metrics": "POS Farmacéutico • NestJS + React • PWA",
+      "client": "Boticas & Farmacias Independientes",
+      "publishedAt": "2026",
+      "accent": "#06b6d4",
       "pending": [
-        "Galería de capturas analíticas",
-        "Demostración pública interactiva"
-      ]
+        "Verificación funcional de módulos internos autenticados (requiere credenciales de demo)",
+        "Confirmación pública del repositorio backend (backpos)"
+      ],
+      "seo": {
+        "metaTitle": "AngiBotica | Sistema POS y Gestión de Inventario para Farmacias",
+        "metaDescription": "Software para boticas y farmacias con punto de venta rápido, control FEFO de lotes y vencimientos, escáner QR/barras remoto y reportes con React y NestJS.",
+        "keywords": [
+          "sistema para boticas y farmacias",
+          "software POS farmacia Perú",
+          "control de lotes y vencimientos FEFO",
+          "sistema ERP farmacia",
+          "React NestJS",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/angibotica",
+        "ogTitle": "AngiBotica — Sistema POS y Control Farmacéutico FEFO | RimCode",
+        "ogDescription": "Plataforma farmacéutica con ventas en mostrador, control de lotes y vencimientos FEFO, escáner remoto en tiempo real e impresión de comprobantes.",
+        "ogImage": "/images/seo/projects/angibotica-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Tarjeta SEO de AngiBotica (Botica Marifarma) mostrando la interfaz de acceso al sistema farmacéutico POS"
+      }
     },
     {
-      "id": "novastore-global",
-      "slug": "novastore-global",
-      "name": "NovaStore Global",
-      "category": "Comercio Electrónico de Alto Rendimiento",
+      "id": "elecciones-municipio-escolar",
+      "slug": "elecciones-municipio-escolar",
+      "name": "Elecciones Municipio Escolar",
+      "category": "Sistemas Electorales & Gestión",
       "status": "production",
       "featured": true,
       "published": true,
-      "shortDescription": "Tienda virtual headless preparada para cargas masivas y checkout de un solo paso.",
-      "description": "Tienda virtual de arquitectura desacoplada diseñada para cargas masivas en Black Friday, checkout ultra rápido en 1 paso y SEO perfecto.",
-      "problem": "Una tienda de alto tráfico necesita un frontend desacoplado, un checkout sin fricción y sincronización fiable con el inventario.",
+      "shortDescription": "Plataforma institucional de voto electrónico escolar presencial con modo kiosco aislado, acreditación QR/DNI, 2FA TOTP y cómputo auditable.",
+      "description": "Sistema electoral escolar diseñado con arquitectura Full-Stack (React + NestJS 11 + Prisma + PostgreSQL) para gestionar elecciones de Municipio Escolar. Separa la terminal de sufragio estudiantil en modo kiosco a pantalla completa de los paneles protegidos para Docentes de Mesa (con 2FA TOTP y escáner QR/DNI) y Administradores Electorales.",
+      "problem": "Los procesos electorales escolares en papel demandan alto tiempo de conteo manual, presentan riesgo de errores en el padrón y dificultan la supervisión en tiempo real por aulas.",
+      "targetAudience": "Colegios, instituciones educativas y comités electorales de Municipio Escolar.",
       "objectives": [
-        "Puntuación perfecta 100 en Core Web Vitals",
-        "Proceso de checkout express en un solo paso",
-        "Sincronización bidireccional con stock de almacén central"
+        "Garantizar voto secreto presencial mediante terminal Kiosco aislada sin navegación externa",
+        "Acreditar electores de forma ágil con escáner de DNI/QR desde cámara",
+        "Centralizar padrón CSV, aulas, listas electorales, auditoría y escrutinio en tiempo real"
       ],
       "technologies": [
-        "Next.js 16",
-        "Tailwind v4",
-        "GraphQL",
-        "AWS CloudFront"
+        "React 18",
+        "TypeScript",
+        "Tailwind CSS",
+        "TanStack Query",
+        "Zustand",
+        "Socket.IO",
+        "NestJS 11",
+        "Prisma",
+        "PostgreSQL",
+        "Vercel"
       ],
-      "thumbnail": "/images/projects/novastore-global.svg",
+      "thumbnail": "/images/seo/projects/elecciones-municipio-escolar-og.png",
+      "gallery": [],
+      "demo": {
+        "type": "external",
+        "url": "https://eleciones-sigma.vercel.app/",
+        "enabled": true,
+        "title": "Ver Plataforma Electoral en Vivo",
+        "description": "Despliegue público operativo en Vercel (HTTP 200 verificado).",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "https://eleciones-sigma.vercel.app/",
+        "github": "https://github.com/samir-141/elecionesFrontend",
+        "documentation": "https://github.com/samir-141/eleccionesBackend"
+      },
+      "features": [
+        "Terminal de Sufragio Estudiantil (/kiosco): pantalla táctil aislada con cédula digital barajada y opción en blanco",
+        "Panel de Docente de Mesa (/docente): acceso protegido con 2FA TOTP, escáner de DNI/QR y ficha de acreditación",
+        "Panel de Administrador Electoral (/admin): gestión de ciclo de vida, aulas, partidos, importación CSV de padrón y escrutinio",
+        "Pantalla de Puerta (/pantalla-puerta) y actualización en tiempo real mediante Socket.IO",
+        "Backend NestJS 11 con Prisma, Argon2, otplib (TOTP) y suite de pruebas de invariantes electorales"
+      ],
+      "challenges": [
+        "Evitar cualquier vínculo rastreable entre la identidad del estudiante acreditado y el voto emitido",
+        "Coordinar acreditación en mesa y habilitación instantánea del puesto de votación"
+      ],
+      "solutions": [
+        "Transacciones atómicas en backend y separación estricta entre padrón de acreditación y urna digital",
+        "Sincronización en tiempo real por WebSockets (Socket.IO) y bloqueos de interfaz en ruta /kiosco"
+      ],
+      "results": [
+        "Frontend público desplegado en Vercel y backend auditado con pruebas de integridad electoral",
+        "Módulos protegidos de docente y administrador habilitados con autenticación 2FA TOTP"
+      ],
+      "metrics": "En Vivo • Vercel • NestJS 11 + Prisma",
+      "client": "Instituciones Educativas / Municipio Escolar",
+      "publishedAt": "2026",
+      "accent": "#3b82f6",
+      "pending": [
+        "Verificación en vivo de rutas internas autenticadas (/admin y /docente)",
+        "Agregar meta description SEO dedicada en el index.html del despliegue"
+      ],
+      "seo": {
+        "metaTitle": "Elecciones Municipio Escolar | Sistema de Voto Electrónico Seguro",
+        "metaDescription": "Plataforma web de voto electrónico presencial escolar con modo kiosco aislado, escáner QR/DNI, autenticación 2FA TOTP y escrutinio auditable en NestJS y React.",
+        "keywords": [
+          "sistema voto electrónico escolar",
+          "elecciones municipio escolar",
+          "software electoral educativo",
+          "NestJS Prisma React",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/elecciones-municipio-escolar",
+        "ogTitle": "Sistema de Elecciones Municipio Escolar — Voto Electrónico | RimCode",
+        "ogDescription": "Plataforma cívica escolar con terminal kiosco aislada, acreditación por QR/DNI, 2FA para docentes y cómputo oficial en tiempo real.",
+        "ogImage": "/images/seo/projects/elecciones-municipio-escolar-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Tarjeta SEO del Sistema Electoral de Municipio Escolar mostrando su portal principal en Vercel"
+      }
+    },
+    {
+      "id": "edu-dental",
+      "slug": "edu-dental",
+      "name": "Edu Dental",
+      "category": "Salud & Captación Digital",
+      "status": "production",
+      "featured": false,
+      "published": true,
+      "shortDescription": "Sitio web informativo y de captación de citas para consultorio odontológico con catálogo interactivo de tratamientos y contacto por WhatsApp.",
+      "description": "Aplicación web multipágina desarrollada para el consultorio odontológico Edu Dental. Presenta un carrusel hero de atención dental, catálogo interactivo de tratamientos con precios referenciales y selección múltiple para enviar solicitudes prellenadas a WhatsApp, sección institucional Sobre Mí y página de contacto con horarios y ubicación en Google Maps.",
+      "problem": "Los consultorios dentales requieren presentar sus tratamientos y precios de forma clara, transmitir confianza al paciente y convertir las visitas web en citas agendadas sin fricción por WhatsApp.",
+      "targetAudience": "Clínicas dentales, consultorios odontológicos y profesionales de la salud.",
+      "objectives": [
+        "Presentar tratamientos odontológicos con beneficios claros y precios referenciales",
+        "Facilitar el agendamiento de citas y consultas directas mediante enlaces prellenados a WhatsApp",
+        "Integrar ubicación física con Google Maps y navegación multipágina ágil"
+      ],
+      "technologies": [
+        "React 19",
+        "React Router 7",
+        "JavaScript",
+        "CSS3 Modular",
+        "Vite",
+        "Netlify"
+      ],
+      "thumbnail": "/images/seo/projects/edu-dental-og.png",
+      "gallery": [],
+      "demo": {
+        "type": "external",
+        "url": "https://edudentalpage.netlify.app/",
+        "enabled": true,
+        "title": "Ver Sitio Web Edu Dental en Vivo",
+        "description": "Despliegue público operativo en Netlify (HTTP 200 verificado).",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "https://edudentalpage.netlify.app/",
+        "github": "https://github.com/samir-141/dentista",
+        "documentation": ""
+      },
+      "features": [
+        "Inicio con slider automático de 3 diapositivas y CTA directo de agendamiento por WhatsApp",
+        "Catálogo de tratamientos (/tratamientos) con selección múltiple y cotización directa por WhatsApp",
+        "Sección Sobre Mí (/sobre-mi) enfocada en pilares de atención, instalaciones y transparencia",
+        "Página de Contacto (/contacto) con horarios de atención, botón de WhatsApp y mapa integrado (Google Maps)",
+        "Selector de tema visual integrado en la cabecera"
+      ],
+      "challenges": [
+        "Convertir la consulta de tratamientos en una solicitud estructurada sin obligar al paciente a llenar formularios largos"
+      ],
+      "solutions": [
+        "Selector interactivo de tratamientos que arma automáticamente el mensaje de consulta para WhatsApp"
+      ],
+      "results": [
+        "Sitio web público operativo en Netlify con 4 rutas funcionales y carrusel activo"
+      ],
+      "metrics": "En Vivo • Netlify • 4 Rutas SPA",
+      "client": "Consultorio Odontológico Edu Dental",
+      "publishedAt": "2026",
+      "accent": "#0284c7",
+      "pending": [
+        "Actualizar <title> y <meta name=\"description\"> en el index.html del despliegue (actualmente figura 'dentista' y lang='en')",
+        "Unificar el número de WhatsApp configurado entre ContactPage y el slider principal"
+      ],
+      "seo": {
+        "metaTitle": "Edu Dental | Plataforma Web para Consultorio Odontológico",
+        "metaDescription": "Sitio web para clínica dental con catálogo interactivo de tratamientos odontológicos, solicitud múltiple por WhatsApp y ubicación en Google Maps.",
+        "keywords": [
+          "diseño web clínica dental",
+          "página web odontología",
+          "catálogo de tratamientos dentales",
+          "React Router Vite",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/edu-dental",
+        "ogTitle": "Edu Dental — Web Odontológica y Captación de Citas | RimCode",
+        "ogDescription": "Plataforma web médica con catálogo seleccionable de tratamientos dentales, horarios, Google Maps y contacto directo por WhatsApp.",
+        "ogImage": "/images/seo/projects/edu-dental-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Tarjeta SEO de Edu Dental mostrando la portada real de la web odontológica en Netlify"
+      }
+    },
+    {
+      "id": "cincit-2026",
+      "slug": "cincit-2026",
+      "name": "CINCIT-2026 (UNAJMA)",
+      "category": "Eventos Académicos & Web",
+      "status": "production",
+      "featured": false,
+      "published": true,
+      "shortDescription": "Plataforma informativa y de inscripción multipaso para el Congreso Internacional de Ingeniería de Sistemas CINCIT-2026 en Andahuaylas.",
+      "description": "Aplicación web desarrollada en React 19, Tailwind CSS v4 y Framer Motion para el congreso CINCIT-2026 de la Universidad Nacional José María Arguedas (Andahuaylas, Apurímac, Perú). Incluye presentación del evento, guía de cómo llegar, línea de tiempo histórica desde COMAREIS I (2015), cronograma de ponentes por días y formulario de inscripción multipaso.",
+      "problem": "Los congresos académicos universitarios necesitan centralizar fechas, sede, historia institucional, cronograma de ponencias y preinscripción en una interfaz accesible desde celulares.",
+      "targetAudience": "Estudiantes universitarios, ponentes, investigadores y asistentes del Congreso CINCIT-UNAJMA.",
+      "objectives": [
+        "Informar sobre sede, fechas (10 al 13 de noviembre de 2026) y canales oficiales de consulta",
+        "Mostrar la trayectoria histórica de ediciones COMAREIS/CINCIT y áreas temáticas",
+        "Ofrecer un flujo multipaso de inscripción con detalle de beneficios incluidos"
+      ],
+      "technologies": [
+        "React 19",
+        "Tailwind CSS v4",
+        "Framer Motion",
+        "React Icons",
+        "JavaScript",
+        "Vite",
+        "Netlify"
+      ],
+      "thumbnail": "/images/seo/projects/cincit-2026-og.png",
+      "gallery": [],
+      "demo": {
+        "type": "external",
+        "url": "https://cencit.netlify.app/",
+        "enabled": true,
+        "title": "Ver Web CINCIT-2026 en Vivo",
+        "description": "Despliegue público operativo en Netlify.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "https://cencit.netlify.app/",
+        "github": "https://github.com/samir-141/cincit",
+        "documentation": ""
+      },
+      "features": [
+        "Cabecera de navegación superior y barra inferior móvil (BottomNav) con 4 vistas principales",
+        "Sección Inicio con sede (Andahuaylas, Apurímac), cómo llegar y contacto por WhatsApp y correo institucional",
+        "Sección Nosotros con estadísticas del congreso, línea de tiempo histórica (desde 2015) y modales temáticos",
+        "Sección Ponentes con pestañas de cronograma por días y sección Inscríbete con formulario multipaso animado"
+      ],
+      "challenges": [
+        "Organizar múltiples vistas informativas (cronograma, historia, ubicación e inscripción) en una experiencia ágil sin recargas"
+      ],
+      "solutions": [
+        "Navegación por vistas en React 19 con barra móvil tipo app y transiciones en Framer Motion"
+      ],
+      "results": [
+        "Sitio web desplegado en Netlify con código fuente público auditado en GitHub"
+      ],
+      "metrics": "Netlify • UNAJMA Andahuaylas",
+      "client": "Comité Organizador CINCIT - UNAJMA",
+      "publishedAt": "2026",
+      "accent": "#6366f1",
+      "pending": [
+        "Corregir prop deprecated 'exitBeforeEnter' en AnimatePresence (Framer Motion v12) que afecta la visibilidad del contenido central en el despliegue actual",
+        "Actualizar biografías de ponentes definitivos 2026 y añadir meta description SEO"
+      ],
+      "seo": {
+        "metaTitle": "CINCIT-2026 UNAJMA | Plataforma Web para Congreso Académico",
+        "metaDescription": "Sitio web del Congreso de Ingeniería de Sistemas CINCIT-2026 en Andahuaylas (UNAJMA): cronograma de ponentes, historia COMAREIS, ubicación e inscripción multipaso.",
+        "keywords": [
+          "CINCIT 2026 UNAJMA",
+          "web congreso académico",
+          "ingeniería de sistemas Andahuaylas",
+          "React Framer Motion",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/cincit-2026",
+        "ogTitle": "CINCIT-2026 UNAJMA — Web de Congreso Universitario | RimCode",
+        "ogDescription": "Plataforma web para congreso académico en Apurímac con cronograma por días, historia institucional, cómo llegar y registro multipaso.",
+        "ogImage": "/images/seo/projects/cincit-2026-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Gráfico SEO del proyecto CINCIT-2026 con las secciones verificadas del congreso en UNAJMA Andahuaylas"
+      }
+    },
+    {
+      "id": "mototaxi",
+      "slug": "mototaxi",
+      "name": "Mototaxi de Confianza",
+      "category": "Movilidad Local & Web App",
+      "status": "development",
+      "featured": false,
+      "published": true,
+      "shortDescription": "Tarjeta digital mobile-first para servicio local de mototaxi en Pisco, Ica con disponibilidad en vivo, datos del vehículo y contacto directo por WhatsApp.",
+      "description": "Aplicación web ligera orientada a móviles desarrollada en React 19, TypeScript y Tailwind CSS v4. Funciona como carnet digital del conductor para presentar nombre, estado de disponibilidad, horario de atención (06:30 a 21:30), zona de trabajo (Pisco, Ica), datos del vehículo, catálogo de servicios y botones para compartir ubicación y contactar por WhatsApp.",
+      "problem": "Los conductores independientes de movilidad local dependen de contactos informales y carecen de una tarjeta digital verificable donde el pasajero confirme horario, vehículo, servicios y solicite recojo rápido.",
+      "targetAudience": "Conductores independientes y servicios locales de movilidad en Perú.",
+      "objectives": [
+        "Presentar un carnet digital claro y confiable optimizado para teléfonos móviles",
+        "Ofrecer botones directos de llamada, WhatsApp y compartición de ubicación",
+        "Configurar los datos del conductor y servicios desde una estructura JSON centralizada"
+      ],
+      "technologies": [
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS v4",
+        "Lucide React",
+        "Vite",
+        "Vercel"
+      ],
+      "thumbnail": "/images/seo/projects/mototaxi-og.png",
       "gallery": [],
       "demo": {
         "type": "iframe",
         "url": "",
         "enabled": false,
-        "title": "Demostración de NovaStore Global",
-        "description": "Demostración de storefront headless.",
+        "title": "Tarjeta Digital Mototaxi de Confianza",
+        "description": "Aplicación web mobile-first lista para demostración bajo solicitud.",
         "aspectRatio": "16 / 9"
       },
       "links": {
         "website": "",
-        "github": "",
+        "github": "https://github.com/samir-141/mototaxi",
         "documentation": ""
       },
       "features": [
-        "Checkout optimizado en un solo paso",
-        "Sincronización de inventario con ERP",
-        "Soporte dinámico multimoneda (PEN/USD/EUR)"
+        "Carnet digital del conductor (DriverCard) con indicador de estado Disponible / No disponible",
+        "Ficha técnica de vehículo (modelo Mototaxi Bajaj, color y placa) y zona de cobertura en Pisco, Ica",
+        "Sección de servicios locales: Recojo en mototaxi, Movilidad escolar y Entrega de almuerzos",
+        "Botón de WhatsApp con mensaje prellenado, llamada directa y utilidades de ubicación (maps.ts / ShareLocationButton)"
       ],
       "challenges": [
-        "Picos extremos de concurrencia en campañas comerciales",
-        "Evitar caídas de catálogo por renderizados pesados"
+        "Lograr carga instantánea y lectura inmediata desde enlaces compartidos por WhatsApp en redes móviles"
       ],
       "solutions": [
-        "Arquitectura estática incremental (ISR) en Edge",
-        "Integración de pasarelas de pago ultra optimizadas"
+        "Interfaz mobile-first ligera en React 19 y Tailwind CSS v4 alimentada por un JSON tipado"
       ],
       "results": [
-        "Score 100/100 en Lighthouse",
-        "+38% conversión"
+        "Repositorio fuente completo y arquitectura de componentes verificados en GitHub"
       ],
-      "metrics": "Score 100/100 en Lighthouse • +38% conversión",
-      "client": "Moda & Consumo Masivo",
-      "publishedAt": "",
-      "accent": "#f59e0b",
+      "metrics": "Mobile-First • React 19 + TS",
+      "client": "Servicio Local de Movilidad — Pisco, Ica",
+      "publishedAt": "2026",
+      "accent": "#eab308",
       "pending": [
-        "Galería de capturas",
-        "Demostración pública"
-      ]
+        "Confirmar URL pública en Vercel sin autenticación (el enlace proporcionado apunta al dashboard de Vercel)"
+      ],
+      "seo": {
+        "metaTitle": "Mototaxi de Confianza | Tarjeta Digital de Movilidad Local",
+        "metaDescription": "Aplicación web mobile-first que funciona como carnet digital para conductores de mototaxi en Pisco, Ica con disponibilidad, servicios y reserva por WhatsApp.",
+        "keywords": [
+          "tarjeta digital conductor",
+          "web app movilidad local Perú",
+          "reserva por WhatsApp",
+          "React TypeScript Tailwind",
+          "RimCode"
+        ],
+        "canonicalUrl": "/projects/mototaxi",
+        "ogTitle": "Mototaxi de Confianza — Tarjeta Digital & Reservas | RimCode",
+        "ogDescription": "Carnet digital mobile-first para transporte local en Pisco, Ica con estado en tiempo real, catálogo de servicios y contacto directo por WhatsApp.",
+        "ogImage": "/images/seo/projects/mototaxi-og.png",
+        "ogType": "article",
+        "twitterCard": "summary_large_image",
+        "altText": "Gráfico SEO del proyecto Mototaxi de Confianza presentando sus funciones de carnet digital y contacto por WhatsApp"
+      }
     }
   ]
 }

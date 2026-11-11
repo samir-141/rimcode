@@ -1,0 +1,46 @@
+{
+  "category": "tecnologias",
+  "items": [
+    {
+      "id": "tecnologias-rimcode",
+      "category": "tecnologias",
+      "question": "¿Qué tecnologías utilizan?",
+      "variations": [
+        "que stack usan",
+        "con que lenguajes programan",
+        "que frameworks manejan",
+        "usan react nextjs o nestjs",
+        "que base de datos utilizan"
+      ],
+      "keywords": ["tecnologias", "tecnologia", "stack", "lenguaje", "lenguajes", "framework", "frameworks", "herramientas", "react", "next", "nestjs", "postgresql", "prisma", "docker", "python", "typescript"],
+      "answer": "Trabajamos con tecnologías modernas orientadas a rendimiento, tipado estricto y mantenibilidad a largo plazo:",
+      "tableType": "technologies",
+      "relatedQuestions": [
+        "¿Cómo trabajan?",
+        "¿El código queda en propiedad del cliente?",
+        "¿Qué proyectos han desarrollado?"
+      ]
+    },
+    {
+      "id": "metodologia-trabajo",
+      "category": "tecnologias",
+      "question": "¿Cómo trabajan?",
+      "variations": [
+        "cual es su metodologia",
+        "cual es el proceso de desarrollo",
+        "como es la forma de trabajo",
+        "como inician un proyecto",
+        "trabajan por sprints"
+      ],
+      "keywords": ["metodologia", "trabajan", "trabajas", "proceso", "fases", "etapas", "sprints", "desarrollo", "entrega"],
+      "answer": "Nuestro flujo de trabajo combina sprints iterativos, comunicación transparente y demos funcionales continuas en cuatro etapas claras:",
+      "tableType": "methodology",
+      "relatedQuestions": [
+        "¿Cuánto tarda un proyecto?",
+        "¿El código queda en propiedad del cliente?",
+        "¿Cuánto cuesta desarrollar un sistema?"
+      ]
+    }
+  ]
+}
+

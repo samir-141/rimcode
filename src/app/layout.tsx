@@ -9,9 +9,13 @@ import RimBotAssistant from "@/components/landing/welcome/RimBotAssistant";
 import RimyController from "@/components/rimy/RimyController";
 import CookiePreferences from "@/components/privacy/CookiePreferences";
 import StructuredData from "@/components/seo/StructuredData";
-import { getCompany, getSettings, getSiteUrl } from "@/lib/db";
+import { getSettings } from "@/lib/db";
 import { getSiteMetadata } from "@/lib/seo/seo-config";
-import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/lib/seo/structured-data";
+import {
+  buildOrganizationJsonLd,
+  buildProfessionalServiceJsonLd,
+  buildWebSiteJsonLd,
+} from "@/lib/seo/structured-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +27,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const company = getCompany();
 const settings = getSettings();
-const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = getSiteMetadata();
 
@@ -73,8 +75,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
 
       <body className="min-h-full flex flex-col">
-        {/* Datos estructurados globales de Organization y WebSite */}
+        {/* Datos estructurados globales de Organization, ProfessionalService y WebSite */}
         <StructuredData data={buildOrganizationJsonLd()} />
+        <StructuredData data={buildProfessionalServiceJsonLd()} />
         <StructuredData data={buildWebSiteJsonLd()} />
 
         <HeadLanding />

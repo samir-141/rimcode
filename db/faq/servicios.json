@@ -1,0 +1,84 @@
+{
+  "category": "servicios",
+  "items": [
+    {
+      "id": "servicios-rimcode",
+      "category": "servicios",
+      "question": "¿Qué servicios ofrecen?",
+      "variations": [
+        "que hacen",
+        "a que se dedica rimcode",
+        "que servicios brinda rimcode",
+        "en que me pueden ayudar",
+        "que tipo de software desarrollan"
+      ],
+      "keywords": ["servicios", "servicio", "hacen", "dedican", "ofrecen", "ofrece", "brindan", "soluciones", "desarrollan"],
+      "answer": "En RimCode desarrollamos soluciones digitales a medida orientadas a optimizar procesos y escalar operaciones. A continuación puedes ver nuestras líneas principales de servicio:",
+      "tableType": "services",
+      "relatedQuestions": [
+        "¿Desarrollan sistemas ERP?",
+        "¿Pueden crear una tienda virtual?",
+        "¿Cuánto cuesta desarrollar un sistema?"
+      ]
+    },
+    {
+      "id": "sistemas-erp",
+      "category": "servicios",
+      "question": "¿Desarrollan sistemas ERP?",
+      "variations": [
+        "hacen sistemas erp",
+        "desarrollan sistemas de inventario y ventas",
+        "pueden hacer un sistema pos para farmacia o botica",
+        "sistemas de gestion empresarial a medida",
+        "control de stock y kardex"
+      ],
+      "keywords": ["erp", "gestion", "inventario", "pos", "kardex", "botica", "farmacia", "almacen", "facturacion", "ventas"],
+      "answer": "Sí. Diseñamos e implementamos sistemas ERP y de gestión operativa a medida con control de inventarios, lotes, vencimientos (FEFO), punto de venta rápido (POS), roles de usuario y reportes operativos. Por ejemplo, hemos construido plataformas enfocadas en boticas y farmacias (AngiBotica / Botica Marifarma) y herramientas de auditoría y reportes A4 (BEEFLOW Auditor).",
+      "tableType": "projects",
+      "relatedQuestions": [
+        "¿Qué proyectos han desarrollado?",
+        "¿Cuánto cuesta desarrollar un sistema?",
+        "¿Cómo puedo contratar sus servicios?"
+      ]
+    },
+    {
+      "id": "tiendas-virtuales",
+      "category": "servicios",
+      "question": "¿Pueden crear una tienda virtual?",
+      "variations": [
+        "hacen ecommerce",
+        "desarrollan tiendas online",
+        "pueden hacer una tienda con carrito de compras",
+        "comercio electronico a medida",
+        "tienda virtual"
+      ],
+      "keywords": ["tienda", "tiendas", "virtual", "virtuales", "ecommerce", "comercio", "carrito", "checkout", "catalogo", "pagos"],
+      "answer": "Sí. Desarrollamos plataformas E-Commerce a medida con catálogo de productos, carrito de compras, gestión de pedidos, sincronización de inventario y pasarelas de pago según los requerimientos de tu negocio.",
+      "relatedQuestions": [
+        "¿Cuánto cuesta desarrollar un sistema?",
+        "¿Qué tecnologías utilizan?",
+        "¿Cómo trabajan?"
+      ]
+    },
+    {
+      "id": "saas-y-apis",
+      "category": "servicios",
+      "question": "¿Desarrollan aplicaciones SaaS e integraciones de APIs?",
+      "variations": [
+        "hacen plataformas saas",
+        "integran apis o automatizaciones",
+        "automatizan procesos empresariales",
+        "hacen landing pages corporativas",
+        "aplicaciones web personalizadas"
+      ],
+      "keywords": ["saas", "api", "apis", "integracion", "integraciones", "automatizacion", "automatizaciones", "landing", "web", "plataforma"],
+      "answer": "Sí. Construimos plataformas web SaaS multiusuario, APIs REST escalables, automatizaciones de flujos operativos y landing pages corporativas orientadas a conversión y posicionamiento SEO.",
+      "relatedQuestions": [
+        "¿Qué servicios ofrecen?",
+        "¿Qué tecnologías utilizan?",
+        "¿Cómo puedo contratar sus servicios?"
+      ]
+    }
+  ]
+}
+

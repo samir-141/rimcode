@@ -93,6 +93,19 @@ export type ProjectLinks = {
     documentation: string;
 };
 
+export type ProjectSeo = {
+    metaTitle: string;
+    metaDescription: string;
+    keywords: string[];
+    canonicalUrl: string;
+    ogTitle: string;
+    ogDescription: string;
+    ogImage: string;
+    ogType: "website" | "article";
+    twitterCard: "summary" | "summary_large_image";
+    altText: string;
+};
+
 export type Project = {
     id: string;
     slug: string;
@@ -104,6 +117,7 @@ export type Project = {
     shortDescription: string;
     description: string;
     problem: string;
+    targetAudience?: string;
     objectives: string[];
     technologies: string[];
     thumbnail: string;
@@ -119,6 +133,7 @@ export type Project = {
     publishedAt: string;
     accent: string;
     pending: string[];
+    seo?: ProjectSeo;
 };
 
 export type ProjectsData = {
@@ -196,12 +211,23 @@ export type MethodologyData = {
     intro: string;
 };
 
+export type FaqTableType =
+    | "services"
+    | "pricing"
+    | "projects"
+    | "technologies"
+    | "methodology"
+    | "contact";
+
 export type FaqItem = {
     id: string;
     question: string;
+    variations?: string[];
     answer: string;
     keywords: string[];
     category: string;
+    relatedQuestions?: string[];
+    tableType?: FaqTableType;
 };
 
 export type FaqData = {

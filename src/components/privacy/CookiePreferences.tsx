@@ -1,68 +1,86 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import CookieBanner from "./CookieBanner";
 import CookieSettings from "./CookieSettings";
 import {
     acceptAllConsent,
     getConsentSnapshot,
+    getServerConsentSnapshot,
     initializeConsent,
-    openConsentSettings,
+    needsConsent as checkNeedsConsent,
+    OPEN_SETTINGS_EVENT,
     rejectOptionalConsent,
     saveCustomConsent,
     subscribeToConsent,
 } from "@/lib/privacy/consent-manager";
-import { needsConsent as checkNeedsConsent } from "@/lib/privacy/consent-manager";
-import type { ConsentCategories, ConsentRecord } from "@/types/consent";
+import {
+    disableGoogleAnalytics,
+    enableGoogleAnalytics,
+} from "@/lib/privacy/script-manager";
+import type { ConsentCategories } from "@/types/consent";
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || "";
+
+const noopSubscribe = () => () => {};
+const getClientTrue = () => true;
+const getServerFalse = () => false;
+
+function getConsentClientSnapshot() {
+    initializeConsent();
+    return getConsentSnapshot();
+}
 
 export default function CookiePreferences() {
-    const [mounted, setMounted] = useState(false);
-    const [bannerVisible, setBannerVisible] = useState(false);
+    const mounted = useSyncExternalStore(
+        noopSubscribe,
+        getClientTrue,
+        getServerFalse
+    );
+    const consent = useSyncExternalStore(
+        subscribeToConsent,
+        getConsentClientSnapshot,
+        getServerConsentSnapshot
+    );
     const [settingsOpen, setSettingsOpen] = useState(false);
-    const [consent, setConsent] = useState<ConsentRecord | null>(null);
 
     useEffect(() => {
-        initializeConsent();
-        const current = getConsentSnapshot();
-        setConsent(current);
-        setBannerVisible(checkNeedsConsent());
-        setMounted(true);
-
-        const unsubscribe = subscribeToConsent(() => {
-            const next = getConsentSnapshot();
-            setConsent(next);
-            setBannerVisible(checkNeedsConsent());
-        });
-
         const handleOpenSettings = () => {
             setSettingsOpen(true);
         };
 
-        window.addEventListener("rimcode:open-cookie-settings", handleOpenSettings);
-
+        window.addEventListener(OPEN_SETTINGS_EVENT, handleOpenSettings);
         return () => {
-            unsubscribe();
-            window.removeEventListener("rimcode:open-cookie-settings", handleOpenSettings);
+            window.removeEventListener(OPEN_SETTINGS_EVENT, handleOpenSettings);
         };
     }, []);
 
+    useEffect(() => {
+        if (!mounted || !GA_MEASUREMENT_ID) return;
+
+        if (consent?.categories.analytics) {
+            enableGoogleAnalytics(GA_MEASUREMENT_ID);
+        } else {
+            disableGoogleAnalytics();
+        }
+    }, [mounted, consent]);
+
     if (!mounted) return null;
+
+    const bannerVisible = checkNeedsConsent();
 
     const handleAcceptAll = () => {
         acceptAllConsent();
-        setBannerVisible(false);
         setSettingsOpen(false);
     };
 
     const handleRejectOptional = () => {
         rejectOptionalConsent();
-        setBannerVisible(false);
         setSettingsOpen(false);
     };
 
     const handleSaveCustom = (categories: ConsentCategories) => {
         saveCustomConsent(categories);
-        setBannerVisible(false);
         setSettingsOpen(false);
     };
 

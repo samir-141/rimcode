@@ -9,7 +9,7 @@
  */
 export default function RimyHero() {
     return (
-        <div className="relative flex w-full flex-col items-center justify-center text-center">
+        <div className="relative flex w-full min-h-[280px] sm:min-h-[380px] py-6 sm:py-12 flex-col items-center justify-center text-center">
             <div
                 id="rimy-hero-slot"
                 className="relative aspect-[260/362] w-full max-w-[160px] sm:max-w-[220px] lg:max-w-[280px]"

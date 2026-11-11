@@ -2,29 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import ProjectCard from "@/components/projects/ProjectCard";
+import StructuredData from "@/components/seo/StructuredData";
 import { getProjects, getSiteUrl } from "@/lib/db";
+import { getProjectsIndexMetadata } from "@/lib/seo/seo-config";
+import {
+    buildBreadcrumbJsonLd,
+    buildWebPageJsonLd,
+} from "@/lib/seo/structured-data";
 
-export const metadata: Metadata = {
-    title: "Portafolio de Proyectos",
-    description:
-        "Proyectos documentados de RimCode: plataformas SaaS, inteligencia de negocios y comercio electrónico de alto rendimiento.",
-    alternates: {
-        canonical: "/projects",
-    },
-    openGraph: {
-        title: "Portafolio de Proyectos | RimCode",
-        description:
-            "Proyectos documentados de RimCode: plataformas SaaS, inteligencia de negocios y comercio electrónico de alto rendimiento.",
-        url: `${getSiteUrl()}/projects`,
-        type: "website",
-    },
-};
+export const metadata: Metadata = getProjectsIndexMetadata();
 
 export default function ProjectsPage() {
     const projects = getProjects();
+    const siteUrl = getSiteUrl();
 
     return (
         <div className="w-full bg-[var(--background)] pb-20 text-[var(--foreground)]">
+            <StructuredData
+                data={buildWebPageJsonLd({
+                    name: "Portafolio de Proyectos | RimCode",
+                    description:
+                        "Proyectos de software a medida, sistemas ERP, aplicaciones web y herramientas digitales desarrolladas por RimCode.",
+                    url: `${siteUrl}/projects`,
+                })}
+            />
+            <StructuredData
+                data={buildBreadcrumbJsonLd([
+                    { name: "Inicio", url: "/" },
+                    { name: "Proyectos", url: "/projects" },
+                ])}
+            />
             <div className="mx-auto w-full max-w-6xl px-4 pt-[100px] sm:px-6 lg:px-8 lg:pt-[112px]">
                 <nav
                     aria-label="Migas de pan"

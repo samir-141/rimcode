@@ -52,6 +52,32 @@ export function buildOrganizationJsonLd(): Record<string, unknown> {
     };
 }
 
+export function buildProfessionalServiceJsonLd(): Record<string, unknown> {
+    const company = getCompany();
+    const contact = getContact();
+    const siteUrl = getSiteUrl();
+
+    return {
+        "@context": schema.context,
+        "@type": "ProfessionalService",
+        "@id": `${siteUrl}/#service`,
+        name: company.name,
+        url: siteUrl,
+        image: absoluteUrl("/images/seo/rimcode-og.png", siteUrl),
+        logo: absoluteUrl("/icon.svg", siteUrl),
+        description: company.description,
+        areaServed: company.institutional.market,
+        serviceType: company.servicesSummary,
+        founder: {
+            "@type": "Person",
+            name: company.founder.name,
+            jobTitle: company.founder.role,
+        },
+        email: contact.email,
+        telephone: contact.phone,
+    };
+}
+
 export function buildWebSiteJsonLd(): Record<string, unknown> {
     const company = getCompany();
     const siteUrl = getSiteUrl();
@@ -101,6 +127,8 @@ export function buildWebPageJsonLd(options: {
 export function buildBreadcrumbJsonLd(
     items: Array<{ name: string; url: string }>
 ): Record<string, unknown> {
+    const siteUrl = getSiteUrl();
+
     return {
         "@context": schema.context,
         "@type": schema.breadcrumbListType,
@@ -108,7 +136,7 @@ export function buildBreadcrumbJsonLd(
             "@type": schema.listItemType,
             position: index + 1,
             name: item.name,
-            item: item.url,
+            item: absoluteUrl(item.url, siteUrl),
         })),
     };
 }
@@ -122,6 +150,15 @@ export function buildProjectJsonLd(
     const isCreativeWork = project.category
         .toLowerCase()
         .includes("experiencia");
+    const imageUrl = absoluteUrl(
+        resolveProjectImage(project.seo?.ogImage || project.thumbnail),
+        siteUrl
+    );
+    const description = project.seo?.metaDescription || project.shortDescription;
+    const keywords =
+        project.seo?.keywords && project.seo.keywords.length > 0
+            ? project.seo.keywords.join(", ")
+            : project.technologies.join(", ");
 
     const base: Record<string, unknown> = {
         "@context": schema.context,
@@ -130,16 +167,24 @@ export function buildProjectJsonLd(
             : schema.softwareApplicationType,
         "@id": url,
         name: project.name,
-        description: project.shortDescription,
+        description,
         url,
-        image: absoluteUrl(resolveProjectImage(project.thumbnail), siteUrl),
+        image: imageUrl,
         inLanguage: schema.inLanguage,
-        keywords: project.technologies.join(", "),
+        keywords,
         creator: {
             "@type": schema.organizationType,
             name: company.name,
             url: siteUrl,
         },
+        ...(project.targetAudience
+            ? {
+                  audience: {
+                      "@type": "Audience",
+                      audienceType: project.targetAudience,
+                  },
+              }
+            : {}),
         ...(isValidIsoDate(project.publishedAt)
             ? { datePublished: project.publishedAt }
             : {}),

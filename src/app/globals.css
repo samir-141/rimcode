@@ -77,6 +77,8 @@
    ========================================================================== */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* En pantallas grandes con suficiente altura, activar scroll snap */
@@ -93,16 +95,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
 }
 
 /* Clases de apoyo para bloques responsivos */
 .block-section {
-  width: 100%;
-  min-height: 100dvh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @apply w-full relative flex flex-col justify-center overflow-x-clip py-12 md:py-0 md:min-h-[100dvh];
 }
 
 @media (min-width: 1024px) and (min-height: 750px) {
@@ -125,7 +123,7 @@ body {
    HEADER COMPONENT (FIJO CON BLUR Y ADAPTADO A TAILWIND)
    ========================================================================== */
 .rim-header {
-  @apply fixed top-0 left-0 z-50 w-full border-b backdrop-blur-xl transition-[background-color,color,border-color] duration-500;
+  @apply fixed top-0 left-0 z-50 w-full max-w-full overflow-x-clip border-b backdrop-blur-xl transition-[background-color,color,border-color] duration-500;
   background-color: var(--header-bg);
   color: var(--header-text);
   border-color: var(--header-border);
@@ -148,8 +146,7 @@ body {
 }
 
 .header-container {
-  @apply mx-auto flex min-h-[68px] sm:min-h-[76px] lg:min-h-[82px] items-center justify-between gap-3 sm:gap-6;
-  width: min(1440px, 94%);
+  @apply mx-auto flex min-h-[68px] sm:min-h-[76px] lg:min-h-[82px] w-full max-w-7xl items-center justify-between gap-2 sm:gap-6 px-4 sm:px-6 lg:px-8 overflow-x-clip;
 }
 
 /* LOGO */
@@ -241,7 +238,7 @@ body {
 }
 
 .currency-info {
-  @apply hidden xl:flex flex-col text-[9px] leading-[1.4];
+  @apply hidden lg:flex flex-col text-[9px] leading-[1.4];
   color: var(--header-muted);
 }
 
@@ -301,20 +298,7 @@ body {
 
 /* MENÚ MÓVIL */
 .mobile-menu-button {
-  @apply flex lg:hidden h-[34px] w-[34px] flex-col items-center justify-center gap-1.5 border-0 bg-transparent cursor-pointer p-0 shrink-0;
-}
-
-.mobile-menu-button span {
-  @apply h-[2px] w-[21px] rounded-full transition-transform duration-300;
-  background-color: var(--header-text);
-}
-
-.mobile-menu-button.open span:first-child {
-  transform: translateY(4px) rotate(45deg);
-}
-
-.mobile-menu-button.open span:last-child {
-  transform: translateY(-4px) rotate(-45deg);
+  @apply flex lg:hidden h-9 w-9 items-center justify-center rounded-lg border border-black/10 dark:border-white/10 bg-transparent text-[var(--header-text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] cursor-pointer p-0 shrink-0;
 }
 
 .mobile-nav-backdrop {
@@ -322,8 +306,7 @@ body {
 }
 
 .mobile-nav {
-  @apply fixed top-[68px] sm:top-[76px] left-0 z-50 flex w-full max-h-[calc(100dvh-76px)] overflow-y-auto flex-col border-b px-[6%] pt-4 pb-6 backdrop-blur-2xl transition-all duration-300 lg:hidden shadow-2xl;
-  background-color: var(--header-bg);
+  @apply fixed top-[68px] sm:top-[76px] left-0 z-50 flex w-full max-h-[calc(100dvh-68px)] sm:max-h-[calc(100dvh-76px)] overflow-y-auto flex-col border-b px-4 sm:px-6 pt-4 pb-6 bg-white/95 dark:bg-black/95 backdrop-blur-md transition-all duration-300 lg:hidden shadow-2xl;
   border-color: var(--header-border);
   opacity: 0;
   visibility: hidden;

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectDemo from "@/components/projects/ProjectDemo";
 import ProjectExplainer from "@/components/projects/ProjectExplainer";
+import StructuredData from "@/components/seo/StructuredData";
 import {
     getProjectBySlug,
     getProjectSlugs,
@@ -15,8 +16,12 @@ import {
 import {
     STATUS_LABELS,
     buildProjectJsonLd,
-    getProjectUrlPath,
 } from "@/lib/projects/presentation";
+import {
+    getNotFoundMetadata,
+    getProjectMetadata,
+} from "@/lib/seo/seo-config";
+import { buildBreadcrumbJsonLd } from "@/lib/seo/structured-data";
 
 type ProjectPageProps = {
     params: Promise<{ slug: string }>;
@@ -30,11 +35,6 @@ export function generateStaticParams() {
     return getProjectSlugs().map((slug) => ({ slug }));
 }
 
-function absoluteImage(source: string, siteUrl: string): string {
-    if (/^https?:\/\//i.test(source)) return source;
-    return `${siteUrl}${source.startsWith("/") ? "" : "/"}${source}`;
-}
-
 export async function generateMetadata({
     params,
 }: ProjectPageProps): Promise<Metadata> {
@@ -42,35 +42,10 @@ export async function generateMetadata({
     const project = getProjectBySlug(slug);
 
     if (!project) {
-        return { title: "Proyecto no encontrado" };
+        return getNotFoundMetadata();
     }
 
-    const siteUrl = getSiteUrl();
-    const image = absoluteImage(
-        resolveProjectImage(project.thumbnail),
-        siteUrl
-    );
-
-    return {
-        title: project.name,
-        description: project.shortDescription,
-        alternates: {
-            canonical: `${siteUrl}${getProjectUrlPath(project.slug)}`,
-        },
-        openGraph: {
-            title: `${project.name} | RimCode`,
-            description: project.shortDescription,
-            url: `${siteUrl}${getProjectUrlPath(project.slug)}`,
-            type: "article",
-            images: [{ url: image, alt: `Imagen de referencia de ${project.name}` }],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: `${project.name} | RimCode`,
-            description: project.shortDescription,
-            images: [image],
-        },
-    };
+    return getProjectMetadata(project);
 }
 
 function PendingNote({ children }: { children: React.ReactNode }) {
@@ -116,13 +91,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     ].filter((link) => link.href);
 
     const jsonLd = buildProjectJsonLd(project, siteUrl);
+    const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+        { name: "Inicio", url: "/" },
+        { name: "Proyectos", url: "/projects" },
+        { name: project.name, url: `/projects/${project.slug}` },
+    ]);
 
     return (
         <div className="w-full bg-[var(--background)] pb-20 text-[var(--foreground)]">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+            <StructuredData data={jsonLd} />
+            <StructuredData data={breadcrumbJsonLd} />
 
             <div className="mx-auto w-full max-w-6xl px-4 pt-[92px] sm:px-6 lg:px-8 lg:pt-[104px]">
                 {/* MIGAS */}
@@ -198,7 +176,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={image}
-                                alt={`Imagen de referencia de ${project.name}`}
+                                alt={
+                                    project.seo?.altText ||
+                                    `Imagen de referencia de ${project.name}`
+                                }
+                                width={1200}
+                                height={630}
                                 className="aspect-[16/9] h-full w-full object-cover"
                             />
                         </div>
@@ -333,75 +316,75 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         {(project.challenges.length > 0 ||
                             project.solutions.length > 0 ||
                             project.results.length > 0) && (
-                            <section>
-                                <SectionTitle
-                                    eyebrow="05 / INGENIERÍA"
-                                    title="Desafíos, soluciones y resultados"
-                                />
+                                <section>
+                                    <SectionTitle
+                                        eyebrow="05 / INGENIERÍA"
+                                        title="Desafíos, soluciones y resultados"
+                                    />
 
-                                <div className="space-y-3">
-                                    {project.challenges.length > 0 && (
-                                        <div>
-                                            <h3 className="text-sm font-bold text-[var(--header-text)]">
-                                                Desafíos técnicos
-                                            </h3>
-                                            <ul className="mt-1.5 space-y-1.5">
-                                                {project.challenges.map(
-                                                    (challenge) => (
-                                                        <li
-                                                            key={challenge}
-                                                            className="text-xs leading-relaxed text-[var(--header-muted)]"
-                                                        >
-                                                            • {challenge}
-                                                        </li>
-                                                    )
-                                                )}
-                                            </ul>
-                                        </div>
-                                    )}
+                                    <div className="space-y-3">
+                                        {project.challenges.length > 0 && (
+                                            <div>
+                                                <h3 className="text-sm font-bold text-[var(--header-text)]">
+                                                    Desafíos técnicos
+                                                </h3>
+                                                <ul className="mt-1.5 space-y-1.5">
+                                                    {project.challenges.map(
+                                                        (challenge) => (
+                                                            <li
+                                                                key={challenge}
+                                                                className="text-xs leading-relaxed text-[var(--header-muted)]"
+                                                            >
+                                                                • {challenge}
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        )}
 
-                                    {project.solutions.length > 0 && (
-                                        <div>
-                                            <h3 className="text-sm font-bold text-[var(--header-text)]">
-                                                Soluciones implementadas
-                                            </h3>
-                                            <ul className="mt-1.5 space-y-1.5">
-                                                {project.solutions.map(
-                                                    (solution) => (
-                                                        <li
-                                                            key={solution}
-                                                            className="text-xs leading-relaxed text-[var(--header-muted)]"
-                                                        >
-                                                            • {solution}
-                                                        </li>
-                                                    )
-                                                )}
-                                            </ul>
-                                        </div>
-                                    )}
+                                        {project.solutions.length > 0 && (
+                                            <div>
+                                                <h3 className="text-sm font-bold text-[var(--header-text)]">
+                                                    Soluciones implementadas
+                                                </h3>
+                                                <ul className="mt-1.5 space-y-1.5">
+                                                    {project.solutions.map(
+                                                        (solution) => (
+                                                            <li
+                                                                key={solution}
+                                                                className="text-xs leading-relaxed text-[var(--header-muted)]"
+                                                            >
+                                                                • {solution}
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        )}
 
-                                    {project.results.length > 0 && (
-                                        <div>
-                                            <h3 className="text-sm font-bold text-[var(--header-text)]">
-                                                Resultados documentados
-                                            </h3>
-                                            <ul className="mt-1.5 space-y-1.5">
-                                                {project.results.map(
-                                                    (result) => (
-                                                        <li
-                                                            key={result}
-                                                            className="text-xs leading-relaxed text-[var(--header-muted)]"
-                                                        >
-                                                            • {result}
-                                                        </li>
-                                                    )
-                                                )}
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-                            </section>
-                        )}
+                                        {project.results.length > 0 && (
+                                            <div>
+                                                <h3 className="text-sm font-bold text-[var(--header-text)]">
+                                                    Resultados documentados
+                                                </h3>
+                                                <ul className="mt-1.5 space-y-1.5">
+                                                    {project.results.map(
+                                                        (result) => (
+                                                            <li
+                                                                key={result}
+                                                                className="text-xs leading-relaxed text-[var(--header-muted)]"
+                                                            >
+                                                                • {result}
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+                                </section>
+                            )}
 
                         <ProjectExplainer project={project} />
                     </main>
@@ -451,7 +434,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             </dl>
                         </div>
 
-                        {project.pending.length > 0 && (
+                        {process.env.NODE_ENV !== "production" && project.pending.length > 0 && (
                             <div className="rounded-3xl border border-dashed border-[var(--header-border)] p-4">
                                 <h2 className="font-mono text-[10px] uppercase tracking-wider text-[var(--header-muted)]">
                                     Documentación pendiente

@@ -1,0 +1,46 @@
+{
+  "category": "proyectos",
+  "items": [
+    {
+      "id": "proyectos-desarrollados",
+      "category": "proyectos",
+      "question": "¿Qué proyectos han desarrollado?",
+      "variations": [
+        "cuales son sus proyectos",
+        "ver portafolio",
+        "que sistemas han creado",
+        "casos de exito",
+        "ejemplos de trabajo"
+      ],
+      "keywords": ["proyectos", "proyecto", "portafolio", "casos", "ejemplos", "experiencia", "trabajos", "desarrollado"],
+      "answer": "Estos son los proyectos documentados en el portafolio oficial de RimCode. Puedes abrir la ficha de cualquiera desde la sección Proyectos para ver su arquitectura y enlaces verificados:",
+      "tableType": "projects",
+      "relatedQuestions": [
+        "¿Puedo solicitar una demostración?",
+        "¿Desarrollan sistemas ERP?",
+        "¿Qué tecnologías utilizan?"
+      ]
+    },
+    {
+      "id": "solicitar-demo",
+      "category": "proyectos",
+      "question": "¿Puedo solicitar una demostración?",
+      "variations": [
+        "tienen demos en vivo",
+        "puedo probar un sistema",
+        "como ver una demo",
+        "quiero una demo de angibotica o beeflow",
+        "demostracion del sistema"
+      ],
+      "keywords": ["demo", "demostracion", "demostraciones", "probar", "prueba", "muestra", "vivo", "ver"],
+      "answer": "Sí. Varios proyectos públicos del portafolio cuentan con demostración en vivo accesible directamente desde su ficha técnica (por ejemplo BEEFLOW Auditor, Elecciones Municipio Escolar, Edu Dental y Donde Florecen los Sentimientos). Para sistemas con acceso protegido por credenciales como AngiBotica, puedes solicitar una sesión guiada desde la sección Contacto.",
+      "tableType": "contact",
+      "relatedQuestions": [
+        "¿Qué proyectos han desarrollado?",
+        "¿Cómo puedo contratar sus servicios?",
+        "¿Cuánto cuesta desarrollar un sistema?"
+      ]
+    }
+  ]
+}
+

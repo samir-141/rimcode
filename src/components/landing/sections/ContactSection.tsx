@@ -236,9 +236,9 @@ export default function ContactSection() {
                 </div>
 
                 {/* DOS COLUMNAS EN DESKTOP, APILADAS EN TABLET/MOBILE */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-5xl mx-auto">
                     {/* COLUMNA IZQUIERDA: CANALES DIRECTOS & FUNDADOR */}
-                    <div className="lg:col-span-5 space-y-3.5 rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl p-4 sm:p-6 flex flex-col justify-between">
+                    <div className="lg:col-span-4 space-y-3.5 rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl p-4 sm:p-6 flex flex-col justify-between">
                         <div>
                             <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--accent)] font-semibold block mb-2.5">
                                 Canales de Comunicación
@@ -315,7 +315,7 @@ export default function ContactSection() {
                                                 WhatsApp Comercial
                                             </div>
                                             <div className="text-[10px] text-[var(--header-muted)] font-mono">
-                                                Disponible mediante NEXT_PUBLIC_WHATSAPP_NUMBER
+                                                Solicita atención directa desde el formulario de contacto
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +341,7 @@ export default function ContactSection() {
                     </div>
 
                     {/* COLUMNA DERECHA: FORMULARIO RESPONSIVE */}
-                    <div className="lg:col-span-7 rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl p-4 sm:p-6 shadow-xl">
+                    <div className="lg:col-span-8 rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl p-4 sm:p-6 shadow-xl">
                         {status === "success" ? (
                             <div className="h-full min-h-[280px] flex flex-col items-center justify-center text-center p-4">
                                 <span className="text-4xl mb-2">🎉</span>
@@ -401,7 +401,7 @@ export default function ContactSection() {
                                         className="rounded-2xl border border-red-500/30 bg-red-500/10 p-3.5 text-xs text-red-600 dark:text-red-300 leading-relaxed space-y-1.5"
                                     >
                                         <p className="font-semibold">{errorMessage}</p>
-                                        {missingVars.length > 0 && (
+                                        {process.env.NODE_ENV !== "production" && missingVars.length > 0 && (
                                             <p className="text-[11px] font-mono text-zinc-400">
                                                 Variables pendientes en servidor: {missingVars.join(", ")}
                                             </p>
@@ -418,7 +418,7 @@ export default function ContactSection() {
                                     </div>
                                 )}
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label
                                             htmlFor="contact-name"
@@ -472,7 +472,7 @@ export default function ContactSection() {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label
                                             htmlFor="contact-company"
@@ -499,7 +499,7 @@ export default function ContactSection() {
                                         >
                                             Teléfono (Opcional)
                                         </label>
-                                        <div className="flex gap-1.5">
+                                        <div className="flex gap-2">
                                             {/* Selector de código de país */}
                                             <select
                                                 value={formData.phoneCode}
@@ -507,7 +507,7 @@ export default function ContactSection() {
                                                     setFormData({ ...formData, phoneCode: e.target.value })
                                                 }
                                                 aria-label="Código de país"
-                                                className="shrink-0 w-[88px] px-2 py-2.5 rounded-xl border border-[var(--header-border)] bg-[var(--header-bg)] text-[16px] sm:text-xs text-[var(--header-text)] focus:outline-none focus:border-[var(--accent)] cursor-pointer min-h-[44px]"
+                                                className="shrink-0 w-24 px-2 py-2.5 rounded-xl border border-[var(--header-border)] bg-[var(--header-bg)] text-[16px] sm:text-xs text-[var(--header-text)] focus:outline-none focus:border-[var(--accent)] cursor-pointer min-h-[44px]"
                                             >
                                                 <option value="+51">🇵🇪 +51</option>
                                                 <option value="+1">🇺🇸 +1</option>
@@ -624,7 +624,7 @@ export default function ContactSection() {
             </div>
 
             {/* PIE DE PÁGINA INTEGRADO */}
-            <div className="pt-6 sm:pt-4 mt-8 sm:mt-6 border-t border-[var(--header-border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] sm:text-[11px] text-[var(--header-muted)] font-mono text-center sm:text-left">
+            <div className="py-6 px-4 mt-8 sm:mt-6 border-t border-[var(--header-border)] flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] sm:text-[11px] text-[var(--header-muted)] font-mono text-center md:text-left">
                 <div>
                     © 2026 <strong>{company.name}</strong> • Fundador:{" "}
                     <strong className="text-[var(--header-text)]">

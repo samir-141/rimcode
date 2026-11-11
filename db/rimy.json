@@ -60,17 +60,17 @@
   "projectExplainer": {
     "title": "Pregúntale a RIMY",
     "intro": "Puedo explicarte este proyecto en dos niveles. Elige cómo quieres escucharlo.",
-    "basicLabel": "Resumen básico",
-    "detailedLabel": "Explicación detallada",
-    "emptyDetail": "La información ampliada de este proyecto todavía está pendiente de documentación.",
-    "noDescription": "Este proyecto aún no tiene una descripción ampliada documentada.",
+    "basicLabel": "Resumen ejecutivo",
+    "detailedLabel": "Detalle técnico",
+    "emptyDetail": "Consulta con nuestro equipo para conocer más detalles técnicos de esta solución.",
+    "noDescription": "Solicita una presentación comercial para conocer el alcance completo de esta solución.",
     "questions": [
       "¿Qué es este proyecto?",
       "¿Qué problema resuelve?",
       "¿Qué tecnologías utiliza?",
       "¿Qué funcionalidades tiene?"
     ],
-    "outOfScope": "Esa pregunta se sale un poco del mundo RimCode. Puedo contarte sobre la empresa, sus servicios o sus proyectos. 🤖"
+    "outOfScope": "Esa consulta está fuera de nuestros servicios. Puedo ayudarte con cotizaciones, tiempos de desarrollo, tecnologías o detalles de nuestros proyectos. 🤖"
   },
   "tts": {
     "lang": "es-ES",
@@ -80,19 +80,21 @@
     "sentencePauseMs": 220
   },
   "chat": {
-    "welcome": "¡Hola! Soy RIMY, la asistente virtual de RimCode. Puedo contarte sobre la empresa, sus servicios, proyectos, tecnologías, metodología o cómo contactar.",
-    "title": "RIMY · Asistente RimCode",
-    "subtitle": "Asistente RimCode",
-    "inputPlaceholder": "Escribe tu pregunta sobre RimCode...",
-    "thinkingLabel": "RIMY está pensando...",
-    "localModeLabel": "Modo local documentado",
-    "aiModeLabel": "IA conectada",
-    "scopeNotice": "Solo respondo preguntas relacionadas con RimCode.",
+    "welcome": "¡Hola! Soy Rimy. Puedo ayudarte con cotizaciones, tiempos de desarrollo, tecnologías o detalles de nuestros proyectos. ¿Qué te gustaría consultar?",
+    "title": "RIMY • Asistente Virtual",
+    "subtitle": "En línea • Respuesta inmediata",
+    "inputPlaceholder": "Escribe tu consulta sobre RimCode...",
+    "thinkingLabel": "Escribiendo respuesta...",
+    "localModeLabel": "En línea • Respuesta inmediata",
+    "aiModeLabel": "En línea • Respuesta inmediata",
+    "scopeNotice": "",
     "suggestions": [
+      "¿Qué es RimCode?",
       "¿Qué servicios ofrecen?",
+      "¿Desarrollan sistemas ERP?",
       "¿Qué proyectos han desarrollado?",
-      "¿Qué tecnologías usan?",
-      "¿Cómo puedo contactarlos?"
+      "¿Cuánto cuesta desarrollar un sistema?",
+      "¿Cómo puedo contratar sus servicios?"
     ]
   }
 }

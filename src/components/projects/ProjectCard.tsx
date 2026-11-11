@@ -36,7 +36,12 @@ export default function ProjectCard({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={source}
-                    alt={`Imagen de referencia de ${project.name}`}
+                    alt={
+                        project.seo?.altText ||
+                        `Imagen de referencia de ${project.name}`
+                    }
+                    width={1200}
+                    height={630}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     onError={() => setSource(getProjectFallbackImage())}

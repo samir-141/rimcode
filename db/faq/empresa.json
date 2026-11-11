@@ -1,0 +1,63 @@
+{
+  "category": "empresa",
+  "items": [
+    {
+      "id": "que-es-rimcode",
+      "category": "empresa",
+      "question": "¿Qué es RimCode?",
+      "variations": [
+        "que es rimcode",
+        "quienes son",
+        "sobre rimcode",
+        "informacion de la empresa",
+        "hablame de rimcode"
+      ],
+      "keywords": ["rimcode", "empresa", "compania", "negocio", "sobre", "quienes", "dedican"],
+      "answer": "RimCode es un estudio de ingeniería y desarrollo de software fundado por Samir Jhoner Gómez Alarcón. Transformamos problemas operativos y necesidades de negocio en soluciones digitales funcionales: sistemas ERP, plataformas web a medida, aplicaciones SaaS y automatizaciones con arquitectura limpia.",
+      "relatedQuestions": [
+        "¿Qué servicios ofrecen?",
+        "¿Qué proyectos han desarrollado?",
+        "¿Cómo trabajan?"
+      ]
+    },
+    {
+      "id": "fundador-rimcode",
+      "category": "empresa",
+      "question": "¿Quién está detrás de RimCode?",
+      "variations": [
+        "quien fundo rimcode",
+        "quien es el fundador",
+        "quien lidera rimcode",
+        "quien desarrolla los proyectos",
+        "samir gomez"
+      ],
+      "keywords": ["fundador", "creador", "samir", "jhoner", "gomez", "alarcon", "arquitecto", "desarrollador"],
+      "answer": "RimCode es liderado por Samir Jhoner Gómez Alarcón, Full-Stack Developer & Lead Software Architect. Cada proyecto se construye con enfoque directo en código mantenible, interfaces intuitivas y rentabilidad operativa para el cliente.",
+      "relatedQuestions": [
+        "¿El código queda en propiedad del cliente?",
+        "¿Qué tecnologías utilizan?",
+        "¿Cómo puedo contratar sus servicios?"
+      ]
+    },
+    {
+      "id": "propiedad-codigo",
+      "category": "empresa",
+      "question": "¿El código queda en propiedad del cliente?",
+      "variations": [
+        "el codigo es mio",
+        "entregan el codigo fuente",
+        "entregan repositorio",
+        "cual es la garantia de rimcode",
+        "dependencia de plataforma"
+      ],
+      "keywords": ["codigo", "propiedad", "fuente", "repositorio", "garantia", "cliente", "ataduras"],
+      "answer": "Sí. Nuestra garantía Clean Code establece que el código desarrollado es 100% propiedad del cliente, documentado y entregable en repositorio sin ataduras a plataformas propietarias. Además, incluimos soporte técnico post-lanzamiento y arquitectura modular escalable.",
+      "relatedQuestions": [
+        "¿Cómo trabajan?",
+        "¿Qué tecnologías utilizan?",
+        "¿Cuánto cuesta desarrollar un sistema?"
+      ]
+    }
+  ]
+}
+

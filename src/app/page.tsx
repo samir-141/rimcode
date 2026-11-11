@@ -187,7 +187,7 @@ export default function Home() {
     }, [activeBlock]);
 
     return (
-        <div className="relative w-full bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+        <div className="relative w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
             {/* NAVEGADOR FLOTANTE LATERAL (INDICADOR DE BLOQUES, VISIBLE EN PANTALLAS XL) */}
             <BlockNavigator
                 activeBlock={activeBlock}
@@ -196,7 +196,7 @@ export default function Home() {
             />
 
             {/* CONTENEDOR DE BLOQUES RESPONSIVOS (SIN OVERFLOW TRAPS) */}
-            <main className="w-full">
+            <main className="w-full overflow-x-hidden">
                 {/* BLOQUE 1: INICIO / HERO CON RIMBOT */}
                 <section
                     id="hero"

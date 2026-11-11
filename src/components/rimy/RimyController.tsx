@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import {
     useCallback,
     useEffect,
@@ -44,14 +45,17 @@ type Target = {
 };
 
 export default function RimyController() {
+    const pathname = usePathname();
     const [mode, setMode] = useState<RimyMode>("hero");
     const [ready, setReady] = useState(false);
     const [moving, setMoving] = useState(false);
     const [riveFailed, setRiveFailed] = useState(false);
+    const [chatOpen, setChatOpen] = useState(false);
     const [viewport, setViewport] = useState({ width: 1280, height: 800 });
     const [slotSize, setSlotSize] = useState({ width: 0, height: 0 });
 
     const shellRef = useRef<HTMLDivElement>(null);
+    const chatOpenRef = useRef(false);
     const modeRef = useRef<RimyMode>("hero");
     const previousModeRef = useRef<RimyMode>("hero");
     const positionedRef = useRef(false);
@@ -209,21 +213,44 @@ export default function RimyController() {
     }, []);
 
     useEffect(() => {
-        const slot = document.getElementById(HERO_SLOT_ID);
-        if (!slot) return;
+        let resizeObserver: ResizeObserver | null = null;
+        let mutationObserver: MutationObserver | null = null;
 
-        const measure = () => {
-            const rect = slot.getBoundingClientRect();
-            setSlotSize({ width: rect.width, height: rect.height });
+        const attachToSlot = (slot: HTMLElement) => {
+            const measure = () => {
+                const rect = slot.getBoundingClientRect();
+                setSlotSize({ width: rect.width, height: rect.height });
+            };
+
+            measure();
+            resizeObserver = new ResizeObserver(measure);
+            resizeObserver.observe(slot);
         };
 
-        measure();
+        const existingSlot = document.getElementById(HERO_SLOT_ID);
+        if (existingSlot) {
+            attachToSlot(existingSlot);
+        } else {
+            // Si la ruta está haciendo streaming (Suspense / cacheComponents),
+            // esperamos a que #rimy-hero-slot aparezca en el DOM.
+            mutationObserver = new MutationObserver(() => {
+                const found = document.getElementById(HERO_SLOT_ID);
+                if (!found) return;
+                mutationObserver?.disconnect();
+                mutationObserver = null;
+                attachToSlot(found);
+            });
+            mutationObserver.observe(document.body, {
+                childList: true,
+                subtree: true,
+            });
+        }
 
-        const observer = new ResizeObserver(measure);
-        observer.observe(slot);
-
-        return () => observer.disconnect();
-    }, []);
+        return () => {
+            resizeObserver?.disconnect();
+            mutationObserver?.disconnect();
+        };
+    }, [pathname, mode]);
 
     useEffect(() => {
         if (positionedRef.current) return;
@@ -246,6 +273,22 @@ export default function RimyController() {
         slotSize,
         viewport,
     ]);
+
+    // Respaldo de visibilidad: si tras hidratar el slot no apareció en 1.2s,
+    // acoplamos a la esquina para que RIMY nunca quede oculta (opacity: 0).
+    useEffect(() => {
+        if (ready) return;
+
+        const timer = window.setTimeout(() => {
+            if (positionedRef.current) return;
+            const target = getHeroTarget() ?? getDockTarget();
+            positionedRef.current = true;
+            setTransform(target);
+            setReady(true);
+        }, 1200);
+
+        return () => window.clearTimeout(timer);
+    }, [ready, getHeroTarget, getDockTarget, setTransform]);
 
     useEffect(() => {
         if (!ready) return;
@@ -342,6 +385,7 @@ export default function RimyController() {
             messageDuration: number,
             cooldown = 6000
         ) => {
+            if (chatOpenRef.current) return false;
             const now = performance.now();
             if (now - lastAutoMessageRef.current < cooldown) return false;
 
@@ -547,21 +591,23 @@ export default function RimyController() {
             ];
 
         const accepted = request("happy", {
-            message: text,
+            message: modeRef.current === "docked" ? undefined : text,
             tone: "happy",
-            duration: 1600,
+            duration: 1400,
             messageDuration: 3200,
         });
 
-        if (!accepted && animation === "idle") {
+        if (!accepted && animation === "idle" && modeRef.current !== "docked") {
             showMessage(text, "happy", 3200);
         }
 
-        // When docked, clicking RIMY opens/closes the chat panel
+        // Al pulsar RIMY acoplada, abre/cierra el chat sobre su cabeza.
+        // Si está en el Hero y el usuario hace un toque simple, también permite abrir el chat tras acoplar o en vista móvil.
         if (modeRef.current === "docked") {
+            dismissMessage();
             window.dispatchEvent(new CustomEvent("rimy:toggle-chat"));
         }
-    }, [animation, audio, request, showMessage]);
+    }, [animation, audio, dismissMessage, request, showMessage]);
 
     const handleWave = useCallback(() => {
         if (audio.blocked) {
@@ -581,6 +627,22 @@ export default function RimyController() {
     const handleEnableAudio = useCallback(() => {
         void audio.enable();
     }, [audio]);
+
+    useEffect(() => {
+        const onChatState = (event: Event) => {
+            const nextOpen = Boolean(
+                (event as CustomEvent<{ open?: boolean }>).detail?.open
+            );
+            chatOpenRef.current = nextOpen;
+            setChatOpen(nextOpen);
+            if (nextOpen) {
+                dismissMessage();
+            }
+        };
+
+        window.addEventListener("rimy:chat-state", onChatState);
+        return () => window.removeEventListener("rimy:chat-state", onChatState);
+    }, [dismissMessage]);
 
     // Expone el modo actual para que otros widgets (p. ej. el asistente)
     // puedan apartarse mientras RIMY protagoniza el Hero.
@@ -646,7 +708,7 @@ export default function RimyController() {
                     </div>
                 )}
 
-            {mode === "docked" && !message && !moving && (
+            {mode === "docked" && !message && !moving && !chatOpen && (
                 <RimyFloating
                     muted={audio.muted}
                     blocked={audio.blocked}
@@ -656,7 +718,7 @@ export default function RimyController() {
                 />
             )}
 
-            {message && (
+            {message && !chatOpen && (
                 <RimySpeechBubble
                     message={message}
                     mode={mode}
