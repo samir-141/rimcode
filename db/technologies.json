@@ -1,0 +1,98 @@
+{
+  "categories": [
+    { "id": "all", "label": "Todo el Stack" },
+    { "id": "frontend", "label": "Frontend & UI" },
+    { "id": "backend", "label": "Backend & APIs" },
+    { "id": "database", "label": "Bases de Datos" },
+    { "id": "cloud", "label": "DevOps & Cloud" }
+  ],
+  "items": [
+    {
+      "id": "nextjs",
+      "name": "Next.js 16",
+      "category": "frontend",
+      "tag": "Full-Stack Framework",
+      "description": "Turbopack, Server Actions y renderizado híbrido ultra veloz.",
+      "highlight": "Core Web Vitals 100"
+    },
+    {
+      "id": "react",
+      "name": "React 19",
+      "category": "frontend",
+      "tag": "UI Architecture",
+      "description": "Concurrent rendering, transiciones fluidas y gestión reactiva.",
+      "highlight": "React Compiler"
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind CSS v4",
+      "category": "frontend",
+      "tag": "Design Engine",
+      "description": "Tokens de diseño nativos, modo oscuro/claro y cero CSS muerto.",
+      "highlight": "Micro-bundle size"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "category": "frontend",
+      "tag": "Type Safety",
+      "description": "Tipado estricto que elimina errores en tiempo de ejecución.",
+      "highlight": "Zero Runtime Bugs"
+    },
+    {
+      "id": "node",
+      "name": "Node.js & Express",
+      "category": "backend",
+      "tag": "High Concurrency",
+      "description": "APIs RESTful y microservicios diseñados para alto tráfico.",
+      "highlight": "10k+ req/seg"
+    },
+    {
+      "id": "python",
+      "name": "Python & FastAPI",
+      "category": "backend",
+      "tag": "AI & Automation",
+      "description": "Servicios de procesamiento de datos, algoritmos e inteligencia artificial.",
+      "highlight": "Async Native"
+    },
+    {
+      "id": "postgres",
+      "name": "PostgreSQL & Prisma",
+      "category": "database",
+      "tag": "Relational Storage",
+      "description": "Bases de datos ACID con modelado tipado y migraciones seguras.",
+      "highlight": "Data Integrity"
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase & Redis",
+      "category": "database",
+      "tag": "Realtime & Cache",
+      "description": "Sincronización WebSockets en vivo y caché ultrarrápida en memoria.",
+      "highlight": "Latencia < 20ms"
+    },
+    {
+      "id": "docker",
+      "name": "Docker & CI/CD",
+      "category": "cloud",
+      "tag": "DevOps & Deploy",
+      "description": "Contenedores portables y pipelines de despliegue automatizado.",
+      "highlight": "Zero Downtime"
+    },
+    {
+      "id": "aws",
+      "name": "AWS & Vercel",
+      "category": "cloud",
+      "tag": "Cloud Infrastructure",
+      "description": "Infraestructura elástica global con autoescalado inteligente.",
+      "highlight": "99.99% SLA"
+    }
+  ],
+  "metrics": [
+    { "value": "100/100", "label": "Google Lighthouse" },
+    { "value": "< 0.4s", "label": "Tiempo de Carga" },
+    { "value": "99.99%", "label": "SLA Disponibilidad" },
+    { "value": "0 Deuda", "label": "Arquitectura Limpia" }
+  ],
+  "intro": "Seleccionamos tecnologías probadas en la industria para garantizar que tu plataforma sea ultrarrápida, escalable y libre de deuda técnica."
+}

@@ -1,0 +1,75 @@
+{
+  "services": [
+    {
+      "id": "web-corporativa",
+      "name": "Web Corporativa",
+      "description": "Landing de alta conversión.",
+      "basePriceUSD": 650,
+      "contactLabel": "Landing Page Corporativa"
+    },
+    {
+      "id": "webapp",
+      "name": "Plataforma SaaS",
+      "description": "App web interactiva con base de datos.",
+      "basePriceUSD": 1800,
+      "contactLabel": "Plataforma Web SaaS"
+    },
+    {
+      "id": "ecommerce",
+      "name": "Tienda E-Commerce",
+      "description": "Pagos y catálogo online.",
+      "basePriceUSD": 1400,
+      "contactLabel": "Tienda E-Commerce"
+    },
+    {
+      "id": "erp",
+      "name": "Sistema a Medida / ERP",
+      "description": "Automatización empresarial.",
+      "basePriceUSD": 2800,
+      "contactLabel": "Sistema a Medida / ERP"
+    },
+    {
+      "id": "ia",
+      "name": "Integración con IA / Chatbot",
+      "description": "Asistentes y automatizaciones con IA.",
+      "basePriceUSD": 0,
+      "contactLabel": "Integración con IA / Chatbot"
+    }
+  ],
+  "modules": [
+    {
+      "id": "auth",
+      "name": "Autenticación & Roles",
+      "priceUSD": 180
+    },
+    {
+      "id": "payments",
+      "name": "Pasarela de Pagos",
+      "priceUSD": 250
+    },
+    {
+      "id": "ai",
+      "name": "Chatbot IA RimBot",
+      "priceUSD": 320
+    },
+    {
+      "id": "admin",
+      "name": "Panel Admin & Métricas",
+      "priceUSD": 260
+    },
+    {
+      "id": "multilang",
+      "name": "Soporte Multimoneda",
+      "priceUSD": 150
+    }
+  ],
+  "delivery": {
+    "standard": "3 a 4 semanas",
+    "express": "1 a 2 semanas",
+    "expressLabel": "Sprints intensivos de 1 a 2 semanas (+25%)",
+    "expressMultiplier": 1.25,
+    "postLaunchSupportDays": 30
+  },
+  "disclaimer": "Precios referenciales sujetos al alcance final de requerimientos.",
+  "helpText": "Selecciona las características de tu proyecto para obtener una estimación transparente en tiempo real adaptada a tu moneda."
+}

@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Categorías de consentimiento de RimCode",
+    "note": "Las cookies estrictamente necesarias no requieren consentimiento ni pueden desactivarse. El resto se activa solo con autorización expresa."
+  },
+  "categories": [
+    {
+      "id": "necessary",
+      "name": "Cookies necesarias",
+      "required": true,
+      "shortDescription": "Funcionamiento básico, seguridad y preferencias indispensables.",
+      "description": "Cookies y tecnologías estrictamente necesarias para que el sitio funcione y para recordar tu decisión de consentimiento. No pueden desactivarse porque sin ellas el banner, la navegación o la seguridad del sitio no funcionarían correctamente.",
+      "purposes": [
+        "Mantener la sesión y el estado básico del sitio",
+        "Recordar la decisión de consentimiento y la versión de la política",
+        "Garantizar la seguridad del formulario y del chat",
+        "Evitar peticiones automatizadas"
+      ]
+    },
+    {
+      "id": "preferences",
+      "name": "Cookies de preferencias",
+      "required": false,
+      "shortDescription": "Tema visual y moneda seleccionada.",
+      "description": "Tecnologías que guardan tus preferencias de visualización y de uso del sitio, como el tema claro u oscuro y la moneda del simulador. No identifican tu persona ni se usan para publicidad.",
+      "purposes": [
+        "Recordar el tema claro u oscuro",
+        "Recordar la moneda elegida para el simulador",
+        "Mantener temporalmente la cotización en la sesión"
+      ]
+    },
+    {
+      "id": "analytics",
+      "name": "Cookies analíticas",
+      "required": false,
+      "shortDescription": "Medición agregada de visitas y navegación.",
+      "description": "Cookies y tecnologías de medición que nos ayudan a entender de forma agregada cómo se usa el sitio: páginas visitadas, procedencia y rendimiento. No se activan sin tu autorización y no se usan para crear perfiles publicitarios.",
+      "purposes": [
+        "Medir visitas y páginas vistas",
+        "Identificar errores y problemas de rendimiento",
+        "Mejorar el contenido y la estructura del sitio"
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "Cookies de marketing",
+      "required": false,
+      "shortDescription": "Publicidad, campañas y remarketing.",
+      "description": "Cookies y tecnologías que permitirían medir campañas, mostrar publicidad y hacer remarketing. RimCode no tiene activas tecnologías de marketing en esta versión; la categoría se muestra para que el panel sea transparente y futuras integraciones queden bloqueadas hasta que autorices esta categoría.",
+      "purposes": [
+        "Medir el resultado de campañas comerciales",
+        "Mostrar publicidad relacionada con servicios de RimCode",
+        "Activar remarketing solo si se contrata en el futuro"
+      ]
+    }
+  ]
+}

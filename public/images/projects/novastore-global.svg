@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="NovaStore Global — e-commerce headless">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#140f06"/>
+      <stop offset="1" stop-color="#221706"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <circle cx="1030" cy="130" r="190" fill="#f59e0b" opacity="0.14" filter="url(#glow)"/>
+  <circle cx="180" cy="610" r="180" fill="#f97316" opacity="0.10" filter="url(#glow)"/>
+  <g transform="translate(96 128)">
+    <rect x="0" y="0" width="470" height="420" rx="28" fill="#1b1408" stroke="#ffffff" stroke-opacity="0.12"/>
+    <rect x="24" y="24" width="422" height="44" rx="12" fill="#ffffff" opacity="0.05"/>
+    <rect x="40" y="39" width="150" height="14" rx="7" fill="#f59e0b"/>
+    <circle cx="410" cy="46" r="10" fill="#f59e0b" opacity="0.75"/>
+    <g transform="translate(24 92)">
+      <rect x="0" y="0" width="196" height="180" rx="18" fill="#ffffff" opacity="0.05" stroke="#ffffff" stroke-opacity="0.09"/>
+      <rect x="18" y="18" width="160" height="98" rx="10" fill="#f59e0b" opacity="0.16"/>
+      <rect x="18" y="130" width="98" height="9" rx="4.5" fill="#ffffff" opacity="0.4"/>
+      <rect x="18" y="150" width="60" height="9" rx="4.5" fill="#f59e0b" opacity="0.8"/>
+      <rect x="226" y="0" width="196" height="180" rx="18" fill="#ffffff" opacity="0.04" stroke="#ffffff" stroke-opacity="0.08"/>
+      <rect x="244" y="18" width="160" height="98" rx="10" fill="#ffffff" opacity="0.07"/>
+      <rect x="244" y="130" width="110" height="9" rx="4.5" fill="#ffffff" opacity="0.32"/>
+      <rect x="244" y="150" width="52" height="9" rx="4.5" fill="#ffffff" opacity="0.18"/>
+    </g>
+    <rect x="24" y="292" width="422" height="52" rx="14" fill="#f59e0b" opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4"/>
+    <text x="44" y="326" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#ffd28a">Checkout en 1 paso</text>
+    <rect x="24" y="360" width="200" height="36" rx="18" fill="#ffffff" opacity="0.05"/>
+    <text x="44" y="384" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" fill="#e7d7bd">PEN · USD · EUR</text>
+  </g>
+  <g transform="translate(640 140)">
+    <text x="0" y="0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#f59e0b" letter-spacing="4">E-COMMERCE HEADLESS</text>
+    <text x="0" y="86" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="72" font-weight="800" fill="#f4f4f5">NovaStore</text>
+    <text x="0" y="158" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="72" font-weight="800" fill="#f4f4f5">Global</text>
+    <text x="0" y="212" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" font-weight="400" fill="#d8cbb6">Arquitectura desacoplada y alto tráfico</text>
+    <g transform="translate(0 272)">
+      <rect x="0" y="0" width="118" height="42" rx="21" fill="#ffffff" opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="59" y="27" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#f4f4f5">Next.js</text>
+      <rect x="130" y="0" width="118" height="42" rx="21" fill="#ffffff" opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="189" y="27" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#f4f4f5">GraphQL</text>
+      <rect x="260" y="0" width="132" height="42" rx="21" fill="#ffffff" opacity="0.06" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="326" y="27" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#f4f4f5">CloudFront</text>
+    </g>
+  </g>
+</svg>

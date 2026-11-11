@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Configuración SEO centralizada de RimCode",
+    "note": "Los textos de empresa, servicios y proyectos siguen viviendo en db/. Este archivo solo define valores específicos de SEO para no duplicar contenido."
+  },
+  "site": {
+    "locale": "es-PE",
+    "defaultTitle": "RimCode | Desarrollo de Software a Medida, ERP y Aplicaciones Web",
+    "titleTemplate": "%s | RimCode",
+    "defaultDescription": "RimCode desarrolla software a medida, sistemas ERP, aplicaciones web y plataformas SaaS en Perú. Automatización de procesos, integración de APIs y sistemas de gestión para empresas.",
+    "keywords": [
+      "desarrollo de software a medida",
+      "desarrollo web",
+      "sistemas ERP",
+      "sistemas de gestión empresarial",
+      "software para boticas y farmacias",
+      "automatización de procesos empresariales",
+      "aplicaciones SaaS",
+      "integración de APIs",
+      "sistemas personalizados para pequeñas empresas",
+      "RimCode",
+      "Perú"
+    ],
+    "openGraphImage": "/opengraph-image",
+    "twitterCard": "summary_large_image",
+    "indexing": {
+      "index": true,
+      "follow": true
+    }
+  }
+}

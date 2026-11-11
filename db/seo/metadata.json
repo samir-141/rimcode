@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Metadatos SEO por ruta de RimCode",
+    "note": "Las rutas dinámicas generan su propio título y descripción a partir del contenido."
+  },
+  "home": {
+    "title": "Desarrollo de Software a Medida, ERP y Aplicaciones Web",
+    "description": "RimCode desarrolla software a medida, sistemas ERP, aplicaciones web y plataformas SaaS en Perú. Automatización de procesos, integración de APIs y sistemas de gestión para empresas.",
+    "canonical": "/"
+  },
+  "projects": {
+    "title": "Portafolio de Proyectos",
+    "description": "Proyectos de software a medida, sistemas ERP, plataformas SaaS y tiendas virtuales desarrollados por RimCode en Perú.",
+    "canonical": "/projects"
+  },
+  "legal": {
+    "privacidad": {
+      "title": "Política de Privacidad",
+      "description": "Conoce cómo RimCode recopila, usa y protege tus datos personales y cómo ejercer tus derechos bajo la Ley N.º 29733.",
+      "canonical": "/legal/privacidad"
+    },
+    "cookies": {
+      "title": "Política de Cookies",
+      "description": "Información sobre las cookies y tecnologías de seguimiento que usa RimCode, sus finalidades y cómo gestionar tu consentimiento.",
+      "canonical": "/legal/cookies"
+    }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe. Explora el portafolio de proyectos de RimCode o vuelve al inicio."
+  }
+}

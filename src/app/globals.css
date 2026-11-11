@@ -1,0 +1,375 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   THEME PARAMETERS & VARIABLES
+   Configurados para RimCode: Modo Claro y Modo Oscuro
+   ========================================================================== */
+:root {
+  /* Modo Claro */
+  --background: #fafafc;
+  --foreground: #18181b;
+
+  --header-bg: rgba(250, 250, 252, 0.9);
+  --header-text: #18181b;
+  --header-muted: #71717a;
+  --header-border: rgba(0, 0, 0, 0.1);
+  --accent: #65a30d;
+}
+
+.dark {
+  /* Modo Oscuro */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --header-bg: rgba(12, 14, 22, 0.88);
+  --header-text: #f4f4f5;
+  --header-muted: #9296a5;
+  --header-border: rgba(255, 255, 255, 0.09);
+  --accent: #a3e635;
+}
+
+/* Fallback inicial según preferencias del sistema */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --header-bg: rgba(12, 14, 22, 0.88);
+    --header-text: #f4f4f5;
+    --header-muted: #9296a5;
+    --header-border: rgba(255, 255, 255, 0.09);
+    --accent: #a3e635;
+  }
+}
+
+/* ==========================================================================
+   TAILWIND THEME CONFIGURATION
+   ========================================================================== */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-header-bg: var(--header-bg);
+  --color-header-text: var(--header-text);
+  --color-header-muted: var(--header-muted);
+  --color-header-border: var(--header-border);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --animate-logo-wave: logo-wave 0.65s ease both;
+}
+
+@keyframes logo-wave {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ==========================================================================
+   ESTILOS BASE & SCROLL RESPONSIVE INTELIGENTE
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* En pantallas grandes con suficiente altura, activar scroll snap */
+@media (min-width: 1024px) and (min-height: 750px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Clases de apoyo para bloques responsivos */
+.block-section {
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) and (min-height: 750px) {
+  .block-section {
+    scroll-snap-align: start;
+  }
+}
+
+/* Ocultar barra de desplazamiento manteniendo funcionalidad táctil */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   HEADER COMPONENT (FIJO CON BLUR Y ADAPTADO A TAILWIND)
+   ========================================================================== */
+.rim-header {
+  @apply fixed top-0 left-0 z-50 w-full border-b backdrop-blur-xl transition-[background-color,color,border-color] duration-500;
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  border-color: var(--header-border);
+}
+
+.rim-header.theme-light {
+  --header-bg: rgba(250, 250, 252, 0.9);
+  --header-text: #18181b;
+  --header-muted: #71717a;
+  --header-border: rgba(0, 0, 0, 0.1);
+  --accent: #65a30d;
+}
+
+.rim-header.theme-dark {
+  --header-bg: rgba(12, 14, 22, 0.88);
+  --header-text: #f4f4f5;
+  --header-muted: #9296a5;
+  --header-border: rgba(255, 255, 255, 0.09);
+  --accent: #a3e635;
+}
+
+.header-container {
+  @apply mx-auto flex min-h-[68px] sm:min-h-[76px] lg:min-h-[82px] items-center justify-between gap-3 sm:gap-6;
+  width: min(1440px, 94%);
+}
+
+/* LOGO */
+.rim-logo {
+  @apply flex shrink-0 cursor-pointer items-center border-0 bg-transparent text-[20px] sm:text-[23px] lg:text-[25px] font-extrabold tracking-[-1.5px] text-inherit select-none;
+}
+
+.logo-symbol {
+  @apply mr-[5px] sm:mr-[7px] text-[18px] sm:text-[21px];
+  color: var(--accent);
+}
+
+.logo-dot {
+  color: var(--accent);
+}
+
+.logo-letter {
+  @apply inline-block transition-colors duration-200;
+  animation: logo-wave 0.65s ease both;
+  animation-delay: calc(var(--i, 0) * 65ms);
+}
+
+.rim-logo:hover .logo-letter {
+  animation: logo-wave 0.55s ease infinite;
+  animation-delay: calc(var(--i, 0) * 65ms);
+  color: var(--accent);
+}
+
+/* NAVEGACIÓN DESKTOP */
+.desktop-nav {
+  @apply hidden lg:flex items-center;
+}
+
+.nav-track {
+  @apply flex items-center gap-1 xl:gap-1.5;
+}
+
+.nav-link {
+  @apply relative flex cursor-pointer items-center gap-[6px] border-0 bg-transparent px-[9px] xl:px-[11px] py-2.5 text-xs font-medium transition-colors duration-300;
+  color: var(--header-muted);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--header-text);
+}
+
+.nav-node {
+  @apply font-mono text-[9px] opacity-45 transition-[color,opacity] duration-300;
+}
+
+.nav-link.active .nav-node {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.nav-link::after {
+  content: "";
+  @apply absolute bottom-[2px] left-[9px] xl:left-[11px] h-[2px] w-0 transition-[width] duration-300 ease-out;
+  background-color: var(--accent);
+}
+
+.nav-link.active::after {
+  width: calc(100% - 18px);
+}
+
+/* ACCIONES Y CONTROLES */
+.header-actions {
+  @apply flex items-center gap-2 sm:gap-3.5;
+}
+
+.currency-control {
+  @apply relative flex items-center gap-1.5 sm:gap-2;
+}
+
+.currency-indicator {
+  @apply h-[6px] w-[6px] sm:h-[7px] sm:w-[7px] rounded-full;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.currency-control select {
+  @apply cursor-pointer border-0 bg-transparent text-[11px] sm:text-xs font-bold outline-none;
+  color: var(--header-text);
+}
+
+.currency-control select option {
+  @apply bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100;
+}
+
+.currency-info {
+  @apply hidden xl:flex flex-col text-[9px] leading-[1.4];
+  color: var(--header-muted);
+}
+
+.currency-info strong {
+  @apply text-[11px] font-bold;
+  color: var(--header-text);
+}
+
+.currency-info small {
+  @apply text-[8px] opacity-80;
+}
+
+/* MODO CLARO / OSCURO INTERRUPTOR */
+.theme-toggle {
+  @apply relative h-6 w-11 sm:h-7 sm:w-[50px] cursor-pointer rounded-full p-[2.5px] transition-colors duration-500 border shrink-0;
+  border-color: var(--header-border);
+  background-color: #252b40;
+}
+
+.theme-toggle.light {
+  background-color: #f5d58b;
+}
+
+.theme-sky {
+  @apply relative block h-full w-full;
+}
+
+.theme-sun,
+.theme-moon {
+  @apply absolute top-0 grid h-5 w-5 place-items-center transition-all duration-500;
+}
+
+.theme-sun svg,
+.theme-moon svg {
+  @apply h-[15px] w-[15px] sm:h-[17px] sm:w-[17px];
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-sun {
+  @apply left-0 -rotate-90 scale-50 opacity-0 text-amber-400;
+}
+
+.theme-moon {
+  @apply right-0 rotate-0 scale-100 opacity-100 text-blue-200;
+}
+
+.theme-toggle.light .theme-sun {
+  @apply rotate-0 scale-100 opacity-100;
+}
+
+.theme-toggle.light .theme-moon {
+  @apply rotate-90 scale-50 opacity-0;
+}
+
+/* MENÚ MÓVIL */
+.mobile-menu-button {
+  @apply flex lg:hidden h-[34px] w-[34px] flex-col items-center justify-center gap-1.5 border-0 bg-transparent cursor-pointer p-0 shrink-0;
+}
+
+.mobile-menu-button span {
+  @apply h-[2px] w-[21px] rounded-full transition-transform duration-300;
+  background-color: var(--header-text);
+}
+
+.mobile-menu-button.open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.mobile-menu-button.open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+.mobile-nav-backdrop {
+  @apply fixed inset-0 z-40 bg-black/60 backdrop-blur-xs transition-opacity duration-300 lg:hidden;
+}
+
+.mobile-nav {
+  @apply fixed top-[68px] sm:top-[76px] left-0 z-50 flex w-full max-h-[calc(100dvh-76px)] overflow-y-auto flex-col border-b px-[6%] pt-4 pb-6 backdrop-blur-2xl transition-all duration-300 lg:hidden shadow-2xl;
+  background-color: var(--header-bg);
+  border-color: var(--header-border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+}
+
+.mobile-nav.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-nav button {
+  @apply flex cursor-pointer items-center gap-3 border-0 border-b py-3 px-2 bg-transparent text-left text-sm transition-colors duration-200;
+  border-color: var(--header-border);
+  color: var(--header-muted);
+}
+
+.mobile-nav button:hover,
+.mobile-nav button.active {
+  color: var(--accent);
+}
+
+.mobile-nav button span:first-child {
+  @apply font-mono text-[10px];
+}
+
+.mobile-arrow {
+  @apply ml-auto text-xs transition-transform duration-200;
+}
+
+.mobile-nav button:hover .mobile-arrow {
+  transform: translate(2px, -2px);
+}
+
+.mobile-nav-footer {
+  @apply pt-4 font-mono text-[9px] tracking-[2px] text-center;
+  color: var(--header-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .rim-header *,
+  .rim-header *::before,
+  .rim-header *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

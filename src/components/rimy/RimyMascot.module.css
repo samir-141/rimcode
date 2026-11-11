@@ -1,0 +1,822 @@
+.svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    user-select: none;
+    -webkit-user-select: none;
+    filter: drop-shadow(0 18px 26px rgba(3, 20, 42, 0.18));
+}
+
+.groundShadow {
+    fill: rgba(3, 20, 42, 0.2);
+    transition: transform 0.4s ease;
+    transform-box: view-box;
+    transform-origin: 130px 354px;
+}
+
+.stage,
+.float,
+.bodyRoot,
+.head,
+.antenna,
+.torso,
+.leg,
+.arm,
+.handLeft,
+.handRight,
+.crossedArms,
+.thinkingArm,
+.sidePods,
+.talkingMouth {
+    transform-box: view-box;
+}
+
+.float {
+    animation: rimyFloat 4.6s ease-in-out infinite;
+    transform-origin: 130px 340px;
+    will-change: transform;
+}
+
+.bodyRoot {
+    transform-origin: 130px 340px;
+    will-change: transform;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ojos                                                                */
+/* ------------------------------------------------------------------ */
+
+.eyeLook {
+    transform: translate(var(--rimy-look-x, 0px), var(--rimy-look-y, 0px));
+    transition: transform 0.12s ease-out;
+    will-change: transform;
+}
+
+.blink {
+    animation: rimyBlink 6.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.blinkDisabled {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.gear {
+    animation: rimyGear 4.2s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.gearReverse {
+    animation: rimyGearReverse 3.4s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.angryWash {
+    animation: rimyAngryPulse 1.1s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+/* ------------------------------------------------------------------ */
+/* Extremidades                                                        */
+/* ------------------------------------------------------------------ */
+
+.arm {
+    transition: transform 0.5s cubic-bezier(0.34, 1.42, 0.64, 1),
+        opacity 0.25s ease;
+    transform-origin: 130px 218px;
+    will-change: transform;
+}
+
+.armLeft {
+    transform-origin: 72px 218px;
+}
+
+.armRight {
+    transform-origin: 188px 218px;
+}
+
+.handLeft {
+    transform-origin: 62px 296px;
+}
+
+.handRight {
+    transform-origin: 198px 296px;
+}
+
+.leg {
+    transition: transform 0.35s ease;
+    will-change: transform;
+}
+
+.legLeft {
+    transform-origin: 106px 300px;
+}
+
+.legRight {
+    transform-origin: 154px 300px;
+}
+
+.crossedArms {
+    opacity: 0;
+    transform-origin: 130px 244px;
+    transition: opacity 0.2s ease;
+}
+
+.thinkingArm {
+    opacity: 0;
+    transform-origin: 186px 220px;
+    transition: opacity 0.25s ease;
+}
+
+.head {
+    transform-origin: 130px 196px;
+    transition: transform 0.35s ease;
+}
+
+.sidePods {
+    transform-origin: 130px 130px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Estados                                                             */
+/* ------------------------------------------------------------------ */
+
+.greeting .bodyRoot {
+    animation: rimyGreetBob 1.5s ease-in-out infinite;
+}
+
+.greeting .head {
+    animation: rimyHeadBob 1.7s ease-in-out infinite;
+}
+
+.greeting .armRight {
+    transform: rotate(-116deg);
+}
+
+.greeting .handRight {
+    animation: rimyHandWave 0.55s ease-in-out infinite;
+}
+
+.greeting .armLeft {
+    transform: rotate(3deg);
+}
+
+.greeting .groundShadow {
+    animation: rimyShadowPulse 1.5s ease-in-out infinite;
+}
+
+.happy .bodyRoot {
+    animation: rimyHop 0.72s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+}
+
+.happy .armLeft {
+    transform: rotate(118deg);
+}
+
+.happy .armRight {
+    transform: rotate(-118deg);
+}
+
+.happy .handLeft,
+.happy .handRight {
+    animation: rimyHandWave 0.5s ease-in-out infinite;
+}
+
+.happy .head {
+    animation: rimyHappyTilt 0.72s ease-in-out infinite;
+}
+
+.happy .groundShadow {
+    animation: rimyShadowPulse 0.72s ease-in-out infinite;
+}
+
+.run .float {
+    animation-duration: 1.4s;
+}
+
+.run .bodyRoot {
+    animation: rimyRunBob 0.46s ease-in-out infinite;
+}
+
+.run .armLeft {
+    animation: rimyArmSwingLeft 0.46s ease-in-out infinite alternate;
+}
+
+.run .armRight {
+    animation: rimyArmSwingRight 0.46s ease-in-out infinite alternate;
+}
+
+.run .legLeft {
+    animation: rimyStrideLeft 0.46s ease-in-out infinite alternate;
+}
+
+.run .legRight {
+    animation: rimyStrideRight 0.46s ease-in-out infinite alternate;
+}
+
+.run .handLeft,
+.run .handRight {
+    animation: none;
+}
+
+.fall .float {
+    animation: none;
+}
+
+.fall .bodyRoot {
+    animation: rimyTumble 1.9s cubic-bezier(0.33, 0.72, 0.38, 1) both;
+}
+
+.fall .armLeft {
+    transform: rotate(54deg);
+}
+
+.fall .armRight {
+    transform: rotate(-54deg);
+}
+
+.fall .legLeft {
+    transform: rotate(18deg);
+}
+
+.fall .legRight {
+    transform: rotate(-18deg);
+}
+
+.fall .groundShadow {
+    animation: rimyFallShadow 1.9s ease-in-out both;
+}
+
+.annoyed .bodyRoot {
+    animation: rimyAnnoyedShake 0.42s ease-in-out infinite;
+}
+
+.annoyed .head {
+    animation: rimyAnnoyedTilt 1.6s ease-in-out infinite;
+}
+
+.annoyed .arm {
+    opacity: 0;
+}
+
+.annoyed .crossedArms {
+    opacity: 1;
+}
+
+.annoyed .groundShadow {
+    animation: rimyShadowPulse 1.1s ease-in-out infinite;
+}
+
+.thinking .head {
+    animation: rimyThinkTilt 2.7s ease-in-out infinite;
+}
+
+.thinking .armRight {
+    opacity: 0;
+}
+
+.thinking .thinkingArm {
+    opacity: 1;
+    animation: rimyThinkArm 2.7s ease-in-out infinite;
+}
+
+.talkingMouth {
+    transform-origin: 130px 159px;
+    animation: rimyTalk 0.42s ease-in-out infinite;
+}
+
+.talking .head {
+    animation: rimyTalkNod 1.1s ease-in-out infinite;
+}
+
+.talking .groundShadow {
+    animation: rimyShadowPulse 1.1s ease-in-out infinite;
+}
+
+.error .float {
+    animation: none;
+}
+
+.error .bodyRoot {
+    animation: rimySurprise 0.95s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.error .armLeft {
+    transform: rotate(64deg);
+}
+
+.error .armRight {
+    transform: rotate(-64deg);
+}
+
+.error .head {
+    animation: rimyErrorHead 0.95s ease-out both;
+}
+
+.error .groundShadow {
+    animation: rimyShadowPulse 0.6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/* Efectos                                                             */
+/* ------------------------------------------------------------------ */
+
+.speedLine {
+    stroke: #53d9ff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 24 26;
+    animation: rimySpeedDash 0.55s linear infinite;
+    opacity: 0.65;
+}
+
+.dust {
+    fill: rgba(120, 208, 255, 0.36);
+    animation: rimyDust 0.6s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.sparkle {
+    animation: rimyTwinkle 1.8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.confetti {
+    animation: rimyConfetti 1.6s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+}
+
+.smokePuff {
+    animation: rimySmoke 2.2s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+}
+
+.angerMark {
+    animation: rimyAnger 1.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.thoughtDot {
+    fill: #7ceffc;
+    animation: rimyThought 2.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.burstLine {
+    stroke: #8ff6ff;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    animation: rimyBurst 0.95s ease-out infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/* Keyframes                                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes rimyFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@keyframes rimyBlink {
+    0%,
+    87%,
+    95%,
+    100% {
+        transform: scaleY(1);
+    }
+    90%,
+    92% {
+        transform: scaleY(0.08);
+    }
+}
+
+@keyframes rimyGear {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rimyGearReverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes rimyGreetBob {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes rimyHeadBob {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-2.5deg);
+    }
+}
+
+@keyframes rimyHandWave {
+    0%,
+    100% {
+        transform: rotate(-17deg);
+    }
+    50% {
+        transform: rotate(21deg);
+    }
+}
+
+@keyframes rimyHop {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    24% {
+        transform: translateY(-6px);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    58% {
+        transform: translateY(0);
+    }
+    74% {
+        transform: translateY(-5px);
+    }
+    88% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes rimyHappyTilt {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    35% {
+        transform: rotate(3deg);
+    }
+    70% {
+        transform: rotate(-2deg);
+    }
+}
+
+@keyframes rimyRunBob {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-7px) rotate(2deg);
+    }
+}
+
+@keyframes rimyArmSwingLeft {
+    from {
+        transform: rotate(34deg);
+    }
+    to {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes rimyArmSwingRight {
+    from {
+        transform: rotate(-30deg);
+    }
+    to {
+        transform: rotate(34deg);
+    }
+}
+
+@keyframes rimyStrideLeft {
+    from {
+        transform: rotate(27deg);
+    }
+    to {
+        transform: rotate(-24deg);
+    }
+}
+
+@keyframes rimyStrideRight {
+    from {
+        transform: rotate(-24deg);
+    }
+    to {
+        transform: rotate(27deg);
+    }
+}
+
+@keyframes rimyTumble {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    14% {
+        transform: translateY(4px) rotate(8deg);
+    }
+    30% {
+        transform: translateY(27px) rotate(21deg);
+    }
+    44% {
+        transform: translateY(15px) rotate(16deg);
+    }
+    58% {
+        transform: translateY(27px) rotate(20deg);
+    }
+    76% {
+        transform: translateY(0) rotate(0deg);
+    }
+    86% {
+        transform: translateY(-4px) rotate(-3deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes rimyTalk {
+    0%,
+    100% {
+        transform: scaleY(0.55);
+    }
+    50% {
+        transform: scaleY(1.15);
+    }
+}
+
+@keyframes rimyTalkNod {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-1.2deg);
+    }
+}
+
+@keyframes rimyFallShadow {
+    0%,
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    30%,
+    58% {
+        transform: scaleX(1.22);
+        opacity: 0.7;
+    }
+}
+
+@keyframes rimyShadowPulse {
+    0%,
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scaleX(0.86);
+        opacity: 0.72;
+    }
+}
+
+@keyframes rimyAnnoyedShake {
+    0%,
+    100% {
+        transform: rotate(0deg) translateY(0);
+    }
+    25% {
+        transform: rotate(-1.8deg) translateY(1px);
+    }
+    75% {
+        transform: rotate(1.8deg) translateY(1px);
+    }
+}
+
+@keyframes rimyAnnoyedTilt {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(2.5deg);
+    }
+}
+
+@keyframes rimyThinkTilt {
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+    50% {
+        transform: rotate(4deg);
+    }
+}
+
+@keyframes rimyThinkArm {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-3deg);
+    }
+}
+
+@keyframes rimySurprise {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    15% {
+        transform: translateY(-14px) scale(1.035, 0.97);
+    }
+    32% {
+        transform: translateY(0) scale(0.98, 1.025);
+    }
+    48% {
+        transform: translateY(-6px) scale(1.01);
+    }
+    66% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes rimyErrorHead {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(-5deg) translateY(-2px);
+    }
+    42% {
+        transform: rotate(4deg);
+    }
+    64% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes rimySpeedDash {
+    to {
+        stroke-dashoffset: -50;
+    }
+}
+
+@keyframes rimyDust {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.4);
+    }
+    30% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px) scale(1.5);
+    }
+}
+
+@keyframes rimyTwinkle {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(0.55) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) rotate(18deg);
+    }
+}
+
+@keyframes rimyConfetti {
+    0% {
+        opacity: 0;
+        transform: translateY(8px) rotate(0deg);
+    }
+    28% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-26px) rotate(110deg);
+    }
+}
+
+@keyframes rimySmoke {
+    0% {
+        opacity: 0;
+        transform: translate(0, 7px) scale(0.65);
+    }
+    25% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-10px, -24px) scale(1.45);
+    }
+}
+
+@keyframes rimyAnger {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.9) rotate(-4deg);
+    }
+    50% {
+        opacity: 0.95;
+        transform: scale(1.05) rotate(3deg);
+    }
+}
+
+@keyframes rimyThought {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(2px) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1);
+    }
+}
+
+@keyframes rimyBurst {
+    0% {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+    35% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.22);
+    }
+}
+
+@keyframes rimyAngryPulse {
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Accesibilidad / rendimiento                                         */
+/* ------------------------------------------------------------------ */
+
+.reduced *,
+.reduced *::before,
+.reduced *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .svg *,
+    .svg *::before,
+    .svg *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    .float {
+        animation: none;
+    }
+}

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Registro de cookies y tecnologías de RimCode",
+    "note": "Registro honesto. Solo se listan tecnologías que existen en el proyecto. Las herramientas de terceros se cargan únicamente si están configuradas y, cuando requieren consentimiento, si el visitante lo autoriza."
+  },
+  "cookies": [
+    {
+      "name": "rimcode-consent",
+      "provider": "RimCode",
+      "category": "necessary",
+      "type": "cookie propia y localStorage",
+      "duration": "12 meses desde la última decisión",
+      "purpose": "Guarda la decisión de consentimiento, las categorías autorizadas y la versión de la política."
+    },
+    {
+      "name": "rimcode-theme",
+      "provider": "RimCode",
+      "category": "preferences",
+      "type": "localStorage",
+      "duration": "Hasta que el visitante lo borra o cambia de tema",
+      "purpose": "Recuerda el tema claro u oscuro elegido."
+    },
+    {
+      "name": "rimcode-currency",
+      "provider": "RimCode",
+      "category": "preferences",
+      "type": "localStorage",
+      "duration": "Hasta que el visitante lo borra o cambia de moneda",
+      "purpose": "Recuerda la moneda preferida para el simulador."
+    },
+    {
+      "name": "rimcode:quote",
+      "provider": "RimCode",
+      "category": "preferences",
+      "type": "sessionStorage",
+      "duration": "Solo durante la pestaña actual",
+      "purpose": "Lleva la cotización del simulador al formulario de contacto. No contiene datos personales."
+    },
+    {
+      "name": "_ga y _ga_*",
+      "provider": "Google Analytics",
+      "category": "analytics",
+      "type": "cookie de terceros",
+      "duration": "Según la configuración del proveedor (GA4: hasta 14 meses)",
+      "purpose": "Mide de forma agregada las visitas y la navegación.",
+      "optional": true,
+      "activation": "Solo si se define NEXT_PUBLIC_GA_MEASUREMENT_ID y se autoriza la categoría analítica."
+    },
+    {
+      "name": "_vercel* y __vc*",
+      "provider": "Vercel",
+      "category": "analytics",
+      "type": "cookie de terceros",
+      "duration": "Según la configuración del proveedor",
+      "purpose": "Analítica de visitas si se activa Vercel Analytics en el despliegue.",
+      "optional": true,
+      "activation": "Solo si se activa la analítica de la plataforma de despliegue."
+    },
+    {
+      "name": "Tecnologías de marketing",
+      "provider": "Ninguna activa",
+      "category": "marketing",
+      "type": "No aplica",
+      "duration": "No aplica",
+      "purpose": "RimCode no utiliza tecnologías de publicidad ni remarketing en esta versión."
+    }
+  ],
+  "functionalServices": [
+    {
+      "name": " open.er-api.com",
+      "provider": "open.er-api.com",
+      "category": "necessary",
+      "purpose": "Consulta tipos de cambio para mostrar precios referenciales en el simulador.",
+      "cookies": "No establece cookies ni crea perfiles.",
+      "activation": "Solo cuando el sitio necesita una tasa de cambio y no la tiene en memoria."
+    },
+    {
+      "name": "Resend o webhook de contacto",
+      "provider": "Resend o endpoint configurable",
+      "category": "necessary",
+      "purpose": "Entrega los mensajes del formulario de contacto.",
+      "cookies": "No establece cookies en el sitio.",
+      "activation": "Solo al enviar el formulario."
+    },
+    {
+      "name": "Proveedor de IA para el chat",
+      "provider": "Gemini u otro endpoint compatible",
+      "category": "necessary",
+      "purpose": "Genera respuestas del asistente Rimy cuando está configurado.",
+      "cookies": "No establece cookies en el sitio.",
+      "activation": "Solo cuando el visitante usa el chat y el proveedor está configurado."
+    }
+  ]
+}

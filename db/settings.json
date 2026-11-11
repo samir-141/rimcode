@@ -1,0 +1,49 @@
+{
+  "site": {
+    "name": "RimCode",
+    "locale": "es-PE",
+    "defaultUrl": "https://rimcode.dev"
+  },
+  "theme": {
+    "storageKey": "rimcode-theme",
+    "default": "dark"
+  },
+  "currency": {
+    "storageKey": "rimcode-currency",
+    "default": "PEN",
+    "options": [
+      "PEN",
+      "USD",
+      "EUR"
+    ],
+    "fallbackRates": {
+      "PEN": 3.75,
+      "USD": 1,
+      "EUR": 0.92
+    },
+    "ratesEndpoint": "https://open.er-api.com/v6/latest/USD",
+    "refreshMs": 300000
+  },
+  "projects": {
+    "featuredLimit": 3,
+    "relatedLimit": 3
+  },
+  "chat": {
+    "maxMessageLength": 600,
+    "minMessageLength": 2,
+    "rateLimitPerMinute": 12,
+    "historyLimit": 8,
+    "timeoutMs": 20000
+  },
+  "contact": {
+    "rateLimitPerHour": 5,
+    "minimumFillTimeMs": 2500,
+    "maximumFillTimeMs": 7200000,
+    "maxMessageLength": 5000,
+    "minMessageLength": 10
+  },
+  "credits": {
+    "year": 2026,
+    "text": "RimCode · Digital Solutions · Clean Code"
+  }
+}

@@ -1,0 +1,457 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-09",
+    "source": "Contenido documentado y portafolio oficial de RimCode",
+    "note": "Los campos vacíos o ausentes no se renderizan como si existieran. No se han inventado enlaces, métricas, galerías ni demostraciones."
+  },
+  "projects": [
+    {
+      "id": "donde-florecen-los-sentimientos",
+      "slug": "donde-florecen-los-sentimientos",
+      "name": "Donde Florecen los Sentimientos",
+      "category": "Experiencias Web Interactivas",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Experiencia web interactiva y narrativa romántica inspirada en las flores amarillas.",
+      "description": "Aplicación web temática diseñada para transformar el significado de las flores amarillas en una experiencia digital romántica, mediante una narrativa visual que busca transmitir emociones, cariño y conexión a través de una interfaz inmersiva.",
+      "problem": "Los mensajes románticos tradicionales suelen limitarse a textos, imágenes estáticas o dedicatorias convencionales. Este proyecto busca ofrecer una alternativa más personal e inmersiva, convirtiendo una dedicatoria en una experiencia digital que invite al usuario a explorar, descubrir y conectar emocionalmente con la historia.",
+      "objectives": [
+        "Presentación narrativa para transmitir emociones mediante experiencia digital",
+        "Interfaz visual interactiva con identidad propia y diseño inmersivo",
+        "Experiencia web accesible y optimizada desde navegadores modernos"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "JavaScript",
+        "Vercel"
+      ],
+      "thumbnail": "/images/projects/flores-amarillas-preview.png",
+      "gallery": [],
+      "demo": {
+        "type": "external",
+        "url": "https://flores-amarrillaslvoe-delta.vercel.app/",
+        "enabled": true,
+        "title": "Ver Experiencia en Vivo",
+        "description": "Despliegue activo en Vercel.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "https://flores-amarrillaslvoe-delta.vercel.app/",
+        "github": "https://github.com/samir-141",
+        "documentation": ""
+      },
+      "features": [
+        "Diseño visual inspirado en las flores amarillas y su simbolismo romántico",
+        "Presentación narrativa orientada a transmitir emociones mediante experiencia digital",
+        "Interfaz visual diseñada para generar una conexión emocional con el usuario",
+        "Experiencia web accesible y optimizada desde navegadores modernos",
+        "Enfoque en la combinación de estética, contenido y exploración interactiva"
+      ],
+      "challenges": [
+        "Composición estética e interactiva fluida para transmitir emociones",
+        "Optimización de rendimiento en dispositivos móviles"
+      ],
+      "solutions": [
+        "Componentes interactivos en React con animaciones sutiles",
+        "Despliegue global en Edge con Vercel"
+      ],
+      "results": [
+        "Experiencia en vivo y disponible públicamente",
+        "Navegación inmersiva y fluida"
+      ],
+      "metrics": "En Vivo • Vercel",
+      "client": "Proyecto Personal / Creativo",
+      "publishedAt": "2026",
+      "accent": "#eab308",
+      "pending": []
+    },
+    {
+      "id": "beeflow-auditor",
+      "slug": "beeflow-auditor",
+      "name": "BEEFLOW Auditor",
+      "category": "Herramientas Web & Auditoría",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Sistema de auditoría de servicio, registro de campo y generación de reportes apícolas.",
+      "description": "Aplicación web orientada a digitalizar el registro y la auditoría de colmenas, permitiendo organizar información de campo, gestionar lotes de registros y generar documentos estandarizados para su impresión y revisión operativa. La interfaz contempla captura desde dispositivos móviles y tablets, junto con vista previa de documentos en formato A4.",
+      "problem": "Los procesos de auditoría realizados mediante formularios físicos dificultan la consolidación de información, aumentan el riesgo de errores de transcripción y requieren tiempo adicional para organizar los datos y preparar informes. BEEFLOW Auditor centraliza estos registros en una interfaz digital y facilita su conversión en documentos listos para imprimir.",
+      "objectives": [
+        "Digitalizar el registro y auditoría de colmenas en campo",
+        "Automatizar la generación de reportes estandarizados e imprimibles en A4",
+        "Habilitar importación y exportación de datos en JSON y CSV"
+      ],
+      "technologies": [
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Netlify",
+        "JSON / CSV"
+      ],
+      "thumbnail": "/images/projects/beeflow-preview.png",
+      "gallery": [],
+      "demo": {
+        "type": "external",
+        "url": "https://superlative-choux-f30238.netlify.app/",
+        "enabled": true,
+        "title": "Ver Sistema BEEFLOW en Vivo",
+        "description": "Despliegue activo en Netlify.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "https://superlative-choux-f30238.netlify.app/",
+        "github": "https://github.com/samir-141",
+        "documentation": ""
+      },
+      "features": [
+        "Gestión de auditorías: registro de campo, apicultor, fecha, proyecto y lote",
+        "Registro de colmenas: identificación individual y control de atributos de colmena",
+        "Procesamiento por lotes: carga de muestras y aplicación masiva de valores",
+        "Búsqueda y organización: localización de colmenas y hojas de registro",
+        "Generación de documentos: vista previa de reportes, exportación a PDF e impresión A4",
+        "Intercambio de información: importación y exportación vía JSON y CSV",
+        "Interfaz multidispositivo: optimizado para móviles y tablets"
+      ],
+      "challenges": [
+        "Captura rápida y sin fricción de datos en condiciones de campo",
+        "Formateo exacto de reportes para impresión horizontal A4"
+      ],
+      "solutions": [
+        "Diseño mobile-first para operaciones masivas con un solo toque",
+        "Motor de vista previa CSS paged media para exportación perfecta a PDF"
+      ],
+      "results": [
+        "En Vivo • Netlify",
+        "Eliminación de formularios físicos de campo"
+      ],
+      "metrics": "En Vivo • Netlify • A4 Print Ready",
+      "client": "Sector Agropecuario / Apícola",
+      "publishedAt": "2026",
+      "accent": "#f59e0b",
+      "pending": []
+    },
+    {
+      "id": "angibotica",
+      "slug": "angibotica",
+      "name": "AngiBotica",
+      "category": "Sistemas ERP & Gestión",
+      "status": "development",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Sistema de gestión, punto de venta y control operativo de inventario para farmacias.",
+      "description": "Plataforma integral diseñada para centralizar el control de inventario farmacéutico, ventas de mostrador, control de lotes y trazabilidad de movimientos en pequeñas y medianas boticas.",
+      "problem": "Las pequeñas boticas y farmacias locales enfrentan discrepancias frecuentes entre el inventario físico y registrado, vencimiento desapercibido de medicamentos y lentitud en la atención por falta de un punto de venta conectado al kardex en tiempo real.",
+      "objectives": [
+        "Modelado de datos relacionales robusto con PostgreSQL y Prisma",
+        "Backend modular escalable con NestJS",
+        "Punto de venta y kardex en tiempo real con React y Tailwind CSS"
+      ],
+      "technologies": [
+        "React",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma ORM",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "thumbnail": "/images/projects/angibotica-preview.png",
+      "gallery": [],
+      "demo": {
+        "type": "iframe",
+        "url": "",
+        "enabled": false,
+        "title": "Demostración de AngiBotica",
+        "description": "Entorno de desarrollo controlado.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "",
+        "github": "https://github.com/samir-141",
+        "documentation": ""
+      },
+      "features": [
+        "Control de inventario por lotes y alertas automáticas de stock mínimo",
+        "Módulo de punto de venta rápido (POS) con registro directo en el kardex",
+        "Búsqueda instantánea de medicamentos por nombre comercial y principio activo",
+        "Registro de movimientos con trazabilidad por rol de usuario",
+        "Generación de reportes operativos de ventas y rotación de productos"
+      ],
+      "challenges": [
+        "Consistencia de inventario en ventas concurrentes de mostrador",
+        "Alertas preventivas de vencimiento de lotes"
+      ],
+      "solutions": [
+        "Transacciones ACID en PostgreSQL con Prisma ORM",
+        "Arquitectura hexagonal y modular en NestJS"
+      ],
+      "results": [
+        "En Desarrollo Activo",
+        "Kardex y POS sincronizados en milisegundos"
+      ],
+      "metrics": "En Desarrollo Activo • PostgreSQL + NestJS",
+      "client": "Boticas & Farmacias Locales",
+      "publishedAt": "2026",
+      "accent": "#06b6d4",
+      "pending": [
+        "Módulo de facturación electrónica",
+        "Despliegue a producción"
+      ]
+    },
+    {
+      "id": "posfarma",
+      "slug": "posfarma",
+      "name": "PosFarma",
+      "category": "Software de gestión",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Sistema de gestión de stock e inventario para pequeñas farmacias y boticas.",
+      "description": "Sistema de gestión de inventario, ventas y kardex valorizado diseñado para pequeñas farmacias y boticas independientes.",
+      "problem": "Las pequeñas farmacias y boticas requieren controlar fechas de vencimiento, lotes y stock crítico sin la complejidad ni costos de un ERP corporativo.",
+      "objectives": [
+        "Control estricto de vencimiento de lotes farmacéuticos",
+        "Punto de venta ágil con cálculo de vuelto y tickets",
+        "Reportes de rotación de medicamentos y kardex valorizado"
+      ],
+      "technologies": [
+        "Next.js",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma"
+      ],
+      "thumbnail": "/images/projects/posfarma.svg",
+      "gallery": [],
+      "demo": {
+        "type": "iframe",
+        "url": "",
+        "enabled": false,
+        "title": "Demostración de PosFarma",
+        "description": "Demostración en entorno controlado previa solicitud.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "",
+        "github": "",
+        "documentation": ""
+      },
+      "features": [
+        "Gestión de inventario y lotes",
+        "Control de fechas de caducidad",
+        "Punto de venta y facturación",
+        "Reportes de kardex valorizado"
+      ],
+      "challenges": [
+        "Manejo estricto de fechas de vencimiento por lote",
+        "Sincronización rápida en horas punta de atención"
+      ],
+      "solutions": [
+        "Alertas preventivas a 30, 60 y 90 días",
+        "Arquitectura desacoplada con Next.js y NestJS"
+      ],
+      "results": [
+        "Reducción del 95% de mermas por vencimiento",
+        "Atención en caja < 15 segundos"
+      ],
+      "metrics": "Reducción 95% mermas • Caja < 15s",
+      "client": "Boticas & Farmacias Independientes",
+      "publishedAt": "",
+      "accent": "#10b981",
+      "pending": [
+        "Galería de capturas en producción",
+        "URL de demostración pública"
+      ]
+    },
+    {
+      "id": "rimbill-pro",
+      "slug": "rimbill-pro",
+      "name": "RimBill Pro",
+      "category": "Fintech & Enterprise",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Plataforma SaaS multi-empresa para facturación electrónica, conciliación bancaria y cobranzas.",
+      "description": "Plataforma multi-empresa con facturación electrónica automática (SUNAT/Stripe), conciliación bancaria y dashboards financieros en tiempo real.",
+      "problem": "Las empresas necesitan emitir comprobantes electrónicos, conciliar pagos y gestionar cobranzas sin dispersar la información entre múltiples sistemas.",
+      "objectives": [
+        "Emisión automatizada masiva con validación tributaria",
+        "Conciliación bancaria en tiempo real",
+        "Disminución de tiempos de cobro con recordatorios automáticos"
+      ],
+      "technologies": [
+        "Next.js 16",
+        "PostgreSQL",
+        "Docker",
+        "Stripe API"
+      ],
+      "thumbnail": "/images/projects/rimbill-pro.svg",
+      "gallery": [],
+      "demo": {
+        "type": "iframe",
+        "url": "",
+        "enabled": false,
+        "title": "Demostración de RimBill Pro",
+        "description": "Demostración disponible para clientes corporativos.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "",
+        "github": "",
+        "documentation": ""
+      },
+      "features": [
+        "Emisión masiva de comprobantes",
+        "Pasarela multimoneda automática",
+        "Módulo de cobranzas con recordatorios IA"
+      ],
+      "challenges": [
+        "Procesamiento asíncrono de alto volumen sin bloqueos",
+        "Seguridad financiera y auditoría de transacciones"
+      ],
+      "solutions": [
+        "Colas de procesamiento en segundo plano con Redis",
+        "Trazabilidad completa de auditoría e integridad transaccional"
+      ],
+      "results": [
+        "+250,000 comprobantes / mes",
+        "99.99% Uptime"
+      ],
+      "metrics": "+250,000 comprobantes / mes • 99.99% Uptime",
+      "client": "Fintech B2B Perú & Latam",
+      "publishedAt": "",
+      "accent": "#a3e635",
+      "pending": [
+        "Galería de imágenes",
+        "Enlaces y demostración pública"
+      ]
+    },
+    {
+      "id": "datarim-ai",
+      "slug": "datarim-ai",
+      "name": "DataRim AI",
+      "category": "Data & Artificial Intelligence",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Panel ejecutivo de inteligencia de negocios con análisis en vivo y proyección de ventas.",
+      "description": "Panel ejecutivo de inteligencia de negocios con análisis de datos en vivo, proyección de ventas con modelos LLM y alertas inteligentes con WebSockets.",
+      "problem": "Los equipos necesitan convertir datos dispersos en decisiones oportunas, con proyecciones y alertas que lleguen al canal donde trabajan.",
+      "objectives": [
+        "Centralizar métricas de ventas y logística en tableros en vivo",
+        "Proyecciones predictivas de demanda utilizando IA",
+        "Alertas en tiempo real vía WebSockets a canales de mensajería"
+      ],
+      "technologies": [
+        "React 19",
+        "Python FastAPI",
+        "Redis",
+        "Supabase"
+      ],
+      "thumbnail": "/images/projects/datarim-ai.svg",
+      "gallery": [],
+      "demo": {
+        "type": "iframe",
+        "url": "",
+        "enabled": false,
+        "title": "Demostración de DataRim AI",
+        "description": "Demostración analítica disponible bajo solicitud estratégica.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "",
+        "github": "",
+        "documentation": ""
+      },
+      "features": [
+        "Conexión a múltiples fuentes de datos",
+        "Asistente conversacional RimBot analítico",
+        "Alertas automáticas a WhatsApp y Slack"
+      ],
+      "challenges": [
+        "Procesamiento de grandes volúmenes de eventos con latencia mínima",
+        "Generación de reportes ejecutivos con lenguaje natural"
+      ],
+      "solutions": [
+        "Canales Pub/Sub en memoria con Redis",
+        "Pipelines asíncronos en FastAPI con modelos LLM locales"
+      ],
+      "results": [
+        "Latencia < 50ms",
+        "+40% eficiencia en decisiones"
+      ],
+      "metrics": "Latencia < 50ms • +40% eficiencia en decisiones",
+      "client": "Retail & Logística",
+      "publishedAt": "",
+      "accent": "#22d3ee",
+      "pending": [
+        "Galería de capturas analíticas",
+        "Demostración pública interactiva"
+      ]
+    },
+    {
+      "id": "novastore-global",
+      "slug": "novastore-global",
+      "name": "NovaStore Global",
+      "category": "Comercio Electrónico de Alto Rendimiento",
+      "status": "production",
+      "featured": true,
+      "published": true,
+      "shortDescription": "Tienda virtual headless preparada para cargas masivas y checkout de un solo paso.",
+      "description": "Tienda virtual de arquitectura desacoplada diseñada para cargas masivas en Black Friday, checkout ultra rápido en 1 paso y SEO perfecto.",
+      "problem": "Una tienda de alto tráfico necesita un frontend desacoplado, un checkout sin fricción y sincronización fiable con el inventario.",
+      "objectives": [
+        "Puntuación perfecta 100 en Core Web Vitals",
+        "Proceso de checkout express en un solo paso",
+        "Sincronización bidireccional con stock de almacén central"
+      ],
+      "technologies": [
+        "Next.js 16",
+        "Tailwind v4",
+        "GraphQL",
+        "AWS CloudFront"
+      ],
+      "thumbnail": "/images/projects/novastore-global.svg",
+      "gallery": [],
+      "demo": {
+        "type": "iframe",
+        "url": "",
+        "enabled": false,
+        "title": "Demostración de NovaStore Global",
+        "description": "Demostración de storefront headless.",
+        "aspectRatio": "16 / 9"
+      },
+      "links": {
+        "website": "",
+        "github": "",
+        "documentation": ""
+      },
+      "features": [
+        "Checkout optimizado en un solo paso",
+        "Sincronización de inventario con ERP",
+        "Soporte dinámico multimoneda (PEN/USD/EUR)"
+      ],
+      "challenges": [
+        "Picos extremos de concurrencia en campañas comerciales",
+        "Evitar caídas de catálogo por renderizados pesados"
+      ],
+      "solutions": [
+        "Arquitectura estática incremental (ISR) en Edge",
+        "Integración de pasarelas de pago ultra optimizadas"
+      ],
+      "results": [
+        "Score 100/100 en Lighthouse",
+        "+38% conversión"
+      ],
+      "metrics": "Score 100/100 en Lighthouse • +38% conversión",
+      "client": "Moda & Consumo Masivo",
+      "publishedAt": "",
+      "accent": "#f59e0b",
+      "pending": [
+        "Galería de capturas",
+        "Demostración pública"
+      ]
+    }
+  ]
+}

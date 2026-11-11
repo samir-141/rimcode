@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Valores estructurados base de RimCode",
+    "note": "Los datos de organización, sitio web y contacto se toman de db/company.json, db/settings.json, db/social.json y db/contact.json. Este archivo solo define valores propios de Schema.org."
+  },
+  "context": "https://schema.org",
+  "inLanguage": "es-PE",
+  "organizationType": "Organization",
+  "websiteType": "WebSite",
+  "webPageType": "WebPage",
+  "softwareApplicationType": "SoftwareApplication",
+  "creativeWorkType": "CreativeWork",
+  "breadcrumbListType": "BreadcrumbList",
+  "listItemType": "ListItem"
+}

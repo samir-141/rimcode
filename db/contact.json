@@ -1,0 +1,43 @@
+{
+  "email": "jhonergomez20@gmail.com",
+  "phone": "+51929284937",
+  "whatsapp": {
+    "number": "51929284937",
+    "message": "Hola Samir, vengo desde RimCode y me gustaría consultar sobre el desarrollo de un proyecto.",
+    "enabled": true
+  },
+  "location": {
+    "city": "",
+    "country": "",
+    "display": ""
+  },
+  "hours": "",
+  "channels": [
+    {
+      "id": "email",
+      "label": "Correo electrónico",
+      "value": "jhonergomez20@gmail.com",
+      "href": "mailto:jhonergomez20@gmail.com",
+      "enabled": true
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp directo",
+      "value": "+51 929 284 937",
+      "href": "https://wa.me/51929284937",
+      "enabled": true
+    }
+  ],
+  "responseTime": "Te responderemos en menos de 24 horas con una sesión estratégica sin compromiso.",
+  "form": {
+    "successTitle": "Mensaje enviado",
+    "successMessage": "Gracias por escribirnos. Revisaremos tus requerimientos y te responderemos por correo.",
+    "errorFallback": "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos directamente por correo.",
+    "privacyNote": "Usaremos tus datos únicamente para responder a esta consulta."
+  },
+  "pendingConfirmation": [
+    "Número de WhatsApp comercial",
+    "Teléfono de contacto",
+    "Ubicación y horarios de atención"
+  ]
+}

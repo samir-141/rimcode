@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Estrategia de palabras clave de RimCode",
+    "note": "Documento de estrategia. No se vuelca como una lista genérica en el HTML: cada página usa términos relevantes para su contenido real."
+  },
+  "primary": [
+    "desarrollo de software a medida",
+    "desarrollo web",
+    "sistemas ERP",
+    "sistemas de gestión empresarial",
+    "software para boticas y farmacias",
+    "automatización de procesos empresariales",
+    "aplicaciones SaaS",
+    "integración de APIs",
+    "sistemas personalizados para pequeñas empresas"
+  ],
+  "pages": {
+    "home": {
+      "focus": "desarrollo de software a medida",
+      "primary": [
+        "desarrollo de software a medida",
+        "sistemas ERP",
+        "aplicaciones web",
+        "plataformas SaaS"
+      ],
+      "secondary": [
+        "automatización de procesos empresariales",
+        "integración de APIs",
+        "desarrollo web Perú",
+        "sistemas de gestión para empresas"
+      ],
+      "intent": "Mostrar el alcance de servicios y proyectos con contenido real."
+    },
+    "projects": {
+      "focus": "portafolio de desarrollo de software",
+      "primary": [
+        "portafolio de proyectos de software",
+        "sistemas ERP desarrollados",
+        "plataformas SaaS",
+        "software para farmacias"
+      ],
+      "secondary": [
+        "tienda virtual headless",
+        "inteligencia de negocios",
+        "facturación electrónica",
+        "punto de venta para boticas"
+      ],
+      "intent": "Demostrar experiencia con proyectos documentados."
+    },
+    "projectDetail": {
+      "focus": "nombre del proyecto y categoría",
+      "primary": [
+        "nombre del proyecto",
+        "categoría del proyecto",
+        "desarrollo de software"
+      ],
+      "secondary": [
+        "tecnologías del proyecto",
+        "resultados documentados",
+        "arquitectura"
+      ],
+      "intent": "Informar sobre un caso concreto sin inventar métricas."
+    },
+    "legal": {
+      "focus": "transparencia y cumplimiento",
+      "primary": [
+        "política de privacidad",
+        "política de cookies",
+        "protección de datos personales",
+        "Ley 29733"
+      ],
+      "secondary": [
+        "consentimiento de cookies",
+        "derechos de titulares de datos",
+        "gestión de preferencias"
+      ],
+      "intent": "Informar a los titulares de datos y a los visitantes."
+    }
+  }
+}

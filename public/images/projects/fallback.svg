@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="RimCode — imagen de referencia del proyecto">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081014"/>
+      <stop offset="1" stop-color="#0d1a1f"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <g transform="translate(600 300)" text-anchor="middle">
+    <text x="0" y="0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#a3e635" letter-spacing="8">RIMCODE</text>
+    <text x="0" y="62" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="60" font-weight="800" fill="#f4f4f5">Proyecto</text>
+    <text x="0" y="104" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" fill="#93a4ab">Imagen de referencia pendiente de documentación</text>
+  </g>
+  <g stroke="#a3e635" stroke-opacity="0.25" fill="none">
+    <circle cx="600" cy="300" r="250"/>
+    <circle cx="600" cy="300" r="300"/>
+  </g>
+</svg>

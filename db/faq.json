@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "que-es-rimcode",
+      "question": "¿Qué es RimCode?",
+      "answer": "RimCode es una empresa de desarrollo de software que crea soluciones digitales, plataformas web, sistemas a medida y automatizaciones. Su propuesta se apoya en arquitectura limpia, rendimiento y diseño centrado en el usuario.",
+      "keywords": ["rimcode", "empresa", "que es", "hacen", "dedican"],
+      "category": "empresa"
+    },
+    {
+      "id": "fundador",
+      "question": "¿Quién está detrás de RimCode?",
+      "answer": "RimCode fue fundada por Samir Jhoner Gómez Alarcón, Fundador & Lead Software Architect. Su visión es construir software de nivel empresarial combinando Clean Code, metodologías ágiles e interfaces modernas.",
+      "keywords": ["fundador", "creador", "samir", "gomez", "alarcon", "quien esta detras"],
+      "category": "empresa"
+    },
+    {
+      "id": "servicios",
+      "question": "¿Qué servicios ofrece RimCode?",
+      "answer": "RimCode ofrece desarrollo de aplicaciones web de alto rendimiento, sistemas a medida y paneles administrativos, plataformas SaaS, arquitectura cloud y microservicios, diseño UI/UX, integraciones de inteligencia artificial y optimización de rendimiento con Clean Code.",
+      "keywords": ["servicio", "servicios", "ofrecen", "desarrollo", "saas", "erp", "ecommerce", "web"],
+      "category": "servicios"
+    },
+    {
+      "id": "tecnologias",
+      "question": "¿Qué tecnologías utiliza RimCode?",
+      "answer": "El stack principal incluye Next.js 16, React 19, TypeScript, Tailwind CSS v4, Node.js, Express, Python, FastAPI, PostgreSQL, Prisma, Supabase, Redis, Docker, AWS y Vercel.",
+      "keywords": ["tecnologia", "tecnologias", "stack", "lenguaje", "framework", "react", "next", "postgres", "docker"],
+      "category": "tecnologias"
+    },
+    {
+      "id": "metodologia",
+      "question": "¿Cómo trabaja RimCode?",
+      "answer": "El proceso tiene cuatro fases: descubrimiento y blueprint, sprints con Clean Code y demos semanales, control de calidad y seguridad, y despliegue con soporte continuo.",
+      "keywords": ["metodologia", "proceso", "etapas", "sprints", "trabajan", "como trabajan"],
+      "category": "metodologia"
+    },
+    {
+      "id": "presupuesto",
+      "question": "¿Cuánto cuesta un proyecto?",
+      "answer": "El presupuesto depende del alcance y de los módulos que necesites. El simulador de la landing calcula una estimación en PEN, USD o EUR con precios referenciales. Para una propuesta formal puedes usar el formulario de contacto.",
+      "keywords": ["precio", "precios", "cuanto", "cuesta", "costo", "cotizar", "cotizacion", "presupuesto", "simulador"],
+      "category": "comercial"
+    },
+    {
+      "id": "contacto",
+      "question": "¿Cómo puedo contactar a RimCode?",
+      "answer": "Puedes escribir a contacto@rimcode.com o usar el formulario de la sección de contacto. El formulario envía la consulta al servicio de correo configurado en el servidor.",
+      "keywords": ["contacto", "contactar", "correo", "email", "escribir", "reunion", "hablar"],
+      "category": "contacto"
+    },
+    {
+      "id": "proyectos",
+      "question": "¿Qué proyectos ha desarrollado RimCode?",
+      "answer": "El portafolio documentado incluye RimBill Pro (facturación y cobranzas), DataRim AI (inteligencia de negocios) y NovaStore Global (e-commerce headless). Cada proyecto tiene su propia página con el detalle disponible.",
+      "keywords": ["proyecto", "proyectos", "portafolio", "casos", "rimbill", "datarim", "novastore"],
+      "category": "proyectos"
+    },
+    {
+      "id": "entrega",
+      "question": "¿Cuánto tarda un proyecto?",
+      "answer": "El simulador muestra una referencia de 3 a 4 semanas en modalidad estándar y de 1 a 2 semanas en entrega express. El plazo final depende del alcance y se confirma en la propuesta.",
+      "keywords": ["tiempo", "tarda", "plazo", "entrega", "semanas", "cuanto tarda"],
+      "category": "comercial"
+    },
+    {
+      "id": "codigo",
+      "question": "¿El código queda en propiedad del cliente?",
+      "answer": "Sí. La garantía de Clean Code de RimCode indica que el código es 100% del cliente, está documentado y no tiene ataduras a plataformas propietarias.",
+      "keywords": ["codigo", "propiedad", "cliente", "entrega", "repositorio", "garantia"],
+      "category": "empresa"
+    }
+  ]
+}

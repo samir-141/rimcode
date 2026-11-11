@@ -1,0 +1,54 @@
+{
+  "networks": [
+    {
+      "id": "github",
+      "name": "GitHub",
+      "url": "https://github.com/samir-141",
+      "icon": "github",
+      "visible": true
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/samir-jhoner-g%C3%B3mez-alarc%C3%B3n/",
+      "icon": "linkedin",
+      "visible": true
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "url": "",
+      "icon": "tiktok",
+      "visible": false
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "url": "",
+      "icon": "instagram",
+      "visible": false
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "url": "",
+      "icon": "facebook",
+      "visible": false
+    },
+    {
+      "id": "x",
+      "name": "X",
+      "url": "",
+      "icon": "x",
+      "visible": false
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "url": "",
+      "icon": "youtube",
+      "visible": false
+    }
+  ],
+  "note": "Los enlaces se muestran únicamente cuando url tiene un valor válido y visible es true."
+}

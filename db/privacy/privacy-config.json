@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-10",
+    "source": "Configuración de privacidad y consentimiento de RimCode",
+    "note": "El correo de contacto y los datos de empresa se toman de db/contact.json y db/company.json. Este archivo define la versión de la política y los valores legales."
+  },
+  "policy": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-11-10",
+    "effectiveDate": "2026-11-10",
+    "consentRetentionDays": 365,
+    "applicableLaw": [
+      "Constitución Política del Perú, artículo 2, numeral 6",
+      "Ley N.º 29733, Ley de Protección de Datos Personales",
+      "Reglamento de la Ley N.º 29733, aprobado por Decreto Supremo N.º 016-2024-JUS"
+    ],
+    "rights": [
+      "Acceso",
+      "Rectificación",
+      "Oposición",
+      "Cancelación o supresión",
+      "Revocación del consentimiento"
+    ],
+    "pendingValidation": [
+      "Razón social y RUC",
+      "Domicilio fiscal",
+      "Plazos de conservación específicos por finalidad",
+      "Revisión profesional del texto antes de publicarlo"
+    ]
+  }
+}

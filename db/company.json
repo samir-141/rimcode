@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "lastUpdated": "2026-11-09",
+    "source": "Contenido publicado actualmente en la landing de RimCode",
+    "pendingConfirmation": [
+      "Historia corporativa detallada",
+      "Datos legales y razón social",
+      "Visión aprobada formalmente por el fundador"
+    ]
+  },
+  "name": "RimCode",
+  "legalName": "",
+  "tagline": "Transformo problemas operativos y necesidades de negocio en soluciones digitales funcionales.",
+  "shortDescription": "Desarrollo de sistemas ERP, herramientas de gestión empresarial, aplicaciones web personalizadas y experiencias digitales diseñadas para optimizar procesos y escalar operaciones.",
+  "description": "Desarrollo de sistemas ERP, herramientas de gestión empresarial, aplicaciones web personalizadas y experiencias digitales diseñadas para optimizar procesos y escalar operaciones. Software con arquitectura moderna, código mantenible y enfoque directo en la rentabilidad operativa.",
+  "history": "",
+  "valueProposition": "Soluciones digitales a medida con arquitectura moderna, código mantenible, interfaces intuitivas y enfoque directo en la rentabilidad operativa de tu negocio.",
+  "mission": "Crear software de alto impacto con arquitectura limpia, escalabilidad robusta y diseño centrado en el usuario.",
+  "vision": "Ser el socio tecnológico de referencia para empresas que quieren convertir sus ideas en software de alto impacto.",
+  "values": [
+    {
+      "name": "Clean Code",
+      "description": "Código documentado, mantenible y sin deuda técnica."
+    },
+    {
+      "name": "Transparencia",
+      "description": "Demos funcionales y comunicación clara durante cada sprint."
+    },
+    {
+      "name": "Calidad",
+      "description": "Pruebas, auditorías de seguridad y optimización antes de cada lanzamiento."
+    },
+    {
+      "name": "Propiedad del cliente",
+      "description": "Código 100% del cliente, sin ataduras a plataformas propietarias."
+    }
+  ],
+  "founder": {
+    "name": "Samir Jhoner Gómez Alarcón",
+    "role": "Full-Stack Developer & Lead Software Architect",
+    "bio": "",
+    "quote": "En RimCode transformamos problemas operativos y necesidades de negocio en soluciones digitales funcionales de alto rendimiento."
+  },
+  "servicesSummary": [
+    "Desarrollo de aplicaciones web de alto rendimiento",
+    "Sistemas a medida, paneles administrativos y plataformas SaaS",
+    "Arquitectura cloud, microservicios y DevOps",
+    "Diseño de interfaces UI/UX modernas y accesibles",
+    "Integraciones de inteligencia artificial y automatizaciones",
+    "Optimización de rendimiento y Clean Code"
+  ],
+  "institutional": {
+    "market": "Perú & Latam",
+    "workingLanguages": ["Español"],
+    "deliveryModel": "Sprints iterativos con demos funcionales"
+  }
+}

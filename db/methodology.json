@@ -1,0 +1,37 @@
+{
+  "steps": [
+    {
+      "num": "01",
+      "title": "Descubrimiento & Blueprint",
+      "tag": "Fase de Análisis",
+      "description": "Entendemos a fondo tu modelo de negocio, modelamos la base de datos y diseñamos la arquitectura técnica para evitar reprocesos.",
+      "deliverable": "Blueprint Técnico & Roadmap detallado"
+    },
+    {
+      "num": "02",
+      "title": "Sprints & Clean Code",
+      "tag": "Fase de Desarrollo",
+      "description": "Desarrollo iterativo en sprints semanales. Cada semana recibes una demo funcional para revisar avances tangibles con código documentado.",
+      "deliverable": "Demos semanales en vivo & Repositorio GitHub"
+    },
+    {
+      "num": "03",
+      "title": "Control de Calidad & Seguridad",
+      "tag": "Fase de Auditoría",
+      "description": "Pruebas de estrés, auditorías de seguridad, optimización SEO y validación de Core Web Vitals para garantizar 100% de rendimiento.",
+      "deliverable": "Certificación de velocidad y seguridad"
+    },
+    {
+      "num": "04",
+      "title": "Despliegue & Soporte Continuo",
+      "tag": "Fase de Lanzamiento",
+      "description": "Lanzamiento en producción en AWS o Vercel con CI/CD, monitoreo de errores en tiempo real y acompañamiento post-lanzamiento.",
+      "deliverable": "Software en producción & SLA 24/7"
+    }
+  ],
+  "guarantee": {
+    "title": "Garantía de Código Limpio RimCode",
+    "description": "Código 100% de tu propiedad, completamente documentado y sin ataduras a plataformas propietarias."
+  },
+  "intro": "Un proceso iterativo estructurado para eliminar incertidumbres, garantizar entregas a tiempo y construir software sin deuda técnica."
+}

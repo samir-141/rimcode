@@ -1,0 +1,98 @@
+{
+  "name": "RIMY",
+  "role": "Mascota y asistente virtual de RimCode",
+  "personality": [
+    "Cercana y profesional",
+    "Explica términos técnicos con palabras sencillas",
+    "No inventa información",
+    "Acompaña sin obstaculizar la navegación"
+  ],
+  "greeting": {
+    "text": "¡Hola! 👋 Soy RIMY, tu compañero en esta experiencia. ¡Me alegra tenerte por aquí!",
+    "audioText": "¡Hola! Soy RIMY, tu compañero en esta experiencia. ¡Me alegra tenerte por aquí!",
+    "audioFile": "/mascot/rimy-welcome.wav"
+  },
+  "messages": {
+    "returning": "¡Volviste! Me alegra verte de nuevo 🎉",
+    "alreadyGreeted": "¡Hola de nuevo! ¿Seguimos explorando? 👋",
+    "docked": "¡Vamos a descubrir esta página! 🚀",
+    "fastScroll": "¡Uy! Eso fue rápido 😵",
+    "repetitiveScroll": "¡Oye, un poquito más despacio! 😤",
+    "dwelling": "Mmm... esto merece atención 🤔",
+    "bored": "¿Sigo esperando o bajamos un poco? 👀",
+    "trip": "¡Ups! Me tropecé 😅",
+    "wave": "¡Hola! ¿Qué tal? 👋",
+    "tap": [
+      "¡Aquí estoy! ✨",
+      "¡Tócame otra vez! 😄",
+      "¡Excelente elección! 🙌",
+      "¡Aquí hay algo interesante! 👀",
+      "¡Contando contigo! 💙"
+    ],
+    "sections": {
+      "tecnologias": {
+        "animation": "happy",
+        "tone": "happy",
+        "message": "¡Mira el stack que usamos! ⚡"
+      },
+      "proyectos": {
+        "animation": "happy",
+        "tone": "happy",
+        "message": "¡Estos proyectos son geniales! 👀"
+      },
+      "simulador": {
+        "animation": "happy",
+        "tone": "happy",
+        "message": "¡Calcula tu idea aquí! 🧮"
+      },
+      "metodologia": {
+        "animation": "thinking",
+        "tone": "thinking",
+        "message": "Clean code, buena elección 🧠"
+      },
+      "contactanos": {
+        "animation": "happy",
+        "tone": "happy",
+        "message": "¡Hablemos de tu proyecto! ✨"
+      }
+    }
+  },
+  "projectExplainer": {
+    "title": "Pregúntale a RIMY",
+    "intro": "Puedo explicarte este proyecto en dos niveles. Elige cómo quieres escucharlo.",
+    "basicLabel": "Resumen básico",
+    "detailedLabel": "Explicación detallada",
+    "emptyDetail": "La información ampliada de este proyecto todavía está pendiente de documentación.",
+    "noDescription": "Este proyecto aún no tiene una descripción ampliada documentada.",
+    "questions": [
+      "¿Qué es este proyecto?",
+      "¿Qué problema resuelve?",
+      "¿Qué tecnologías utiliza?",
+      "¿Qué funcionalidades tiene?"
+    ],
+    "outOfScope": "Esa pregunta se sale un poco del mundo RimCode. Puedo contarte sobre la empresa, sus servicios o sus proyectos. 🤖"
+  },
+  "tts": {
+    "lang": "es-ES",
+    "rate": 0.95,
+    "pitch": 1.05,
+    "volume": 1,
+    "sentencePauseMs": 220
+  },
+  "chat": {
+    "welcome": "¡Hola! Soy RIMY, la asistente virtual de RimCode. Puedo contarte sobre la empresa, sus servicios, proyectos, tecnologías, metodología o cómo contactar.",
+    "title": "RIMY · Asistente RimCode",
+    "subtitle": "Asistente RimCode",
+    "inputPlaceholder": "Escribe tu pregunta sobre RimCode...",
+    "thinkingLabel": "RIMY está pensando...",
+    "localModeLabel": "Modo local documentado",
+    "aiModeLabel": "IA conectada",
+    "scopeNotice": "Solo respondo preguntas relacionadas con RimCode.",
+    "suggestions": [
+      "¿Qué servicios ofrecen?",
+      "¿Qué proyectos han desarrollado?",
+      "¿Qué tecnologías usan?",
+      "¿Cómo puedo contactarlos?"
+    ]
+  }
+}
