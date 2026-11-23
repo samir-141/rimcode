@@ -9,6 +9,7 @@
     width: 260px;
     height: 362px;
     z-index: 80;
+    transform: var(--rimy-page-transform, none);
     transform-origin: top left;
     pointer-events: none;
     opacity: 0;
@@ -20,6 +21,11 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 0.35s ease;
+}
+
+.shellInChat {
+    z-index: 101;
+    transform: var(--rimy-chat-transform, var(--rimy-page-transform, none));
 }
 
 .mascotButton {

@@ -10,12 +10,12 @@ import ContactSection from "@/components/landing/sections/ContactSection";
 import BlockNavigator from "@/components/landing/navigation/BlockNavigator";
 
 const BLOCKS = [
-    { id: "hero", label: "Inicio", num: "01" },
-    { id: "tecnologias", label: "Tecnologías", num: "02" },
-    { id: "proyectos", label: "Proyectos", num: "03" },
-    { id: "simulador", label: "Simulador", num: "04" },
-    { id: "metodologia", label: "Metodología", num: "05" },
-    { id: "contactanos", label: "Contacto", num: "06" },
+    { id: "hero", label: "Inicio" },
+    { id: "tecnologias", label: "Tecnologías" },
+    { id: "proyectos", label: "Proyectos" },
+    { id: "simulador", label: "Simulador" },
+    { id: "metodologia", label: "Metodología" },
+    { id: "contactanos", label: "Contacto" },
 ];
 
 export default function Home() {
@@ -87,14 +87,9 @@ export default function Home() {
     // En móviles, laptops compactas o si el bloque tiene overflow interno, permite scroll nativo continuo.
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
-            // Ignorar inputs, textareas y selects
             const target = e.target as HTMLElement | null;
-            if (
-                target &&
-                (target.tagName === "TEXTAREA" ||
-                    target.tagName === "INPUT" ||
-                    target.tagName === "SELECT")
-            ) {
+            if (target?.closest("input, textarea, select, #rimy-assistant, dialog, #mobile-navigation") ||
+                e.ctrlKey || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
                 return;
             }
 
@@ -148,12 +143,8 @@ export default function Home() {
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             const target = e.target as HTMLElement | null;
-            if (
-                target &&
-                (target.tagName === "TEXTAREA" ||
-                    target.tagName === "INPUT" ||
-                    target.tagName === "SELECT")
-            ) {
+            if (target?.closest("a, button, input, textarea, select, [contenteditable], #rimy-assistant, dialog, #mobile-navigation") ||
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
                 return;
             }
 
@@ -187,7 +178,7 @@ export default function Home() {
     }, [activeBlock]);
 
     return (
-        <div className="relative w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+        <div data-rimcode-landing className="relative w-full overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
             {/* NAVEGADOR FLOTANTE LATERAL (INDICADOR DE BLOQUES, VISIBLE EN PANTALLAS XL) */}
             <BlockNavigator
                 activeBlock={activeBlock}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import ProjectCard from "@/components/projects/ProjectCard";
+import CardCarousel from "@/components/landing/navigation/CardCarousel";
 import StructuredData from "@/components/seo/StructuredData";
 import { getProjects, getSiteUrl } from "@/lib/db";
 import { getProjectsIndexMetadata } from "@/lib/seo/seo-config";
@@ -49,18 +50,16 @@ export default function ProjectsPage() {
                         Portafolio RimCode
                     </p>
                     <h1 className="mt-2 text-3xl font-black tracking-tight text-[var(--header-text)] sm:text-4xl lg:text-5xl">
-                        Proyectos documentados, sin métricas inventadas
+                        Portafolio de proyectos
                     </h1>
                     <p className="mt-3 text-sm leading-relaxed text-[var(--header-muted)] sm:text-base">
-                        Cada ficha presenta la información realmente documentada
-                        del proyecto. Los campos pendientes se indican de forma
-                        explícita y no se rellenan con datos ficticios.
+                        Explora proyectos, tecnologías, funciones y demostraciones disponibles.
                     </p>
 
                     <div className="mt-5 flex flex-wrap gap-2.5">
                         <Link
                             href="/#contactanos"
-                            className="inline-flex min-h-[44px] items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 transition hover:opacity-90"
+                            className="inline-flex min-h-[44px] items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--accent-ink)] transition hover:opacity-90"
                         >
                             Hablemos de tu proyecto ↗
                         </Link>
@@ -73,10 +72,10 @@ export default function ProjectsPage() {
                     </div>
                 </header>
 
-                <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {projects.map((project) => (
-                        <ProjectCard key={project.slug} project={project} />
-                    ))}
+                <div className="mt-8">
+                    <CardCarousel id="portfolio-cards" label="Portafolio">
+                        {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
+                    </CardCarousel>
                 </div>
 
                 {projects.length === 0 && (

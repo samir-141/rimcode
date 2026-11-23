@@ -73,27 +73,28 @@
     "outOfScope": "Esa consulta está fuera de nuestros servicios. Puedo ayudarte con cotizaciones, tiempos de desarrollo, tecnologías o detalles de nuestros proyectos. 🤖"
   },
   "tts": {
-    "lang": "es-ES",
+    "lang": "es-PE",
     "rate": 0.95,
     "pitch": 1.05,
     "volume": 1,
     "sentencePauseMs": 220
   },
   "chat": {
-    "welcome": "¡Hola! Soy Rimy. Puedo ayudarte con cotizaciones, tiempos de desarrollo, tecnologías o detalles de nuestros proyectos. ¿Qué te gustaría consultar?",
-    "title": "RIMY • Asistente Virtual",
-    "subtitle": "En línea • Respuesta inmediata",
-    "inputPlaceholder": "Escribe tu consulta sobre RimCode...",
+    "welcome": "Soy Rimy, el asistente virtual de RimCode. Puedo orientarte sobre servicios, cotizaciones, tecnologías y proyectos. ¿Qué te gustaría consultar?",
+    "title": "Rimy",
+    "subtitle": "Asistente virtual de RimCode",
+    "inputPlaceholder": "Escribe tu pregunta",
     "thinkingLabel": "Escribiendo respuesta...",
-    "localModeLabel": "En línea • Respuesta inmediata",
+    "localModeLabel": "Respuesta de la base de RimCode",
     "aiModeLabel": "En línea • Respuesta inmediata",
     "scopeNotice": "",
     "suggestions": [
       "¿Qué es RimCode?",
       "¿Qué servicios ofrecen?",
+      "¿Cuánto cuesta una landing?",
+      "Ya tengo dominio, ¿pueden publicarla?",
       "¿Desarrollan sistemas ERP?",
       "¿Qué proyectos han desarrollado?",
-      "¿Cuánto cuesta desarrollar un sistema?",
       "¿Cómo puedo contratar sus servicios?"
     ]
   }

@@ -12,7 +12,7 @@
       "name": "Next.js 16",
       "category": "frontend",
       "tag": "Full-Stack Framework",
-      "description": "Turbopack, Server Actions y renderizado híbrido ultra veloz.",
+      "description": "Turbopack, Server Actions y renderizado híbrido para aplicaciones web.",
       "highlight": "Core Web Vitals 100"
     },
     {
@@ -28,7 +28,7 @@
       "name": "Tailwind CSS v4",
       "category": "frontend",
       "tag": "Design Engine",
-      "description": "Tokens de diseño nativos, modo oscuro/claro y cero CSS muerto.",
+      "description": "Estilos adaptables a pantallas, temas y sistemas de diseño.",
       "highlight": "Micro-bundle size"
     },
     {
@@ -36,7 +36,7 @@
       "name": "TypeScript",
       "category": "frontend",
       "tag": "Type Safety",
-      "description": "Tipado estricto que elimina errores en tiempo de ejecución.",
+      "description": "Tipado estático para detectar errores durante el desarrollo.",
       "highlight": "Zero Runtime Bugs"
     },
     {
@@ -68,7 +68,7 @@
       "name": "Supabase & Redis",
       "category": "database",
       "tag": "Realtime & Cache",
-      "description": "Sincronización WebSockets en vivo y caché ultrarrápida en memoria.",
+      "description": "Datos en tiempo real con Supabase y caché en memoria con Redis.",
       "highlight": "Latencia < 20ms"
     },
     {

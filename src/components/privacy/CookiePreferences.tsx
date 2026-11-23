@@ -61,7 +61,7 @@ export default function CookiePreferences() {
         if (consent?.categories.analytics) {
             enableGoogleAnalytics(GA_MEASUREMENT_ID);
         } else {
-            disableGoogleAnalytics();
+            disableGoogleAnalytics(GA_MEASUREMENT_ID);
         }
     }, [mounted, consent]);
 
@@ -94,14 +94,13 @@ export default function CookiePreferences() {
                 />
             )}
 
-            <CookieSettings
-                open={settingsOpen}
+            {settingsOpen && <CookieSettings
                 initialRecord={consent}
                 onClose={() => setSettingsOpen(false)}
                 onSave={handleSaveCustom}
                 onAcceptAll={handleAcceptAll}
                 onRejectOptional={handleRejectOptional}
-            />
+            />}
         </>
     );
 }

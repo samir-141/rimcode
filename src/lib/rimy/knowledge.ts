@@ -10,6 +10,7 @@ import {
     getTechnologies,
 } from "@/lib/db";
 import type { Currency, FaqItem, FaqTableType, Project } from "@/lib/db/types";
+import { formatQuoteAmount, servicePricePEN } from "@/lib/quote";
 
 export type KnowledgeEntry = {
     id: string;
@@ -139,9 +140,10 @@ export function normalize(value: string): string {
 }
 
 function tokenize(value: string): string[] {
-    return normalize(value)
+    const tokens = normalize(value)
         .split(" ")
         .filter((token) => token.length > 1 && !STOPWORDS.has(token));
+    return [...new Set(tokens)];
 }
 
 function expandTokens(tokens: string[]): Set<string> {
@@ -169,27 +171,22 @@ function buildTable(tableType: FaqTableType | undefined, currency: Currency): An
 
     if (tableType === "services") {
         return {
-            headers: ["Servicio", "Descripción", "Base (USD)"],
+            headers: ["Servicio", "Descripción"],
             rows: services.services.map((srv) => [
                 srv.name,
                 srv.description,
-                srv.basePriceUSD > 0 ? `Desde $${srv.basePriceUSD}` : "A medida",
             ]),
         };
     }
 
     if (tableType === "pricing") {
-        const rate = settings.currency.fallbackRates[currency] ?? 1;
-        const symbol = currency === "PEN" ? "S/" : currency === "EUR" ? "€" : "$";
+        const rates = settings.currency.fallbackRates;
         return {
-            headers: ["Solución", `Referencia (${currency})`, "Base USD"],
-            rows: services.services
-                .filter((srv) => srv.basePriceUSD > 0)
-                .map((srv) => [
-                    srv.name,
-                    `Desde ${symbol} ${Math.round(srv.basePriceUSD * rate).toLocaleString("es-PE")}`,
-                    `$${srv.basePriceUSD} USD`,
-                ]),
+            headers: ["Solución", `Referencia (${currency})`],
+            rows: services.services.map((service) => {
+                const price = servicePricePEN(service, rates.PEN);
+                return [service.name, price === null ? "Sujeto a evaluación" : `Desde ${formatQuoteAmount(price, currency, rates)}`];
+            }),
         };
     }
 
@@ -324,7 +321,7 @@ function matchSpecificProject(normalizedMsg: string, rawTokens: string[]): Proje
             score += 35;
         }
 
-        if (score >= 14 && (!best || score > best.score)) {
+        if (score >= 28 && (!best || score > best.score)) {
             best = { project, score };
         }
     }
@@ -342,7 +339,6 @@ const OUT_OF_SCOPE_HINTS = [
     "elecciones presidenciales",
     "horoscopo",
     "traduce",
-    "tarea",
     "ensayo",
     "cancion",
     "pelicula",
@@ -356,13 +352,38 @@ function buildSuggestions(): string[] {
     return rimy.chat.suggestions.slice(0, 4);
 }
 
+function rankFaq(message: string) {
+    const normalized = normalize(message);
+    const tokens = tokenize(message);
+    const expanded = expandTokens(tokens);
+    return faq.items.map((item) => ({ item, score: scoreFaqItem(item, normalized, tokens, expanded) }))
+        .sort((left, right) => right.score - left.score);
+}
+
+function faqAnswer(item: FaqItem, currency: Currency): LocalAnswer {
+    return {
+        reply: item.answer,
+        table: buildTable(item.tableType, currency),
+        suggestions: item.relatedQuestions?.slice(0, 4) ?? buildSuggestions(),
+        matched: [`faq:${item.id}`],
+        category: item.category,
+        inScope: true,
+    };
+}
+
+export function answerFromFaq(id: string, currency: Currency): LocalAnswer | undefined {
+    const entry = faq.items.find((item) => item.id === id);
+    return entry && faqAnswer(entry, currency);
+}
+
 export function answerLocally(
     message: string,
     currency: Currency = "PEN"
 ): LocalAnswer {
     const normalized = normalize(message);
 
-    if (GREETING_PATTERN.test(normalized) && normalized.length < 40) {
+    if (GREETING_PATTERN.test(normalized) && tokenize(normalized).length <= 2 &&
+        !rankFaq(message).some(({ score }) => score >= 16)) {
         return {
             reply: rimy.chat.welcome,
             suggestions: buildSuggestions(),
@@ -382,7 +403,7 @@ export function answerLocally(
         };
     }
 
-    const offTopic = OUT_OF_SCOPE_HINTS.find((hint) => normalized.includes(hint));
+    const offTopic = OUT_OF_SCOPE_HINTS.find((hint) => ` ${normalized} `.includes(` ${hint} `));
     if (offTopic) {
         return {
             reply: `${rimy.projectExplainer.outOfScope} Si necesitas consultar un proyecto a medida, aquí tienes nuestros canales directos:`,
@@ -394,7 +415,6 @@ export function answerLocally(
     }
 
     const rawTokens = tokenize(message);
-    const expandedTokens = expandTokens(rawTokens);
 
     // 1. Verificar si consulta por un proyecto específico del portafolio
     const specificProject = matchSpecificProject(normalized, rawTokens);
@@ -431,25 +451,10 @@ export function answerLocally(
     }
 
     // 2. Buscar mejor coincidencia en db/faq/*.json
-    const rankedFaq = faq.items
-        .map((item) => ({
-            item,
-            score: scoreFaqItem(item, normalized, rawTokens, expandedTokens),
-        }))
-        .filter((entry) => entry.score > 0)
-        .sort((a, b) => b.score - a.score);
-
-    const bestFaq = rankedFaq[0];
-    if (bestFaq && bestFaq.score >= 7) {
-        return {
-            reply: bestFaq.item.answer,
-            table: buildTable(bestFaq.item.tableType, currency),
-            suggestions:
-                bestFaq.item.relatedQuestions?.slice(0, 4) ?? buildSuggestions(),
-            matched: [`faq:${bestFaq.item.id}`],
-            category: bestFaq.item.category,
-            inScope: true,
-        };
+    const [bestFaq, nextFaq] = rankFaq(message);
+    if (bestFaq && (bestFaq.score >= 70 ||
+        (bestFaq.score >= 16 && bestFaq.score - (nextFaq?.score ?? 0) >= 5))) {
+        return faqAnswer(bestFaq.item, currency);
     }
 
     // 3. Fallback sin inventar datos: sugerir preguntas + contacto

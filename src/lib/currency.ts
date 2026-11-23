@@ -80,10 +80,11 @@ async function fetchRates() {
 
         const rates = { ...FALLBACK_RATES };
         for (const currency of CURRENCIES) {
+            const rate = rawRates[currency];
             if (currency === "USD") {
                 rates.USD = 1;
-            } else if (typeof rawRates[currency] === "number") {
-                rates[currency] = rawRates[currency];
+            } else if (Number.isFinite(rate) && rate > 0) {
+                rates[currency] = rate;
             }
         }
 

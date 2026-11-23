@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import RimyHero from "@/components/rimy/RimyHero";
-import { getCompany, getRimy } from "@/lib/db";
+import { getCompany, getRimy, getServices } from "@/lib/db";
 
 const company = getCompany();
 const rimy = getRimy();
 
 const WELCOME_MESSAGES = [
-    rimy.greeting.text,
+    rimy.chat.welcome,
     company.valueProposition,
     company.description,
     `Fundado por ${company.founder.name}. ¿Listo para construir tu solución?`,
@@ -37,17 +37,9 @@ export default function WelcomeSection() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
                 {/* COLUMNA TEXTO Y PROPUESTA (IZQUIERDA EN DESKTOP) */}
                 <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-3.5 sm:space-y-4">
-                    {/* BADGE DE BIENVENIDA */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-md shadow-xs">
-                        <span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
-                        <span className="text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider uppercase text-[var(--accent)]">
-                            DIGITAL SOLUTIONS / {company.name.toUpperCase()}
-                        </span>
-                    </div>
-
                     {/* TITULAR PRINCIPAL */}
                     <div className="space-y-1.5">
-                        <p className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-cyan-500 dark:text-cyan-400 font-semibold">
+                        <p className="font-mono text-[11px] sm:text-xs uppercase tracking-[0.25em] text-cyan-800 dark:text-cyan-300 font-semibold">
                             {company.tagline}
                         </p>
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-[var(--header-text)]">
@@ -61,7 +53,10 @@ export default function WelcomeSection() {
 
                     {/* DESCRIPCIÓN CENTRALIZADA */}
                     <p className="max-w-xl text-xs sm:text-sm md:text-base leading-relaxed text-[var(--header-muted)]">
-                        {company.description}
+                        {company.shortDescription}
+                    </p>
+                    <p className="max-w-xl text-sm leading-relaxed text-[var(--header-muted)]">
+                        {getServices().audiences}
                     </p>
 
                     {/* BADGE DEL FUNDADOR */}
@@ -81,7 +76,7 @@ export default function WelcomeSection() {
                             <div className="flex items-center gap-2">
                                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                                 <span className="text-[10px] font-bold tracking-widest text-cyan-500 dark:text-cyan-400 uppercase font-mono">
-                                    {rimy.name} SAYS
+                                    {rimy.name}
                                 </span>
                             </div>
                             <span className="text-[10px] font-mono text-[var(--header-muted)]">
@@ -108,7 +103,7 @@ export default function WelcomeSection() {
                         <button
                             type="button"
                             onClick={() => scrollTo("contactanos")}
-                            className="px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[var(--accent)] text-zinc-950 transition-all hover:opacity-90 hover:shadow-[0_0_20px_var(--accent)] cursor-pointer min-h-[44px] flex items-center justify-center"
+                            className="px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-ink)] transition-all hover:opacity-90 hover:shadow-[0_0_20px_var(--accent)] cursor-pointer min-h-[44px] flex items-center justify-center"
                         >
                             Hablemos de tu proyecto ↗
                         </button>

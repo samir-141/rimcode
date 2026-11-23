@@ -13,7 +13,7 @@
         "que tipo de software desarrollan"
       ],
       "keywords": ["servicios", "servicio", "hacen", "dedican", "ofrecen", "ofrece", "brindan", "soluciones", "desarrollan"],
-      "answer": "En RimCode desarrollamos soluciones digitales a medida orientadas a optimizar procesos y escalar operaciones. A continuación puedes ver nuestras líneas principales de servicio:",
+      "answer": "Desarrollamos sitios web, comercio digital, aplicaciones SaaS, sistemas ERP y software a medida. Trabajamos con profesionales, negocios, empresas, instituciones educativas y organizaciones. ¿Qué necesitas publicar, vender o gestionar?",
       "tableType": "services",
       "relatedQuestions": [
         "¿Desarrollan sistemas ERP?",
@@ -30,16 +30,35 @@
         "desarrollan sistemas de inventario y ventas",
         "pueden hacer un sistema pos para farmacia o botica",
         "sistemas de gestion empresarial a medida",
+        "pueden desarrollar un sistema para controlar mi almacen",
         "control de stock y kardex"
       ],
       "keywords": ["erp", "gestion", "inventario", "pos", "kardex", "botica", "farmacia", "almacen", "facturacion", "ventas"],
-      "answer": "Sí. Diseñamos e implementamos sistemas ERP y de gestión operativa a medida con control de inventarios, lotes, vencimientos (FEFO), punto de venta rápido (POS), roles de usuario y reportes operativos. Por ejemplo, hemos construido plataformas enfocadas en boticas y farmacias (AngiBotica / Botica Marifarma) y herramientas de auditoría y reportes A4 (BEEFLOW Auditor).",
+      "answer": "Sí. Podemos desarrollar un sistema para registrar entradas y salidas, controlar existencias y consultar reportes. También podemos incorporar lotes, vencimientos, compras y roles según tu operación. ¿Tu almacén necesita trazabilidad por lote o un control general de existencias?",
       "tableType": "projects",
       "relatedQuestions": [
-        "¿Qué proyectos han desarrollado?",
+        "¿Cómo funciona la trazabilidad por lote?",
         "¿Cuánto cuesta desarrollar un sistema?",
         "¿Cómo puedo contratar sus servicios?"
       ]
+    },
+    {
+      "id": "inventario-lotes",
+      "category": "servicios",
+      "question": "¿Cómo funciona la trazabilidad por lote?",
+      "variations": ["por lote", "por lotes", "control por lotes", "necesito trazabilidad", "manejo de vencimientos"],
+      "keywords": ["trazabilidad", "lote", "lotes", "vencimientos"],
+      "answer": "El sistema puede registrar cada entrada, salida y existencia por lote. Cuando trabajas con productos perecederos, también puedes consultar las fechas de vencimiento. Para definir el alcance, importa saber si gestionas uno o varios almacenes.",
+      "relatedQuestions": ["¿Desarrollan sistemas ERP?", "¿Cuánto cuesta desarrollar un sistema?"]
+    },
+    {
+      "id": "software-educativo",
+      "category": "servicios",
+      "question": "¿Trabajan con instituciones educativas?",
+      "variations": ["software educativo", "sitios web para escuelas", "sistema para un colegio", "web para una universidad"],
+      "keywords": ["escuela", "colegio", "universidad", "educativa", "educativas", "educativo"],
+      "answer": "Sí. Para una institución educativa podemos preparar un sitio informativo o una aplicación a medida. Por ejemplo, el alcance puede incluir formularios, perfiles de usuario o un módulo para un proceso interno. ¿Necesitas publicar información o gestionar un proceso?",
+      "relatedQuestions": ["¿Qué servicios ofrecen?", "¿Cómo puedo contratar sus servicios?"]
     },
     {
       "id": "tiendas-virtuales",

@@ -18,13 +18,7 @@ export default function RimyAudio({
     onToggle,
     className = "",
 }: RimyAudioProps) {
-    const label = speaking
-        ? "Silenciar a RIMY"
-        : blocked
-          ? "Activar la voz de RIMY"
-          : muted
-            ? "Activar el sonido de RIMY"
-            : "Silenciar a RIMY";
+    const label = muted ? "Escuchar saludo de Rimy" : "Detener saludo de Rimy";
 
     return (
         <button

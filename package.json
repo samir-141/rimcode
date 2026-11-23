@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test qa/rimcode-api.test.mjs",
+    "test:browser": "node qa/rimcode-browser.mjs",
+    "bench:voice": "node qa/voice-bench.mjs"
   },
   "dependencies": {
     "@rive-app/react-webgl2": "^4.38.1",
@@ -15,12 +18,14 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "playwright": "^1.65.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

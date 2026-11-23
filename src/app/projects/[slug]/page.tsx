@@ -27,8 +27,7 @@ type ProjectPageProps = {
     params: Promise<{ slug: string }>;
 };
 
-// Toda la página depende del slug y `notFound()` debe conservar un 404 real
-// antes de enviar el shell. Se permite el bloqueo de navegación en esta ruta.
+// La ficha obtiene su contenido completo a partir del slug.
 export const instant = false;
 
 export function generateStaticParams() {
@@ -158,7 +157,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         <div className="mt-6 flex flex-wrap gap-2.5">
                             <Link
                                 href="/#contactanos"
-                                className="inline-flex min-h-[44px] items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 transition hover:opacity-90"
+                                className="inline-flex min-h-[44px] items-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--accent-ink)] transition hover:opacity-90"
                             >
                                 Hablemos de un proyecto similar ↗
                             </Link>

@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ConsentCategories, ConsentRecord } from "@/types/consent";
 import { getCookieCategories, type CookieCategory } from "@/lib/privacy/config";
 
 type CookieSettingsProps = {
-    open: boolean;
     initialRecord: ConsentRecord | null;
     onClose: () => void;
     onSave: (categories: ConsentCategories) => void;
@@ -15,7 +14,6 @@ type CookieSettingsProps = {
 };
 
 export default function CookieSettings({
-    open,
     initialRecord,
     onClose,
     onSave,
@@ -31,7 +29,16 @@ export default function CookieSettings({
         marketing: initialRecord?.categories.marketing ?? false,
     });
 
-    if (!open) return null;
+    const modal = useRef<HTMLDialogElement>(null);
+    useEffect(() => {
+        const dialog = modal.current;
+        const opener = document.activeElement;
+        dialog?.showModal();
+        return () => {
+            dialog?.close();
+            if (opener instanceof HTMLElement && opener.isConnected) opener.focus({ preventScroll: true });
+        };
+    }, []);
 
     const toggle = (id: keyof ConsentCategories) => {
         if (id === "necessary") return;
@@ -42,13 +49,28 @@ export default function CookieSettings({
     };
 
     return (
-        <div
-            role="dialog"
-            aria-modal="true"
+        <dialog
+            ref={modal}
+            onCancel={(event) => { event.preventDefault(); onClose(); }}
+            onKeyDown={(event) => {
+                if (event.key !== "Tab") return;
+                const controls = [...event.currentTarget.querySelectorAll<HTMLElement>(
+                    "button:not(:disabled), a[href], input:not(:disabled)"
+                )].filter((element) => element.tabIndex >= 0);
+                const first = controls[0];
+                const last = controls.at(-1);
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last?.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first?.focus();
+                }
+            }}
             aria-labelledby="cookie-settings-title"
-            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+            className="fixed inset-0 m-auto w-[calc(100%-1.5rem)] max-w-2xl rounded-3xl bg-[var(--background)] text-[var(--foreground)] backdrop:bg-black/65"
         >
-            <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)] shadow-2xl overflow-hidden">
+            <div className="relative flex max-h-[90dvh] w-full flex-col overflow-hidden rounded-3xl border border-[var(--header-border)]">
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-[var(--header-border)] p-5">
                     <div>
@@ -166,12 +188,12 @@ export default function CookieSettings({
                     <button
                         type="button"
                         onClick={() => onSave(selected)}
-                        className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[var(--accent)] text-zinc-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer shadow-sm"
+                        className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[var(--accent)] text-[var(--accent-ink)] font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer shadow-sm"
                     >
                         Guardar Preferencias
                     </button>
                 </div>
             </div>
-        </div>
+        </dialog>
     );
 }

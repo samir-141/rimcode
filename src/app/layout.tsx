@@ -56,7 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem("${settings.theme.storageKey}");
+                  var theme = localStorage.getItem(${JSON.stringify(settings.theme.storageKey).replace(/</g, "\\u003c")});
 
                   var isDark = theme
                     ? theme === "dark"

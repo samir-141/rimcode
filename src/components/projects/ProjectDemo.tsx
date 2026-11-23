@@ -59,7 +59,7 @@ export default function ProjectDemo({ project }: ProjectDemoProps) {
                     href={demo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-[var(--accent)] px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-zinc-950"
+                    className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-[var(--accent)] px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] transition hover:bg-[var(--accent)] hover:text-[var(--accent-ink)]"
                 >
                     Abrir demo en otra pestaña ↗
                 </a>
@@ -83,6 +83,7 @@ export default function ProjectDemo({ project }: ProjectDemoProps) {
                     title={demo.title || `Demostración de ${project.name}`}
                     loading="lazy"
                     referrerPolicy="no-referrer"
+                    sandbox="allow-scripts allow-same-origin allow-forms"
                     allow="fullscreen"
                     className="h-full w-full border-0"
                     onLoad={() => {

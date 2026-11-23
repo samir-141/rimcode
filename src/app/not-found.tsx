@@ -24,7 +24,7 @@ export default function NotFound() {
                 <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                     <Link
                         href="/"
-                        className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--accent)] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 transition hover:opacity-90"
+                        className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--accent)] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--accent-ink)] transition hover:opacity-90"
                     >
                         Volver al inicio
                     </Link>

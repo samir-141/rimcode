@@ -1,356 +1,139 @@
-import { NextResponse } from "next/server";
+import { createHash } from "node:crypto";
 
-import { getContact, getServices, getSettings } from "@/lib/db";
-import { getClientIp, pruneRateLimitBuckets, rateLimit } from "@/lib/server/rate-limit";
-import { cleanText, escapeHtml, isValidEmail } from "@/lib/validation";
+import { validateContact } from "@/lib/contact";
+import { getContact, getSettings } from "@/lib/db";
+import { recordChatEvent } from "@/lib/rimy/turn-log";
+import { limitRequest } from "@/lib/server/rate-limit";
+import { apiJson, readJsonObject, requestError } from "@/lib/server/request";
+import { parseUrl } from "@/lib/urls";
+import { escapeHtml } from "@/lib/validation";
 
-type ContactPayload = {
-    name?: unknown;
-    email?: unknown;
-    company?: unknown;
-    service?: unknown;
-    subject?: unknown;
-    message?: unknown;
-    website?: unknown;
-    startedAt?: unknown;
-};
+const settings = getSettings().contact;
+const contact = getContact();
+const submissions = new Map<string, { answer: Promise<boolean>; until: number; rimyRecorded?: boolean }>();
+type Fields = ReturnType<typeof validateContact>["fields"];
 
-type ProviderResult = {
-    ok: boolean;
-    status?: number;
-    detail?: string;
-};
-
-const settings = getSettings();
-const contactData = getContact();
-const allowedServices = new Set(
-    getServices().services.map((service) => service.contactLabel || service.name)
-);
-
-function getProviderConfig() {
-    const explicit = process.env.CONTACT_PROVIDER?.trim().toLowerCase();
-
-    if (explicit === "resend") return "resend" as const;
-    if (explicit === "webhook") return "webhook" as const;
-    if (process.env.RESEND_API_KEY) return "resend" as const;
-    if (process.env.CONTACT_WEBHOOK_URL) return "webhook" as const;
+function providerConfig() {
+    const provider = process.env.CONTACT_PROVIDER?.trim().toLowerCase() ||
+        (process.env.RESEND_API_KEY ? "resend" : "webhook");
+    const token = process.env.RESEND_API_KEY?.trim();
+    const from = process.env.CONTACT_FROM_EMAIL?.trim();
+    const to = process.env.CONTACT_EMAIL?.trim();
+    if (provider === "resend" && token && from && to) {
+        return { provider, token, from, to } as const;
+    }
+    const endpoint = parseUrl(process.env.CONTACT_WEBHOOK_URL?.trim() ?? "");
+    if (provider === "webhook" && endpoint && !endpoint.username && !endpoint.password &&
+        (endpoint.protocol === "https:" ||
+            (endpoint.protocol === "http:" && ["127.0.0.1", "[::1]", "localhost"].includes(endpoint.hostname)))) {
+        return { provider, endpoint, token: process.env.CONTACT_WEBHOOK_SECRET?.trim() } as const;
+    }
     return null;
 }
 
-function getMissingVariables(provider: "resend" | "webhook" | null): string[] {
-    if (provider === "resend") {
-        return ["RESEND_API_KEY", "CONTACT_EMAIL", "CONTACT_FROM_EMAIL"].filter(
-            (key) => !process.env[key]?.trim()
-        );
+async function deliver(config: NonNullable<ReturnType<typeof providerConfig>>, fields: Fields, key: string) {
+    const headers = new Headers({ "Content-Type": "application/json", "Idempotency-Key": key });
+    if (config.token) headers.set("Authorization", `Bearer ${config.token}`);
+    const text = [
+        `Nombre: ${fields.name}`, `Correo: ${fields.email}`, `Teléfono: ${fields.phone || "No indicado"}`,
+        `Empresa: ${fields.company || "No indicada"}`, `Servicio: ${fields.service || "No indicado"}`,
+        "", fields.message,
+    ].join("\n");
+    const body = config.provider === "resend" ? {
+        from: config.from,
+        to: [config.to],
+        reply_to: fields.email,
+        subject: `[RimCode] ${fields.subject}`,
+        html: `<h2>Nueva consulta desde RimCode</h2><p style="white-space:pre-wrap">${escapeHtml(text)}</p>`,
+        text,
+    } : { source: "rimcode-contact-form", submittedAt: new Date().toISOString(), ...fields };
+
+    try {
+        const response = await fetch(config.provider === "resend" ? "https://api.resend.com/emails" : config.endpoint, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(body),
+            redirect: "error",
+            signal: AbortSignal.timeout(15_000),
+        });
+        if (!response.ok) console.error("[contact] Fallo del proveedor", config.provider, response.status);
+        void response.body?.cancel().catch(() => {});
+        return response.ok;
+    } catch {
+        console.error("[contact] Fallo de conexión con el proveedor", config.provider);
+        return false;
     }
-
-    if (provider === "webhook") {
-        return ["CONTACT_WEBHOOK_URL"].filter(
-            (key) => !process.env[key]?.trim()
-        );
-    }
-
-    return ["CONTACT_PROVIDER", "RESEND_API_KEY", "CONTACT_EMAIL", "CONTACT_FROM_EMAIL"];
-}
-
-function buildEmailHtml(fields: {
-    name: string;
-    email: string;
-    company: string;
-    service: string;
-    subject: string;
-    message: string;
-}): string {
-    const rows = [
-        ["Nombre", fields.name],
-        ["Correo", fields.email],
-        ["Empresa", fields.company || "No indicada"],
-        ["Servicio", fields.service || "No indicado"],
-        ["Asunto", fields.subject],
-    ]
-        .map(
-            ([label, value]) =>
-                `<tr><td style="padding:6px 12px 6px 0;color:#52525b;font-size:13px">${escapeHtml(
-                    label
-                )}</td><td style="padding:6px 0;color:#18181b;font-size:13px;font-weight:600">${escapeHtml(
-                    value
-                )}</td></tr>`
-        )
-        .join("");
-
-    return `
-        <div style="font-family:Inter,Segoe UI,Arial,sans-serif;max-width:620px">
-            <h2 style="color:#18181b;margin:0 0 4px">Nueva consulta desde RimCode</h2>
-            <p style="color:#71717a;font-size:13px;margin:0 0 20px">Enviada desde el formulario de contacto del sitio.</p>
-            <table style="border-collapse:collapse;width:100%">${rows}</table>
-            <div style="margin-top:20px;padding:16px;border-radius:12px;background:#f4f4f5">
-                <p style="color:#52525b;font-size:12px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px">Mensaje</p>
-                <p style="color:#18181b;font-size:14px;line-height:1.6;white-space:pre-wrap;margin:0">${escapeHtml(
-                    fields.message
-                )}</p>
-            </div>
-        </div>
-    `;
-}
-
-async function sendWithResend(
-    fields: {
-        name: string;
-        email: string;
-        company: string;
-        service: string;
-        subject: string;
-        message: string;
-    },
-    request: Request
-): Promise<ProviderResult> {
-    const apiKey = process.env.RESEND_API_KEY?.trim();
-    const to = process.env.CONTACT_EMAIL?.trim() || contactData.email;
-    const from = process.env.CONTACT_FROM_EMAIL?.trim();
-
-    if (!apiKey || !to || !from) {
-        return { ok: false, detail: "Configuración de Resend incompleta." };
-    }
-
-    const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            from,
-            to: [to],
-            reply_to: fields.email,
-            subject: `[RimCode] ${fields.subject}`,
-            html: buildEmailHtml(fields),
-            text: [
-                fields.name,
-                fields.email,
-                fields.company || "Empresa no indicada",
-                fields.service || "Servicio no indicado",
-                "",
-                fields.message,
-            ].join("\n"),
-        }),
-        signal: AbortSignal.timeout(15000),
-    });
-
-    if (!response.ok) {
-        let detail = `Resend respondió ${response.status}.`;
-        try {
-            const body = (await response.json()) as { message?: string };
-            if (body.message) detail = body.message;
-        } catch {
-            // La respuesta no era JSON.
-        }
-
-        console.error("[contact] Resend falló:", response.status, detail, request.url);
-        return { ok: false, status: 502, detail };
-    }
-
-    return { ok: true, status: 200 };
-}
-
-async function sendWithWebhook(
-    fields: {
-        name: string;
-        email: string;
-        company: string;
-        service: string;
-        subject: string;
-        message: string;
-    }
-): Promise<ProviderResult> {
-    const endpoint = process.env.CONTACT_WEBHOOK_URL?.trim();
-    const secret = process.env.CONTACT_WEBHOOK_SECRET?.trim();
-
-    if (!endpoint) {
-        return { ok: false, detail: "Configuración de webhook incompleta." };
-    }
-
-    const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-    };
-    if (secret) headers.Authorization = `Bearer ${secret}`;
-
-    const response = await fetch(endpoint, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-            source: "rimcode-contact-form",
-            submittedAt: new Date().toISOString(),
-            ...fields,
-        }),
-        signal: AbortSignal.timeout(15000),
-    });
-
-    if (!response.ok) {
-        console.error("[contact] Webhook falló:", response.status);
-        return {
-            ok: false,
-            status: 502,
-            detail: `El servicio de correo respondió ${response.status}.`,
-        };
-    }
-
-    return { ok: true, status: 200 };
 }
 
 export async function POST(request: Request) {
-    pruneRateLimitBuckets();
-
-    let payload: ContactPayload;
+    let payload: Record<string, unknown>;
     try {
-        payload = (await request.json()) as ContactPayload;
-    } catch {
-        return NextResponse.json(
-            { ok: false, error: "El cuerpo de la solicitud no es JSON válido." },
-            { status: 400 }
-        );
-    }
-
-    if (!payload || typeof payload !== "object") {
-        return NextResponse.json(
-            { ok: false, error: "Solicitud no válida." },
-            { status: 400 }
-        );
-    }
-
-    const ip = getClientIp(request);
-    const limit = rateLimit(
-        `contact:${ip}`,
-        settings.contact.rateLimitPerHour,
-        60 * 60 * 1000
-    );
-
-    if (!limit.allowed) {
-        return NextResponse.json(
-            {
-                ok: false,
-                error: "Has enviado demasiadas consultas. Intenta de nuevo más tarde.",
-            },
-            {
-                status: 429,
-                headers: { "Retry-After": String(limit.retryAfterSeconds) },
-            }
-        );
-    }
-
-    // Honeypot: un humano no ve ni rellena este campo.
-    if (typeof payload.website === "string" && payload.website.trim() !== "") {
-        return NextResponse.json({ ok: true });
-    }
-
-    const startedAt =
-        typeof payload.startedAt === "number" ? payload.startedAt : 0;
-    const elapsed = Date.now() - startedAt;
-
-    if (
-        startedAt > 0 &&
-        (elapsed < settings.contact.minimumFillTimeMs ||
-            elapsed > settings.contact.maximumFillTimeMs)
-    ) {
-        return NextResponse.json(
-            {
-                ok: false,
-                error: "El formulario se envió demasiado rápido o caducó. Recarga la página e inténtalo de nuevo.",
-            },
-            { status: 400 }
-        );
-    }
-
-    const name = cleanText(payload.name, 120);
-    const email = cleanText(payload.email, 254).toLowerCase();
-    const company = cleanText(payload.company, 160);
-    const service = cleanText(payload.service, 160);
-    const subject = cleanText(payload.subject, 180);
-    const message = cleanText(
-        payload.message,
-        settings.contact.maxMessageLength
-    );
-
-    const fieldErrors: Record<string, string> = {};
-
-    if (name.length < 2) {
-        fieldErrors.name = "Indica tu nombre (mínimo 2 caracteres).";
-    }
-    if (!isValidEmail(email)) {
-        fieldErrors.email = "El correo electrónico no es válido.";
-    }
-    if (subject.length < 3) {
-        fieldErrors.subject = "Indica un asunto de al menos 3 caracteres.";
-    }
-    if (message.length < settings.contact.minMessageLength) {
-        fieldErrors.message = `Describe tu proyecto con al menos ${settings.contact.minMessageLength} caracteres.`;
-    }
-    if (service && !allowedServices.has(service)) {
-        fieldErrors.service = "El servicio seleccionado no es válido.";
-    }
-
-    if (Object.keys(fieldErrors).length > 0) {
-        return NextResponse.json(
-            {
-                ok: false,
-                error: "Revisa los campos marcados.",
-                fieldErrors,
-            },
-            { status: 422 }
-        );
-    }
-
-    const provider = getProviderConfig();
-    const missing = getMissingVariables(provider);
-
-    if (!provider || missing.length > 0) {
-        return NextResponse.json(
-            {
-                ok: false,
-                error: "El envío de correo aún no está configurado en este entorno.",
-                missing,
-                hint: "Configura las variables indicadas en .env.example y reinicia el servidor. Mientras tanto puedes escribir directamente al correo de contacto.",
-                contactEmail: contactData.email,
-            },
-            { status: 503 }
-        );
-    }
-
-    const fields = { name, email, company, service, subject, message };
-
-    try {
-        const result =
-            provider === "resend"
-                ? await sendWithResend(fields, request)
-                : await sendWithWebhook(fields);
-
-        if (!result.ok) {
-            return NextResponse.json(
-                {
-                    ok: false,
-                    error:
-                        "No pudimos entregar el mensaje al servicio de correo. No se ha simulado un envío exitoso.",
-                    detail:
-                        process.env.NODE_ENV === "production"
-                            ? undefined
-                            : result.detail,
-                    contactEmail: contactData.email,
-                },
-                { status: result.status ?? 502 }
-            );
-        }
-
-        return NextResponse.json({ ok: true });
+        payload = await readJsonObject(request, 36_000);
     } catch (error) {
-        console.error("[contact] Error de red:", error);
-
-        return NextResponse.json(
-            {
-                ok: false,
-                error:
-                    "No pudimos conectar con el servicio de correo. Intenta de nuevo o escríbenos directamente.",
-                contactEmail: contactData.email,
-            },
-            { status: 502 }
-        );
+        return requestError(error);
     }
+
+    if (typeof payload.website === "string" && payload.website.trim()) return apiJson({ ok: true });
+    const startedAt = payload.startedAt;
+    if (startedAt !== undefined && (typeof startedAt !== "number" ||
+        Date.now() - startedAt < settings.minimumFillTimeMs ||
+        Date.now() - startedAt > settings.maximumFillTimeMs)) {
+        return apiJson({
+            ok: false,
+            error: "El formulario se envió demasiado rápido o caducó. Revisa los campos y vuelve a intentarlo.",
+        }, 400);
+    }
+
+    const { fields, errors } = validateContact(payload);
+    if (Object.keys(errors).length) {
+        return apiJson({ ok: false, error: "Revisa los campos marcados.", fieldErrors: errors }, 422);
+    }
+
+    const config = providerConfig();
+    if (!config) {
+        return apiJson({
+            ok: false,
+            error: "El formulario no está disponible en este momento. Puedes escribir al correo de contacto.",
+            contactEmail: contact.email,
+        }, 503);
+    }
+
+    const submission = typeof payload.submissionId === "string" && /^[\da-f-]{36}$/i.test(payload.submissionId)
+        ? payload.submissionId : "";
+    const key = "contact-" + createHash("sha256").update(JSON.stringify([submission, fields])).digest("hex");
+    const now = Date.now();
+    for (const [id, entry] of submissions) {
+        if (entry.until <= now) submissions.delete(id);
+    }
+
+    let entry = submissions.get(key);
+    if (!entry) {
+        const limit = await limitRequest(request, "contact", settings.rateLimitPerHour, 3_600_000, 20);
+        entry = submissions.get(key);
+        if (!entry) {
+            if (!limit.allowed || submissions.size >= 2_000) {
+                return apiJson({
+                    ok: false,
+                    error: "El formulario está ocupado. Vuelve a intentarlo más tarde.",
+                }, limit.unavailable ? 503 : 429, { "Retry-After": String(limit.retryAfterSeconds) });
+            }
+            entry = { answer: deliver(config, fields, key), until: now + 600_000 };
+            submissions.set(key, entry);
+        }
+    }
+
+    if (await entry.answer) {
+        if (!entry.rimyRecorded && typeof payload.rimyTurnGrant === "string") {
+            entry.rimyRecorded = true;
+            await recordChatEvent(payload.rimyTurnGrant, "dejo_contacto");
+        }
+        return apiJson({ ok: true });
+    }
+
+    if (submissions.get(key) === entry) submissions.delete(key);
+    return apiJson({
+        ok: false,
+        error: "No pudimos confirmar la entrega. Intenta de nuevo o escríbenos directamente.",
+        contactEmail: contact.email,
+    }, 502);
 }

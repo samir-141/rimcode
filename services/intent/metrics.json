@@ -1,0 +1,1205 @@
+{
+  "clases": [
+    "agendar_reunion",
+    "ambiguo_reserva",
+    "charla_social",
+    "consultar_hosting",
+    "consultar_precios",
+    "contactar_programador",
+    "cotizar",
+    "otro",
+    "saludo"
+  ],
+  "ejemplos": {
+    "entrenamiento": 407,
+    "validacion": 102,
+    "reto": 135
+  },
+  "validacion": {
+    "tfidf": {
+      "accuracy": 0.8627450980392157,
+      "f1_macro": 0.8827857962869405,
+      "f1_por_clase": {
+        "agendar_reunion": 0.9,
+        "ambiguo_reserva": 0.9523809523809523,
+        "charla_social": 0.9473684210526315,
+        "consultar_hosting": 0.9,
+        "consultar_precios": 0.8695652173913043,
+        "contactar_programador": 0.8,
+        "cotizar": 0.9090909090909091,
+        "otro": 0.6666666666666666,
+        "saludo": 1.0
+      },
+      "log_loss": 0.4204697958131001,
+      "matriz_confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          2,
+          2,
+          2,
+          13,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          10
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 1,
+          "esperado": "agendar_reunion",
+          "predicho": "otro",
+          "confianza": 0.5552
+        },
+        {
+          "indice": 11,
+          "esperado": "otro",
+          "predicho": "consultar_precios",
+          "confianza": 0.9684
+        },
+        {
+          "indice": 22,
+          "esperado": "otro",
+          "predicho": "consultar_precios",
+          "confianza": 0.6424
+        },
+        {
+          "indice": 27,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.6174
+        },
+        {
+          "indice": 30,
+          "esperado": "contactar_programador",
+          "predicho": "otro",
+          "confianza": 0.8164
+        },
+        {
+          "indice": 35,
+          "esperado": "otro",
+          "predicho": "cotizar",
+          "confianza": 0.3011
+        },
+        {
+          "indice": 36,
+          "esperado": "otro",
+          "predicho": "cotizar",
+          "confianza": 0.8644
+        },
+        {
+          "indice": 53,
+          "esperado": "otro",
+          "predicho": "agendar_reunion",
+          "confianza": 0.7458
+        },
+        {
+          "indice": 54,
+          "esperado": "consultar_hosting",
+          "predicho": "consultar_precios",
+          "confianza": 0.4987
+        },
+        {
+          "indice": 58,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.9331
+        },
+        {
+          "indice": 67,
+          "esperado": "charla_social",
+          "predicho": "otro",
+          "confianza": 0.8452
+        },
+        {
+          "indice": 84,
+          "esperado": "contactar_programador",
+          "predicho": "otro",
+          "confianza": 0.5136
+        },
+        {
+          "indice": 85,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.9949
+        },
+        {
+          "indice": 101,
+          "esperado": "otro",
+          "predicho": "ambiguo_reserva",
+          "confianza": 0.9711
+        }
+      ]
+    },
+    "minilm_int8": {
+      "accuracy": 0.9019607843137255,
+      "f1_macro": 0.9059305527650303,
+      "f1_por_clase": {
+        "agendar_reunion": 0.9090909090909091,
+        "ambiguo_reserva": 0.8888888888888888,
+        "charla_social": 0.9523809523809523,
+        "consultar_hosting": 0.8571428571428571,
+        "consultar_precios": 1.0,
+        "contactar_programador": 0.8695652173913043,
+        "cotizar": 0.8571428571428571,
+        "otro": 0.8717948717948718,
+        "saludo": 0.9473684210526315
+      },
+      "log_loss": 0.30045906374011827,
+      "matriz_confusion": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          8,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          1,
+          1,
+          17,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          9
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 12,
+          "esperado": "consultar_hosting",
+          "predicho": "cotizar",
+          "confianza": 0.7489
+        },
+        {
+          "indice": 22,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.8659
+        },
+        {
+          "indice": 34,
+          "esperado": "cotizar",
+          "predicho": "agendar_reunion",
+          "confianza": 0.5438
+        },
+        {
+          "indice": 55,
+          "esperado": "ambiguo_reserva",
+          "predicho": "charla_social",
+          "confianza": 0.5
+        },
+        {
+          "indice": 57,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.9941
+        },
+        {
+          "indice": 71,
+          "esperado": "otro",
+          "predicho": "cotizar",
+          "confianza": 0.5506
+        },
+        {
+          "indice": 72,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.9563
+        },
+        {
+          "indice": 85,
+          "esperado": "otro",
+          "predicho": "agendar_reunion",
+          "confianza": 0.2929
+        },
+        {
+          "indice": 95,
+          "esperado": "saludo",
+          "predicho": "contactar_programador",
+          "confianza": 0.6062
+        },
+        {
+          "indice": 98,
+          "esperado": "ambiguo_reserva",
+          "predicho": "contactar_programador",
+          "confianza": 0.8188
+        }
+      ]
+    },
+    "hibrido_int8": {
+      "accuracy": 0.9411764705882353,
+      "f1_macro": 0.9500222635234077,
+      "f1_por_clase": {
+        "agendar_reunion": 1.0,
+        "ambiguo_reserva": 0.9473684210526315,
+        "charla_social": 1.0,
+        "consultar_hosting": 0.9090909090909091,
+        "consultar_precios": 0.9523809523809523,
+        "contactar_programador": 0.8695652173913043,
+        "cotizar": 1.0,
+        "otro": 0.8717948717948718,
+        "saludo": 1.0
+      },
+      "log_loss": 0.20203671439892343,
+      "matriz_confusion": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          9,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          2,
+          0,
+          17,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          10
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 11,
+          "esperado": "otro",
+          "predicho": "consultar_precios",
+          "confianza": 0.8159
+        },
+        {
+          "indice": 57,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.906
+        },
+        {
+          "indice": 58,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.7766
+        },
+        {
+          "indice": 72,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.8946
+        },
+        {
+          "indice": 85,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.9483
+        },
+        {
+          "indice": 98,
+          "esperado": "ambiguo_reserva",
+          "predicho": "contactar_programador",
+          "confianza": 0.6165
+        }
+      ]
+    },
+    "acuerdo_head_hibrido_fp32_vs_int8": 1.0
+  },
+  "reto": {
+    "tfidf": {
+      "accuracy": 0.9037037037037037,
+      "f1_macro": 0.9033144558033323,
+      "f1_por_clase": {
+        "agendar_reunion": 0.8571428571428571,
+        "ambiguo_reserva": 0.9032258064516129,
+        "charla_social": 1.0,
+        "consultar_hosting": 0.896551724137931,
+        "consultar_precios": 0.9333333333333333,
+        "contactar_programador": 0.9032258064516129,
+        "cotizar": 0.9375,
+        "otro": 0.7333333333333333,
+        "saludo": 0.9655172413793104
+      },
+      "log_loss": 0.26832371346977263,
+      "matriz_confusion": [
+        [
+          12,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          13,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          11,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          14
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 12,
+          "esperado": "saludo",
+          "predicho": "contactar_programador",
+          "confianza": 0.773
+        },
+        {
+          "indice": 48,
+          "esperado": "agendar_reunion",
+          "predicho": "ambiguo_reserva",
+          "confianza": 0.3598
+        },
+        {
+          "indice": 54,
+          "esperado": "agendar_reunion",
+          "predicho": "otro",
+          "confianza": 0.3875
+        },
+        {
+          "indice": 55,
+          "esperado": "agendar_reunion",
+          "predicho": "contactar_programador",
+          "confianza": 0.5704
+        },
+        {
+          "indice": 65,
+          "esperado": "contactar_programador",
+          "predicho": "otro",
+          "confianza": 0.6561
+        },
+        {
+          "indice": 80,
+          "esperado": "consultar_hosting",
+          "predicho": "cotizar",
+          "confianza": 0.529
+        },
+        {
+          "indice": 87,
+          "esperado": "consultar_hosting",
+          "predicho": "otro",
+          "confianza": 0.3871
+        },
+        {
+          "indice": 100,
+          "esperado": "consultar_precios",
+          "predicho": "cotizar",
+          "confianza": 0.4111
+        },
+        {
+          "indice": 108,
+          "esperado": "ambiguo_reserva",
+          "predicho": "otro",
+          "confianza": 0.588
+        },
+        {
+          "indice": 121,
+          "esperado": "otro",
+          "predicho": "consultar_precios",
+          "confianza": 0.668
+        },
+        {
+          "indice": 122,
+          "esperado": "otro",
+          "predicho": "ambiguo_reserva",
+          "confianza": 0.7641
+        },
+        {
+          "indice": 123,
+          "esperado": "otro",
+          "predicho": "agendar_reunion",
+          "confianza": 0.989
+        },
+        {
+          "indice": 132,
+          "esperado": "otro",
+          "predicho": "consultar_hosting",
+          "confianza": 0.4979
+        }
+      ]
+    },
+    "minilm_int8": {
+      "accuracy": 0.8518518518518519,
+      "f1_macro": 0.8554880340320953,
+      "f1_por_clase": {
+        "agendar_reunion": 0.896551724137931,
+        "ambiguo_reserva": 0.8148148148148148,
+        "charla_social": 0.9333333333333333,
+        "consultar_hosting": 0.8571428571428571,
+        "consultar_precios": 0.8461538461538461,
+        "contactar_programador": 0.8275862068965517,
+        "cotizar": 0.8571428571428571,
+        "otro": 0.6666666666666666,
+        "saludo": 1.0
+      },
+      "log_loss": 0.5030811755777836,
+      "matriz_confusion": [
+        [
+          13,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          14,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          12,
+          0,
+          0,
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          11,
+          0,
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          12,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          12,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 27,
+          "esperado": "charla_social",
+          "predicho": "otro",
+          "confianza": 0.9793
+        },
+        {
+          "indice": 45,
+          "esperado": "agendar_reunion",
+          "predicho": "otro",
+          "confianza": 0.6247
+        },
+        {
+          "indice": 52,
+          "esperado": "agendar_reunion",
+          "predicho": "otro",
+          "confianza": 0.4823
+        },
+        {
+          "indice": 60,
+          "esperado": "contactar_programador",
+          "predicho": "cotizar",
+          "confianza": 0.8308
+        },
+        {
+          "indice": 65,
+          "esperado": "contactar_programador",
+          "predicho": "otro",
+          "confianza": 0.9324
+        },
+        {
+          "indice": 70,
+          "esperado": "contactar_programador",
+          "predicho": "charla_social",
+          "confianza": 0.7751
+        },
+        {
+          "indice": 75,
+          "esperado": "consultar_hosting",
+          "predicho": "otro",
+          "confianza": 0.9482
+        },
+        {
+          "indice": 80,
+          "esperado": "consultar_hosting",
+          "predicho": "cotizar",
+          "confianza": 0.9738
+        },
+        {
+          "indice": 82,
+          "esperado": "consultar_hosting",
+          "predicho": "cotizar",
+          "confianza": 0.7535
+        },
+        {
+          "indice": 90,
+          "esperado": "consultar_precios",
+          "predicho": "otro",
+          "confianza": 0.5854
+        },
+        {
+          "indice": 94,
+          "esperado": "consultar_precios",
+          "predicho": "cotizar",
+          "confianza": 0.485
+        },
+        {
+          "indice": 100,
+          "esperado": "consultar_precios",
+          "predicho": "cotizar",
+          "confianza": 0.982
+        },
+        {
+          "indice": 104,
+          "esperado": "consultar_precios",
+          "predicho": "consultar_hosting",
+          "confianza": 0.6434
+        },
+        {
+          "indice": 105,
+          "esperado": "ambiguo_reserva",
+          "predicho": "otro",
+          "confianza": 0.5561
+        },
+        {
+          "indice": 108,
+          "esperado": "ambiguo_reserva",
+          "predicho": "otro",
+          "confianza": 0.4761
+        },
+        {
+          "indice": 115,
+          "esperado": "ambiguo_reserva",
+          "predicho": "otro",
+          "confianza": 0.5616
+        },
+        {
+          "indice": 119,
+          "esperado": "ambiguo_reserva",
+          "predicho": "contactar_programador",
+          "confianza": 0.8642
+        },
+        {
+          "indice": 124,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.6239
+        },
+        {
+          "indice": 127,
+          "esperado": "otro",
+          "predicho": "agendar_reunion",
+          "confianza": 0.3856
+        },
+        {
+          "indice": 132,
+          "esperado": "otro",
+          "predicho": "ambiguo_reserva",
+          "confianza": 0.3124
+        }
+      ]
+    },
+    "hibrido_int8": {
+      "accuracy": 0.9333333333333333,
+      "f1_macro": 0.9333452647134517,
+      "f1_por_clase": {
+        "agendar_reunion": 1.0,
+        "ambiguo_reserva": 1.0,
+        "charla_social": 0.9333333333333333,
+        "consultar_hosting": 0.9285714285714286,
+        "consultar_precios": 0.9655172413793104,
+        "contactar_programador": 0.8571428571428571,
+        "cotizar": 0.9090909090909091,
+        "otro": 0.8387096774193549,
+        "saludo": 0.967741935483871
+      },
+      "log_loss": 0.21746095357856032,
+      "matriz_confusion": [
+        [
+          15,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          14,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          13,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          12,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          13,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15
+        ]
+      ],
+      "errores": [
+        {
+          "indice": 27,
+          "esperado": "charla_social",
+          "predicho": "otro",
+          "confianza": 0.7106
+        },
+        {
+          "indice": 60,
+          "esperado": "contactar_programador",
+          "predicho": "cotizar",
+          "confianza": 0.5973
+        },
+        {
+          "indice": 65,
+          "esperado": "contactar_programador",
+          "predicho": "otro",
+          "confianza": 0.8571
+        },
+        {
+          "indice": 70,
+          "esperado": "contactar_programador",
+          "predicho": "charla_social",
+          "confianza": 0.5581
+        },
+        {
+          "indice": 75,
+          "esperado": "consultar_hosting",
+          "predicho": "otro",
+          "confianza": 0.5553
+        },
+        {
+          "indice": 80,
+          "esperado": "consultar_hosting",
+          "predicho": "cotizar",
+          "confianza": 0.9889
+        },
+        {
+          "indice": 100,
+          "esperado": "consultar_precios",
+          "predicho": "cotizar",
+          "confianza": 0.863
+        },
+        {
+          "indice": 124,
+          "esperado": "otro",
+          "predicho": "contactar_programador",
+          "confianza": 0.7715
+        },
+        {
+          "indice": 132,
+          "esperado": "otro",
+          "predicho": "saludo",
+          "confianza": 0.2786
+        }
+      ]
+    },
+    "acuerdo_head_hibrido_fp32_vs_int8": 1.0
+  },
+  "cpu": {
+    "procesador": "Intel Core i5-13420H",
+    "plataforma": "Windows-11-10.0.26300-SP0",
+    "hilos_onnx": 2,
+    "muestras_por_modelo": 102,
+    "hibrido_int8": {
+      "p50_ms": 14.28,
+      "p95_ms": 22.5,
+      "max_ms": 137.76
+    },
+    "minilm_int8": {
+      "p50_ms": 13.41,
+      "p95_ms": 18.42,
+      "max_ms": 116.16
+    },
+    "tfidf": {
+      "p50_ms": 1.89,
+      "p95_ms": 3.16,
+      "max_ms": 13.9
+    }
+  },
+  "bytes": {
+    "encoder.onnx": 118453870,
+    "intent.int8.onnx": 27663,
+    "minilm.int8.onnx": 4485,
+    "lexical.json": 74297,
+    "tokenizer.json": 9081518,
+    "labels.json": 183
+  },
+  "temperatura": {
+    "tfidf": 0.5975675510600194,
+    "minilm": 0.7370415401913333,
+    "hibrido": 0.7322609675132011
+  },
+  "peso_lexico_elegido_por_validacion_cruzada": 1.0
+}

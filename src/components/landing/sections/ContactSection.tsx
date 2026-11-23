@@ -5,13 +5,14 @@ import { getCurrencySymbol, type Currency } from "@/lib/currency";
 import { getCompany, getContact, getServicesForContact, getSocialNetworks } from "@/lib/db";
 import Link from "next/link";
 import CookieSettingsTrigger from "@/components/privacy/CookieSettingsTrigger";
+import { contactLimits, resolveContactService, validateContact } from "@/lib/contact";
+import { QUOTE_STORAGE_KEY } from "@/lib/quote";
+import { clearRimyGrant, readRimyGrant } from "@/lib/rimy/client-events";
 
 const company = getCompany();
 const contact = getContact();
 const availableServices = getServicesForContact();
 const socialNetworks = getSocialNetworks();
-
-const QUOTE_STORAGE_KEY = "rimcode:quote";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -24,13 +25,15 @@ type StoredQuote = {
     totalUSD?: number;
     currency?: string;
     total?: number;
+    message?: string;
 };
 
 function buildQuoteMessage(quote: StoredQuote): string {
+    if (typeof quote.message === "string") return quote.message.slice(0, contactLimits.message);
     const projectType = quote.projectType?.trim() || "Proyecto sin especificar";
     const modules =
-        quote.modules && quote.modules.length > 0
-            ? quote.modules.join(", ")
+        Array.isArray(quote.modules) && quote.modules.length > 0
+            ? quote.modules.filter((item) => typeof item === "string").join(", ")
             : "Sin módulos adicionales";
     const delivery = quote.express ? "Express prioritaria" : "Estándar";
     const currency = (quote.currency || "PEN") as Currency;
@@ -58,14 +61,16 @@ function normalizeQuote(value: unknown): StoredQuote | null {
     if (typeof quote.projectType !== "string" && typeof quote.service !== "string") {
         return null;
     }
-    return quote;
+    return {
+        ...quote,
+        projectType: typeof quote.projectType === "string" ? quote.projectType : undefined,
+        service: typeof quote.service === "string" ? quote.service : undefined,
+    };
 }
 
 interface FormResponseError {
     error?: string;
     fieldErrors?: Record<string, string>;
-    missing?: string[];
-    hint?: string;
     contactEmail?: string;
 }
 
@@ -73,9 +78,10 @@ export default function ContactSection() {
     const [status, setStatus] = useState<FormStatus>("idle");
     const [errorMessage, setErrorMessage] = useState("");
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-    const [missingVars, setMissingVars] = useState<string[]>([]);
     const [quoteLoaded, setQuoteLoaded] = useState(false);
     const startedAtRef = useRef<number>(0);
+    const sending = useRef(false);
+    const submissionId = useRef("");
 
     const [formData, setFormData] = useState({
         name: "",
@@ -83,7 +89,7 @@ export default function ContactSection() {
         phoneCode: "+51",
         phone: "",
         company: "",
-        service: availableServices[0]?.label || "Plataforma Web SaaS",
+        service: "",
         subject: "Consulta sobre desarrollo de software",
         message: "",
         website: "", // Campo honeypot anti-spam
@@ -97,16 +103,13 @@ export default function ContactSection() {
             if (!quote) return;
 
             const projectType = quote.projectType?.trim() || quote.service?.trim() || "";
-            const matchedService = availableServices.find(
-                (service) =>
-                    service.label === quote.service ||
-                    service.label === quote.projectType ||
-                    service.id === quote.projectTypeId
-            );
+            const matchedService = resolveContactService(quote.service ?? "") ??
+                resolveContactService(quote.projectType ?? "") ??
+                resolveContactService(typeof quote.projectTypeId === "string" ? quote.projectTypeId : "");
 
             setFormData((prev) => ({
                 ...prev,
-                service: matchedService?.label || prev.service,
+                service: matchedService?.name || prev.service,
                 subject: projectType
                     ? `Cotización: ${projectType}`
                     : prev.subject,
@@ -140,25 +143,34 @@ export default function ContactSection() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (sending.current) return;
+        const submission = {
+            ...formData,
+            phone: formData.phone ? `${formData.phoneCode} ${formData.phone}` : "",
+        };
+        const { errors } = validateContact(submission);
+        if (Object.keys(errors).length) {
+            setFieldErrors(errors);
+            setErrorMessage("Revisa los campos marcados.");
+            setStatus("error");
+            document.getElementById(`contact-${Object.keys(errors)[0]}`)?.focus();
+            return;
+        }
+        sending.current = true;
         setStatus("submitting");
         setErrorMessage("");
         setFieldErrors({});
-        setMissingVars([]);
+        submissionId.current ||= globalThis.crypto?.randomUUID?.() ?? "";
 
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone ? `${formData.phoneCode} ${formData.phone}` : "",
-                    company: formData.company,
-                    service: formData.service,
-                    subject: formData.subject,
-                    message: formData.message,
-                    website: formData.website,
+                    ...submission,
+                    submissionId: submissionId.current,
                     startedAt: startedAtRef.current,
+                    rimyTurnGrant: readRimyGrant(),
                 }),
             });
 
@@ -177,13 +189,13 @@ export default function ContactSection() {
                     setFieldErrors(data.fieldErrors);
                 }
 
-                if (data.missing) {
-                    setMissingVars(data.missing);
-                }
+                if (response.status === 400 && Date.now() - startedAtRef.current > 7_200_000) startedAtRef.current = Date.now();
                 return;
             }
 
             setStatus("success");
+            clearRimyGrant();
+            submissionId.current = "";
             try {
                 sessionStorage.removeItem(QUOTE_STORAGE_KEY);
             } catch {
@@ -196,7 +208,7 @@ export default function ContactSection() {
                 phoneCode: "+51",
                 phone: "",
                 company: "",
-                service: availableServices[0]?.label || "Plataforma Web SaaS",
+                service: "",
                 subject: "Consulta sobre desarrollo de software",
                 message: "",
                 website: "",
@@ -206,6 +218,8 @@ export default function ContactSection() {
             setErrorMessage(
                 "Error de conexión con el servidor. Por favor verifica tu conexión a internet o contáctanos por correo."
             );
+        } finally {
+            sending.current = false;
         }
     };
 
@@ -354,7 +368,7 @@ export default function ContactSection() {
                                 <button
                                     type="button"
                                     onClick={() => setStatus("idle")}
-                                    className="px-6 py-2.5 rounded-full text-xs font-bold bg-[var(--accent)] text-zinc-950 cursor-pointer min-h-[44px]"
+                                    className="px-6 py-2.5 rounded-full text-xs font-bold bg-[var(--accent)] text-[var(--accent-ink)] cursor-pointer min-h-[44px]"
                                 >
                                     Enviar otra consulta
                                 </button>
@@ -401,11 +415,6 @@ export default function ContactSection() {
                                         className="rounded-2xl border border-red-500/30 bg-red-500/10 p-3.5 text-xs text-red-600 dark:text-red-300 leading-relaxed space-y-1.5"
                                     >
                                         <p className="font-semibold">{errorMessage}</p>
-                                        {process.env.NODE_ENV !== "production" && missingVars.length > 0 && (
-                                            <p className="text-[11px] font-mono text-zinc-400">
-                                                Variables pendientes en servidor: {missingVars.join(", ")}
-                                            </p>
-                                        )}
                                         <p className="text-[11px]">
                                             Puedes escribirnos directamente a:{" "}
                                             <a
@@ -428,6 +437,8 @@ export default function ContactSection() {
                                         </label>
                                         <input
                                             id="contact-name"
+                                            maxLength={contactLimits.name}
+                                            autoComplete="name"
                                             type="text"
                                             required
                                             value={formData.name}
@@ -454,6 +465,8 @@ export default function ContactSection() {
                                         </label>
                                         <input
                                             id="contact-email"
+                                            maxLength={contactLimits.email}
+                                            autoComplete="email"
                                             type="email"
                                             required
                                             value={formData.email}
@@ -482,6 +495,8 @@ export default function ContactSection() {
                                         </label>
                                         <input
                                             id="contact-company"
+                                            maxLength={contactLimits.company}
+                                            autoComplete="organization"
                                             type="text"
                                             value={formData.company}
                                             onChange={(e) =>
@@ -533,6 +548,9 @@ export default function ContactSection() {
                                             {/* Número de teléfono */}
                                             <input
                                                 id="contact-phone"
+                                                autoComplete="tel-national"
+                                                aria-invalid={Boolean(fieldErrors.phone)}
+                                                aria-describedby={fieldErrors.phone ? "contact-phone-error" : undefined}
                                                 type="tel"
                                                 value={formData.phone}
                                                 onChange={(e) =>
@@ -543,7 +561,18 @@ export default function ContactSection() {
                                                 className="min-w-0 flex-1 px-3.5 py-2.5 rounded-xl border border-[var(--header-border)] bg-black/5 dark:bg-white/5 text-[16px] sm:text-xs text-[var(--header-text)] placeholder-[var(--header-muted)] focus:outline-none focus:border-[var(--accent)] min-h-[44px]"
                                             />
                                         </div>
+                                        {fieldErrors.phone && <p id="contact-phone-error" className="mt-1 text-xs text-red-600 dark:text-red-300">{fieldErrors.phone}</p>}
                                     </div>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="contact-service" className="mb-1 block text-xs font-medium">Solución de interés</label>
+                                    <select id="contact-service" value={formData.service} onChange={(event) =>
+                                        setFormData({ ...formData, service: event.target.value })
+                                    } className="min-h-11 w-full rounded-xl border border-[var(--header-border)] bg-[var(--background)] px-3 text-sm">
+                                        <option value="">Por definir</option>
+                                        {availableServices.map(({ id, label }) => <option key={id} value={label}>{label}</option>)}
+                                    </select>
                                 </div>
 
                                 <div>
@@ -555,6 +584,7 @@ export default function ContactSection() {
                                     </label>
                                     <input
                                         id="contact-subject"
+                                        maxLength={contactLimits.subject}
                                         type="text"
                                         required
                                         value={formData.subject}
@@ -581,13 +611,14 @@ export default function ContactSection() {
                                     </label>
                                     <textarea
                                         id="contact-message"
+                                        maxLength={contactLimits.message}
                                         rows={3}
                                         required
                                         value={formData.message}
                                         onChange={(e) =>
                                             setFormData({ ...formData, message: e.target.value })
                                         }
-                                        placeholder="Describe brevemente tus requerimientos o idea técnica (mínimo 15 caracteres)..."
+                                        placeholder="Describe los procesos o funciones que necesitas"
                                         aria-invalid={Boolean(fieldErrors.message)}
                                         className="w-full px-3.5 py-2.5 rounded-xl border border-[var(--header-border)] bg-black/5 dark:bg-white/5 text-[16px] sm:text-xs text-[var(--header-text)] placeholder-[var(--header-muted)] focus:outline-none focus:border-[var(--accent)] resize-y"
                                     />
@@ -601,7 +632,7 @@ export default function ContactSection() {
                                 <button
                                     type="submit"
                                     disabled={status === "submitting"}
-                                    className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[var(--accent)] text-zinc-950 transition-all hover:opacity-90 hover:shadow-[0_0_20px_var(--accent)] cursor-pointer disabled:opacity-50 min-h-[44px] flex items-center justify-center"
+                                    className="w-full py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-ink)] transition-all hover:opacity-90 hover:shadow-[0_0_20px_var(--accent)] cursor-pointer disabled:opacity-50 min-h-[44px] flex items-center justify-center"
                                 >
                                     {status === "submitting"
                                         ? "Enviando mensaje..."

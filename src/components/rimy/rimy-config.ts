@@ -30,11 +30,8 @@ export const RIMY_DURATION: Record<RimyAnimation, number> = {
     greeting: 6200,
 };
 
-export const RIMY_GREETING_TEXT = rimyData.greeting.text;
-
-export const RIMY_GREETING_AUDIO_TEXT = rimyData.greeting.audioText;
-
-export const RIMY_WELCOME_AUDIO = rimyData.greeting.audioFile;
+export const RIMY_GREETING_TEXT = rimyData.chat.welcome;
+export const RIMY_CHAT_SLOT_ID = "rimy-chat-slot";
 
 /** Evita repetir la bienvenida en cada render / navegación interna. */
 export const RIMY_GREETING_KEY = "rimy:greeted:v1";

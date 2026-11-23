@@ -16,7 +16,7 @@ export default function CookieBanner({
     return (
         <section
             aria-label="Aviso de cookies"
-            className="cookie-banner fixed inset-x-0 bottom-0 z-50 px-3 pb-3 sm:px-5 sm:pb-5"
+            className="cookie-banner fixed inset-x-0 bottom-0 z-[110] px-3 pb-3 sm:px-5 sm:pb-5"
         >
             <div className="cookie-banner-card mx-auto w-full max-w-3xl rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/95 p-4 shadow-2xl backdrop-blur-xl sm:p-5">
                 <div className="flex items-start gap-3">
@@ -50,7 +50,7 @@ export default function CookieBanner({
                     <button
                         type="button"
                         onClick={onAcceptAll}
-                        className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-zinc-950 transition hover:opacity-90"
+                        className="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[var(--accent-ink)] transition hover:opacity-90"
                     >
                         Aceptar todas
                     </button>

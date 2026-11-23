@@ -126,16 +126,16 @@ function normalizeProject(project: Project): Project {
         pending: Array.isArray(project.pending) ? project.pending : [],
         demo: {
             type: project.demo?.type ?? "iframe",
-            url: project.demo?.url ?? "",
+            url: safeExternalUrl(project.demo?.url),
             enabled: Boolean(project.demo?.enabled),
             title: project.demo?.title ?? `Demostración de ${project.name}`,
             description: project.demo?.description ?? "",
             aspectRatio: project.demo?.aspectRatio ?? "16 / 9",
         },
         links: {
-            website: project.links?.website ?? "",
-            github: project.links?.github ?? "",
-            documentation: project.links?.documentation ?? "",
+            website: safeExternalUrl(project.links?.website),
+            github: safeExternalUrl(project.links?.github),
+            documentation: safeExternalUrl(project.links?.documentation),
         },
         seo: project.seo
             ? {
@@ -249,9 +249,7 @@ export function getContact(): Contact {
 }
 
 export function getSocialNetworks(): SocialNetwork[] {
-    return social.networks.filter(
-        (network) => network.visible && isHttpUrl(network.url)
-    );
+    return social.networks.filter((network) => network.visible && safeExternalUrl(network.url));
 }
 
 export function getProjects(): Project[] {
@@ -309,7 +307,7 @@ export function getServices(): ServicesData {
 export function getServicesForContact(): { id: string; label: string }[] {
     return services.services.map((service) => ({
         id: service.id,
-        label: service.contactLabel || service.name,
+        label: service.name,
     }));
 }
 
@@ -352,3 +350,4 @@ export function isCurrency(value: string): value is Currency {
 export function getSiteUrl(): string {
     return getSettings().site.url ?? settingsBase.site.defaultUrl;
 }
+import { safeExternalUrl } from "../urls";

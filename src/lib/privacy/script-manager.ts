@@ -85,11 +85,14 @@ declare global {
     interface Window {
         dataLayer?: unknown[];
         gtag?: (...args: unknown[]) => void;
+        [property: `ga-disable-${string}`]: boolean | undefined;
     }
 }
 
 export function enableGoogleAnalytics(measurementId: string): void {
     if (typeof window === "undefined" || !measurementId) return;
+    window[`ga-disable-${measurementId}`] = false;
+    if (document.getElementById("rimcode-ga")) return;
 
     window.dataLayer = window.dataLayer ?? [];
     window.gtag =
@@ -100,15 +103,20 @@ export function enableGoogleAnalytics(measurementId: string): void {
 
     window.gtag("consent", "default", {
         ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
         analytics_storage: "granted",
         functionality_storage: "granted",
         personalization_storage: "denied",
         security_storage: "granted",
     });
+    window.gtag("consent", "update", { analytics_storage: "granted" });
 
     window.gtag("js", new Date());
     window.gtag("config", measurementId, {
         anonymize_ip: true,
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
         send_page_view: true,
     });
 
@@ -121,19 +129,14 @@ export function enableGoogleAnalytics(measurementId: string): void {
     });
 }
 
-export function disableGoogleAnalytics(): void {
+export function disableGoogleAnalytics(measurementId: string): void {
+    if (typeof window === "undefined" || !measurementId) return;
+    window[`ga-disable-${measurementId}`] = true;
+    window.gtag?.("consent", "update", { analytics_storage: "denied" });
     removeScript("rimcode-ga");
-
-    if (typeof window !== "undefined") {
-        window.dataLayer = [];
-        delete window.gtag;
-    }
-
-    if (typeof document !== "undefined") {
-        const cookies = ["_ga", "_gid", "_gat", "_gat_gtag_UA_*"];
-
-        for (const cookie of cookies) {
-            document.cookie = `${cookie}=; Path=/; Max-Age=0`;
-        }
+    const cookieNames = document.cookie.split(";").map((cookie) => cookie.trim().split("=")[0]);
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    for (const name of cookieNames.filter((value) => /^_(?:ga(?:t)?|gid)(?:_[\w-]+)?$/.test(value))) {
+        document.cookie = `${name}=; Path=/; SameSite=Lax${secure}; Max-Age=0`;
     }
 }

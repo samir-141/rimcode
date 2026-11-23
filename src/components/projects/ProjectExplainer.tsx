@@ -2,86 +2,27 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import RimyMascot from "@/components/rimy/RimyMascot";
 import { useNarration } from "@/components/rimy/useNarration";
 import { getRimy } from "@/lib/db";
 import type { Project } from "@/lib/db/types";
+import { buildProjectNarration } from "@/lib/rimy/project-narration";
+import { maximumVoiceText, prepareRimySpeech, type ProjectVoicePart } from "@/lib/rimy/voice-text";
 import {
     pauseNarration,
     resumeNarration,
-    speak,
+    speakRimy,
     stopNarration,
 } from "@/lib/rimy/narration";
-
-type ExplainerKey =
-    | "basic"
-    | "detailed"
-    | "problem"
-    | "technologies"
-    | "features";
 
 type ProjectExplainerProps = {
     project: Project;
 };
 
 const rimy = getRimy();
-const tts = rimy.tts;
-
-function buildAnswers(project: Project): Record<ExplainerKey, string> {
-    const basic = [
-        `${project.name} es un proyecto de RimCode en la categoría ${project.category}.`,
-        project.shortDescription,
-    ]
-        .filter(Boolean)
-        .join(" ");
-
-    const detailedParts = [
-        project.description || project.shortDescription,
-        project.problem ? `Problema que resuelve: ${project.problem}` : "",
-        project.objectives.length
-            ? `Objetivos: ${project.objectives.join(", ")}.`
-            : "",
-        project.features.length
-            ? `Funcionalidades: ${project.features.join(", ")}.`
-            : "",
-        project.technologies.length
-            ? `Tecnologías utilizadas: ${project.technologies.join(", ")}.`
-            : "",
-        project.challenges.length
-            ? `Desafíos técnicos: ${project.challenges.join(", ")}.`
-            : "",
-        project.solutions.length
-            ? `Soluciones implementadas: ${project.solutions.join(", ")}.`
-            : "",
-        project.results.length
-            ? `Resultados documentados: ${project.results.join(", ")}.`
-            : "",
-    ].filter(Boolean);
-
-    if (
-        !project.objectives.length &&
-        !project.challenges.length &&
-        !project.solutions.length
-    ) {
-        detailedParts.push(rimy.projectExplainer.emptyDetail);
-    }
-
-    return {
-        basic,
-        detailed: detailedParts.join("\n\n"),
-        problem: project.problem || rimy.projectExplainer.noDescription,
-        technologies: project.technologies.length
-            ? `Tecnologías documentadas de ${project.name}: ${project.technologies.join(", ")}.`
-            : rimy.projectExplainer.emptyDetail,
-        features: project.features.length
-            ? `Funcionalidades documentadas de ${project.name}: ${project.features.join(", ")}.`
-            : rimy.projectExplainer.emptyDetail,
-    };
-}
 
 export default function ProjectExplainer({ project }: ProjectExplainerProps) {
-    const [selected, setSelected] = useState<ExplainerKey>("basic");
-    const answers = useMemo(() => buildAnswers(project), [project]);
+    const [selected, setSelected] = useState<ProjectVoicePart>("basic");
+    const answers = useMemo(() => buildProjectNarration(project), [project]);
     const narration = useNarration();
 
     useEffect(() => {
@@ -94,19 +35,12 @@ export default function ProjectExplainer({ project }: ProjectExplainerProps) {
     const speaking = narration.status === "speaking";
     const paused = narration.status === "paused";
     const unsupported = narration.status === "unsupported";
-    const isCurrentNarration = narration.text === current;
+    const voicePart = Math.max(current.length, prepareRimySpeech(current).length) > maximumVoiceText ? "basic" : selected;
+    const spokenText = answers[voicePart];
+    const isCurrentNarration = narration.text === spokenText;
+    const start = () => speakRimy(spokenText, { project: project.slug, part: voicePart });
 
-    const start = () => {
-        speak(current, {
-            lang: tts.lang,
-            rate: tts.rate,
-            pitch: tts.pitch,
-            volume: tts.volume,
-            sentencePauseMs: tts.sentencePauseMs,
-        });
-    };
-
-    const quickQuestions: { key: ExplainerKey; label: string }[] = [
+    const quickQuestions: { key: ProjectVoicePart; label: string }[] = [
         { key: "basic", label: rimy.projectExplainer.questions[0] },
         { key: "problem", label: rimy.projectExplainer.questions[1] },
         { key: "technologies", label: rimy.projectExplainer.questions[2] },
@@ -119,14 +53,6 @@ export default function ProjectExplainer({ project }: ProjectExplainerProps) {
             className="rounded-3xl border border-[var(--header-border)] bg-[var(--header-bg)]/80 p-5 shadow-xl backdrop-blur-xl sm:p-6"
         >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-                <div className="h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-cyan-400/30 bg-cyan-500/10 p-1.5">
-                    <RimyMascot
-                        animation={speaking ? "talking" : "happy"}
-                        interactiveEyes={false}
-                        className="h-full w-full"
-                    />
-                </div>
-
                 <div className="min-w-0 flex-1">
                     <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-500">
                         {rimy.projectExplainer.title}
@@ -150,7 +76,7 @@ export default function ProjectExplainer({ project }: ProjectExplainerProps) {
                     aria-pressed={selected === "basic"}
                     className={`min-h-[40px] rounded-full px-4 py-2 text-xs font-semibold transition ${
                         selected === "basic"
-                            ? "bg-[var(--accent)] text-zinc-950"
+                            ? "bg-[var(--accent)] text-[var(--accent-ink)]"
                             : "border border-[var(--header-border)] text-[var(--header-muted)] hover:border-[var(--accent)] hover:text-[var(--header-text)]"
                     }`}
                 >
@@ -163,7 +89,7 @@ export default function ProjectExplainer({ project }: ProjectExplainerProps) {
                     aria-pressed={selected === "detailed"}
                     className={`min-h-[40px] rounded-full px-4 py-2 text-xs font-semibold transition ${
                         selected === "detailed"
-                            ? "bg-[var(--accent)] text-zinc-950"
+                            ? "bg-[var(--accent)] text-[var(--accent-ink)]"
                             : "border border-[var(--header-border)] text-[var(--header-muted)] hover:border-[var(--accent)] hover:text-[var(--header-text)]"
                     }`}
                 >
@@ -209,10 +135,10 @@ export default function ProjectExplainer({ project }: ProjectExplainerProps) {
                         ? "Pausar"
                         : paused && isCurrentNarration
                           ? "Continuar"
-                          : "Escuchar explicación"}
+                          : voicePart !== selected ? "Escuchar resumen" : "Escuchar explicación"}
                 </button>
 
-                {(speaking || paused) && (
+                {isCurrentNarration && (speaking || paused || narration.status === "loading") && (
                     <button
                         type="button"
                         onClick={stopNarration}

@@ -37,26 +37,25 @@ Una animación de menor prioridad no interrumpe a otra mayor. El saludo no puede
 - Se programa 650 ms después del montaje.
 - Se registra en `sessionStorage` con la clave `rimy:greeted:v1`; no se repite en la misma sesión.
 - Si ya saludó, muestra “¡Hola de nuevo!”.
-- Reproduce `public/mascot/rimy-welcome.wav` mediante `useRimyAudio`.
-- Si el navegador bloquea el autoplay, el globo muestra un botón para activar el audio. Nunca se fuerza la reproducción.
+- El saludo usa el mismo texto inicial del chat. Su botón solicita la voz de Rimy por intervención del visitante.
 - El texto del saludo y el audio están en `db/rimy.json` → `greeting`.
 
 ## 4. Audio y TTS
 
 Hay dos mecanismos distintos:
 
-1. **Audio pregrabado**: solo para la bienvenida (`rimy-welcome.wav`). Requiere gesto del usuario si el navegador bloquea autoplay.
-2. **Text-to-Speech**: Web Speech API del navegador. Lo usa el explicador y el chat.
+1. Saludo, chat y explicaciones comparten el servicio de voz natural cuando está habilitado. Solo sintetiza saludos y fichas canónicas o respuestas firmadas por el servidor.
+2. Cuando la síntesis natural está deshabilitada, las tres superficies usan la misma voz del navegador. Si falla el servicio, el chat permite elegir la voz del dispositivo para el resto de la sesión.
 
 `src/lib/rimy/narration.ts`:
 
 - `speak(text, options)`: divide el texto en frases, selecciona una voz española y reproduce con pausas.
 - `pauseNarration()` / `resumeNarration()`: pausa y reanuda.
 - `stopNarration()`: cancela y limpia el estado.
-- Estado observable (`idle`, `speaking`, `paused`, `unsupported`, `error`) mediante `useNarration`.
+- Estado observable (`idle`, `loading`, `speaking`, `paused`, `unsupported`, `error`) mediante `useNarration`.
 - Si el navegador no soporta voz, `status` pasa a `unsupported` y la UI mantiene el texto como alternativa.
 
-`RimyController` escucha el estado: mientras habla solicita `talking`; al detenerse vuelve a `idle`. La boca del rig se anima con `rimyTalk` y la cabeza con `rimyTalkNod`.
+`RimyController` aplica la animación de habla mientras se reproduce audio. El SVG puede usar amplitud para mover la boca en audio medible. Consulta la [arquitectura de voz](../audit/VOICE_ARCHITECTURE.md) para el servicio Python.
 
 ## 5. Explicador de proyectos
 
@@ -74,7 +73,7 @@ Hay dos mecanismos distintos:
 - Al hacer scroll se acopla a la esquina inferior derecha y vuelve al Hero si el usuario sube.
 - En `/projects` y `/projects/[slug]` no existe el hueco: `useScrollBehavior` fuerza el modo `docked` desde el inicio.
 - Al cambiar de ruta no se desmonta, por lo que conserva animación y estado.
-- El chat flotante se oculta mientras RIMY está en el Hero en pantallas de una columna.
+- El chat se puede abrir desde la mascota en el Hero o en modo acoplado. El audio se detiene al cambiar de ruta.
 
 ## 7. Rive opcional
 

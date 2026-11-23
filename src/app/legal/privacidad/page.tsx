@@ -101,7 +101,10 @@ export default function PrivacidadPage() {
                                 <strong>Datos:</strong> Mensajes de consulta sobre proyectos, tecnologías o servicios de RimCode.
                             </p>
                             <p className="text-xs">
-                                <strong>Finalidad:</strong> Brindar respuestas inmediatas orientativas sobre la oferta documentada de RimCode. No se almacenan datos sensibles en las conversaciones.
+                                <strong>Finalidad:</strong> Orientar sobre la oferta documentada de RimCode y mejorar el asistente. La clasificación del texto se ejecuta localmente. Cuando se activa el registro, guardamos consultas y acciones del chat en el servidor. Ocultamos direcciones de correo y números de teléfono detectados en las consultas. Evita incluir datos personales.
+                            </p>
+                            <p className="text-xs">
+                                El dictado se inicia desde su control. Tu navegador puede procesar el audio con su servicio de reconocimiento. RimCode recibe el texto cuando lo envías y no almacena grabaciones. La voz de Rimy se genera a partir de respuestas públicas del sitio.
                             </p>
                         </div>
                     </div>

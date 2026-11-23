@@ -59,7 +59,7 @@
     {
       "id": "entrega",
       "question": "¿Cuánto tarda un proyecto?",
-      "answer": "El simulador muestra una referencia de 3 a 4 semanas en modalidad estándar y de 1 a 2 semanas en entrega express. El plazo final depende del alcance y se confirma en la propuesta.",
+      "answer": "El plazo depende del alcance, las integraciones y la modalidad de entrega. Se confirma en la propuesta.",
       "keywords": ["tiempo", "tarda", "plazo", "entrega", "semanas", "cuanto tarda"],
       "category": "comercial"
     },

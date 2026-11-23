@@ -1,75 +1,180 @@
 {
+  "audiences": "Profesionales independientes, emprendedores, pequeños negocios, pymes, empresas con procesos complejos, instituciones educativas y organizaciones que requieren software especializado.",
   "services": [
     {
-      "id": "web-corporativa",
-      "name": "Web Corporativa",
-      "description": "Landing de alta conversión.",
-      "basePriceUSD": 650,
-      "contactLabel": "Landing Page Corporativa"
+      "id": "landing",
+      "name": "Landing Esencial",
+      "description": "Una página adaptable a móviles, con botón de contacto y entrega del código.",
+      "basePriceUSD": 80,
+      "basePricePEN": null,
+      "publicationPEN": 120,
+      "legacyLabels": [
+        "Landing Page Corporativa"
+      ]
     },
     {
-      "id": "webapp",
-      "name": "Plataforma SaaS",
-      "description": "App web interactiva con base de datos.",
-      "basePriceUSD": 1800,
-      "contactLabel": "Plataforma Web SaaS"
+      "id": "web-corporativa",
+      "name": "Web Profesional",
+      "description": "Sitio corporativo con varias secciones o páginas, SEO, formularios e integraciones básicas.",
+      "basePriceUSD": null,
+      "legacyLabels": []
     },
     {
       "id": "ecommerce",
-      "name": "Tienda E-Commerce",
-      "description": "Pagos y catálogo online.",
+      "name": "Comercio Digital",
+      "description": "Catálogos, ventas, existencias, gestión de pedidos y conexiones según tu operación.",
       "basePriceUSD": 1400,
-      "contactLabel": "Tienda E-Commerce"
+      "legacyLabels": [
+        "Tienda E-Commerce"
+      ]
+    },
+    {
+      "id": "webapp",
+      "name": "SaaS y aplicaciones web",
+      "description": "Aplicaciones con autenticación, roles, bases de datos, paneles, suscripciones e integraciones.",
+      "basePriceUSD": null,
+      "legacyLabels": [
+        "Plataforma Web SaaS"
+      ]
     },
     {
       "id": "erp",
-      "name": "Sistema a Medida / ERP",
-      "description": "Automatización empresarial.",
-      "basePriceUSD": 2800,
-      "contactLabel": "Sistema a Medida / ERP"
+      "name": "Sistemas Empresariales / ERP",
+      "description": "Operaciones, inventario, compras, ventas, reportes, auditorías y automatización.",
+      "basePriceUSD": null,
+      "legacyLabels": [
+        "Sistema a Medida / ERP"
+      ]
     },
     {
-      "id": "ia",
-      "name": "Integración con IA / Chatbot",
-      "description": "Asistentes y automatizaciones con IA.",
-      "basePriceUSD": 0,
-      "contactLabel": "Integración con IA / Chatbot"
+      "id": "custom",
+      "name": "Software a Medida",
+      "description": "Software especializado. Definimos el alcance contigo mediante un análisis de requerimientos.",
+      "basePriceUSD": null,
+      "legacyLabels": [
+        "Integración con IA / Chatbot"
+      ]
     }
   ],
   "modules": [
     {
       "id": "auth",
-      "name": "Autenticación & Roles",
+      "name": "Autenticación y roles",
       "priceUSD": 180
     },
     {
+      "id": "admin",
+      "name": "Panel y métricas",
+      "priceUSD": 260
+    },
+    {
+      "id": "inventory",
+      "name": "Inventario y trazabilidad",
+      "priceUSD": null
+    },
+    {
+      "id": "reports",
+      "name": "Reportes y auditoría",
+      "priceUSD": null
+    },
+    {
+      "id": "multilang",
+      "name": "Soporte multimoneda",
+      "priceUSD": 150
+    }
+  ],
+  "integrations": [
+    {
       "id": "payments",
-      "name": "Pasarela de Pagos",
+      "name": "Pasarela de pagos",
       "priceUSD": 250
     },
     {
       "id": "ai",
-      "name": "Chatbot IA RimBot",
+      "name": "Asistente con IA",
       "priceUSD": 320
     },
     {
-      "id": "admin",
-      "name": "Panel Admin & Métricas",
-      "priceUSD": 260
-    },
-    {
-      "id": "multilang",
-      "name": "Soporte Multimoneda",
-      "priceUSD": 150
+      "id": "external",
+      "name": "API de terceros o sistema existente",
+      "priceUSD": null
     }
   ],
-  "delivery": {
-    "standard": "3 a 4 semanas",
-    "express": "1 a 2 semanas",
-    "expressLabel": "Sprints intensivos de 1 a 2 semanas (+25%)",
-    "expressMultiplier": 1.25,
-    "postLaunchSupportDays": 30
-  },
-  "disclaimer": "Precios referenciales sujetos al alcance final de requerimientos.",
-  "helpText": "Selecciona las características de tu proyecto para obtener una estimación transparente en tiempo real adaptada a tu moneda."
+  "complexities": [
+    {
+      "id": "standard",
+      "name": "Estándar",
+      "multiplier": 1
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermedia",
+      "multiplier": null
+    },
+    {
+      "id": "advanced",
+      "name": "Avanzada",
+      "multiplier": null
+    }
+  ],
+  "delivery": [
+    {
+      "id": "code",
+      "name": "Entrega de código",
+      "multiplier": 1
+    },
+    {
+      "id": "publish",
+      "name": "Código y publicación",
+      "multiplier": 1
+    },
+    {
+      "id": "express",
+      "name": "Entrega prioritaria de código",
+      "multiplier": 1.25
+    }
+  ],
+  "infrastructure": [
+    {
+      "id": "domain",
+      "name": "Dominio",
+      "period": "año",
+      "variants": [
+        {
+          "id": "com",
+          "name": "Dominio .com",
+          "amountPEN": 65
+        },
+        {
+          "id": "pe",
+          "name": "Dominio .pe",
+          "amountPEN": 110
+        }
+      ]
+    },
+    {
+      "id": "hosting",
+      "name": "Hosting",
+      "period": "mes",
+      "variants": [
+        {
+          "id": "basic",
+          "amountPEN": 25
+        }
+      ]
+    },
+    {
+      "id": "maintenance",
+      "name": "Mantenimiento",
+      "period": "mes",
+      "variants": [
+        {
+          "id": "basic",
+          "amountPEN": 80
+        }
+      ]
+    }
+  ],
+  "disclaimer": "Estimación referencial. El alcance, los plazos y la propuesta final se confirman al evaluar el proyecto.",
+  "helpText": "Combina una solución con los módulos y servicios que necesitas. Cada proyecto se ajusta a tu alcance."
 }

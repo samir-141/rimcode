@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 
+import { CURRENCIES, setAppCurrency, useCurrency, type Currency } from "@/lib/currency";
+
 const NAV_ITEMS = [
     { id: "hero", label: "Inicio" },
     { id: "tecnologias", label: "Tecnologías" },
@@ -12,15 +14,6 @@ const NAV_ITEMS = [
     { id: "metodologia", label: "Metodología" },
     { id: "contactanos", label: "Contacto" },
 ];
-
-const CURRENCIES = ["PEN", "USD", "EUR"] as const;
-type Currency = (typeof CURRENCIES)[number];
-
-const FALLBACK_RATES: Record<Currency, number> = {
-    PEN: 3.75,
-    USD: 1,
-    EUR: 0.92,
-};
 
 // ==========================================
 // STORE EXTERNO PARA TEMA (REACT 19 IDIOMATIC)
@@ -32,7 +25,12 @@ function getThemeSnapshot(): boolean {
     if (typeof window === "undefined") return true;
     if (currentTheme !== null) return currentTheme;
 
-    const saved = localStorage.getItem("rimcode-theme");
+    let saved: string | null = null;
+    try {
+        saved = localStorage.getItem("rimcode-theme");
+    } catch {
+        // Se mantiene la preferencia del sistema si el navegador bloquea el almacenamiento.
+    }
     if (saved !== null) {
         currentTheme = saved === "dark";
     } else {
@@ -45,7 +43,11 @@ function getThemeSnapshot(): boolean {
 
 function setAppTheme(dark: boolean) {
     currentTheme = dark;
-    localStorage.setItem("rimcode-theme", dark ? "dark" : "light");
+    try {
+        localStorage.setItem("rimcode-theme", dark ? "dark" : "light");
+    } catch {
+        // El cambio sigue activo durante la visita.
+    }
     document.documentElement.classList.toggle("dark", dark);
     document.documentElement.classList.toggle("light", !dark);
     themeListeners.forEach((listener) => listener());
@@ -54,50 +56,6 @@ function setAppTheme(dark: boolean) {
 function subscribeTheme(listener: () => void) {
     themeListeners.add(listener);
     return () => themeListeners.delete(listener);
-}
-
-// ==========================================
-// STORE EXTERNO PARA MONEDA
-// ==========================================
-let currentCurrency: Currency | null = null;
-const currencyListeners = new Set<() => void>();
-
-function getCurrencySnapshot(): Currency {
-    if (typeof window === "undefined") return "PEN";
-    if (currentCurrency !== null) return currentCurrency;
-
-    const saved = localStorage.getItem("rimcode-currency") as Currency | null;
-    if (saved && (CURRENCIES as readonly string[]).includes(saved)) {
-        currentCurrency = saved;
-    } else {
-        currentCurrency = "PEN";
-    }
-    return currentCurrency;
-}
-
-function setAppCurrency(
-    newCurrency: Currency,
-    currentRates: Record<Currency, number>
-) {
-    currentCurrency = newCurrency;
-    localStorage.setItem("rimcode-currency", newCurrency);
-    currencyListeners.forEach((listener) => listener());
-
-    if (typeof window !== "undefined") {
-        window.dispatchEvent(
-            new CustomEvent("rimcode:currency-change", {
-                detail: {
-                    currency: newCurrency,
-                    rate: currentRates[newCurrency] ?? 1,
-                },
-            })
-        );
-    }
-}
-
-function subscribeCurrency(listener: () => void) {
-    currencyListeners.add(listener);
-    return () => currencyListeners.delete(listener);
 }
 
 // ==========================================
@@ -111,11 +69,7 @@ export default function HeadLanding() {
 
     // Estados reactivos sincronizados
     const isDark = useSyncExternalStore<boolean>(subscribeTheme, getThemeSnapshot, () => true);
-    const currency = useSyncExternalStore<Currency>(subscribeCurrency, getCurrencySnapshot, () => "PEN");
-
-    const [rates, setRates] = useState(FALLBACK_RATES);
-    const [lastUpdate, setLastUpdate] = useState("");
-    const [loadingRates, setLoadingRates] = useState(true);
+    const { currency, rates, lastUpdate, loading: loadingRates } = useCurrency();
 
     // 1. Alternar tema
     const toggleTheme = useCallback(() => {
@@ -124,7 +78,7 @@ export default function HeadLanding() {
 
     // 2. Cambiar moneda seleccionada
     const handleCurrencyChange = (newCurrency: Currency) => {
-        setAppCurrency(newCurrency, rates);
+        setAppCurrency(newCurrency);
     };
 
     // 3. Navegación coordinada con la landing o redirección a /
@@ -253,66 +207,12 @@ export default function HeadLanding() {
         };
     }, [menuOpen]);
 
-    // 6. Obtener tasas de cambio en tiempo real
-    useEffect(() => {
-        let cancelled = false;
-
-        const fetchRates = async () => {
-            try {
-                const response = await fetch(
-                    "https://open.er-api.com/v6/latest/USD",
-                    { cache: "no-store" }
-                );
-
-                if (!response.ok) {
-                    throw new Error("No se pudieron obtener las monedas");
-                }
-
-                const data = await response.json();
-
-                if (data.result !== "success") {
-                    throw new Error("Respuesta de moneda no válida");
-                }
-
-                if (!cancelled) {
-                    setRates({
-                        PEN: data.rates.PEN ?? FALLBACK_RATES.PEN,
-                        USD: 1,
-                        EUR: data.rates.EUR ?? FALLBACK_RATES.EUR,
-                    });
-
-                    setLastUpdate(
-                        new Date(data.time_last_update_utc).toLocaleTimeString(
-                            "es-PE",
-                            { hour: "2-digit", minute: "2-digit" }
-                        )
-                    );
-
-                    setLoadingRates(false);
-                }
-            } catch {
-                if (!cancelled) {
-                    setLoadingRates(false);
-                }
-            }
-        };
-
-        fetchRates();
-
-        const interval = setInterval(fetchRates, 5 * 60 * 1000);
-
-        return () => {
-            cancelled = true;
-            clearInterval(interval);
-        };
-    }, []);
-
     const effectiveActiveSection = pathname === "/" ? activeSection : "";
 
     return (
         <>
             <header
-                className={`rim-header ${isDark ? "theme-dark" : "theme-light"}`}
+                className={`rim-header ${isDark ? "theme-dark" : "theme-light"}${menuOpen ? " menu-open" : ""}`}
             >
                 <div className="header-container">
                     {/* LOGOTIPO */}
@@ -347,7 +247,7 @@ export default function HeadLanding() {
                     {/* NAVEGACIÓN DESKTOP */}
                     <nav className="desktop-nav" aria-label="Navegación principal">
                         <div className="nav-track">
-                            {NAV_ITEMS.map((item, index) => (
+                            {NAV_ITEMS.map((item) => (
                                 <button
                                     key={item.id}
                                     type="button"
@@ -358,9 +258,6 @@ export default function HeadLanding() {
                                         effectiveActiveSection === item.id ? "page" : undefined
                                     }
                                 >
-                                    <span className="nav-node">
-                                        {String(index + 1).padStart(2, "0")}
-                                    </span>
                                     {item.label}
                                 </button>
                             ))}
@@ -476,14 +373,13 @@ export default function HeadLanding() {
                     className={`mobile-nav ${menuOpen ? "visible" : ""}`}
                     aria-hidden={!menuOpen}
                 >
-                    {NAV_ITEMS.map((item, index) => (
+                    {NAV_ITEMS.map((item) => (
                         <button
                             key={item.id}
                             type="button"
                             onClick={() => navigateTo(item.id)}
                             className={effectiveActiveSection === item.id ? "active" : ""}
                         >
-                            <span>{String(index + 1).padStart(2, "0")}</span>
                             {item.label}
                             <span className="mobile-arrow" aria-hidden="true">↗</span>
                         </button>
@@ -506,9 +402,6 @@ export default function HeadLanding() {
                         </div>
                     </div>
 
-                    <div className="mobile-nav-footer">
-                        RIMCODE / DIGITAL SOLUTIONS
-                    </div>
                 </div>
             </header>
 

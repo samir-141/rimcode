@@ -32,6 +32,12 @@
     transform-box: view-box;
 }
 
+:global([data-rimy-measured="true"]) .talkingMouth {
+    animation: none;
+    transform: scaleY(var(--rimy-mouth, 0.34));
+    transition: transform 55ms linear;
+}
+
 .float {
     animation: rimyFloat 4.6s ease-in-out infinite;
     transform-origin: 130px 340px;
@@ -292,11 +298,11 @@
 }
 
 .talking .head {
-    animation: rimyTalkNod 1.1s ease-in-out infinite;
+    animation: rimyTalkNod 4.2s ease-in-out infinite;
 }
 
 .talking .groundShadow {
-    animation: rimyShadowPulse 1.1s ease-in-out infinite;
+    animation: rimyShadowPulse 4.2s ease-in-out infinite;
 }
 
 .error .float {

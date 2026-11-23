@@ -2,9 +2,11 @@
 
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+import { subscribeMouth } from "@/lib/rimy/narration";
 import {
     useCallback,
     useEffect,
+    useLayoutEffect,
     useMemo,
     useRef,
     useState,
@@ -21,6 +23,7 @@ import { useRimyAudio } from "./hooks/useRimyAudio";
 import { useRimyState } from "./hooks/useRimyState";
 import { useScrollBehavior } from "./hooks/useScrollBehavior";
 import {
+    RIMY_CHAT_SLOT_ID,
     RIMY_GREETING_KEY,
     RIMY_GREETING_TEXT,
     RIMY_MESSAGES,
@@ -69,13 +72,19 @@ export default function RimyController() {
     const lastTapRef = useRef(0);
 
     const reducedMotion = usePrefersReducedMotion();
-    const { animation, message, request, showMessage, dismissMessage, reset } =
+    const { animation, message, request, showMessage, dismissMessage } =
         useRimyState();
     const audio = useRimyAudio();
-    const { playWelcome } = audio;
     const narration = useNarration();
-    const narrationActive =
-        narration.status === "speaking" || narration.status === "paused";
+    const [chatPhase, setChatPhase] = useState("idle");
+    const activeAnimation: RimyAnimation = narration.status === "speaking" ? "talking" :
+        chatPhase === "searching" || chatPhase === "thinking" || chatPhase === "listening" ? "thinking" :
+        chatPhase === "explaining" ? "happy" :
+        chatPhase === "error" || chatPhase === "offline" ? "error" : animation;
+
+    useEffect(() => subscribeMouth((level) => {
+        shellRef.current?.style.setProperty("--rimy-mouth", String(0.34 + level * 1.75));
+    }), []);
 
     const layout = useMemo(() => {
         const isMobile = viewport.width < 640;
@@ -90,7 +99,7 @@ export default function RimyController() {
                 : 1;
         // Tamaño reducido en modo docked para no invadir el contenido
         const dockWidth = isMobile
-            ? Math.min(96, Math.max(76, viewport.width * 0.24))
+            ? Math.min(64, Math.max(56, viewport.width * 0.18))
             : isTablet
               ? 100
               : 120;
@@ -111,7 +120,7 @@ export default function RimyController() {
         if (!shell) return;
 
         transformRef.current = target;
-        shell.style.transform = `translate3d(${target.x}px, ${target.y}px, 0) scale(${target.scale})`;
+        shell.style.setProperty("--rimy-page-transform", `translate3d(${target.x}px, ${target.y}px, 0) scale(${target.scale})`);
     }, []);
 
     const getDockTarget = useCallback((): Target => {
@@ -525,7 +534,6 @@ export default function RimyController() {
                 messageDuration: 7000,
             });
 
-            void playWelcome();
         }, 650);
 
         return () => {
@@ -534,39 +542,26 @@ export default function RimyController() {
                 greetingScheduledRef.current = false;
             }
         };
-    }, [playWelcome, request]);
+    }, [request]);
 
     /* ------------------------------------------------------------------ */
     /* Narración (TTS): RIMY habla mientras se reproduce una explicación    */
     /* ------------------------------------------------------------------ */
 
     useEffect(() => {
-        if (narrationActive) {
-            if (animation !== "talking") {
-                request("talking", { duration: 60 * 60 * 1000 });
-            }
-            return;
-        }
-
-        if (animation === "talking") {
-            reset();
-        }
-    }, [narrationActive, animation, request, reset]);
+        const handlePhase = (event: Event) => setChatPhase((event as CustomEvent<string>).detail);
+        window.addEventListener("rimy:chat-phase", handlePhase);
+        return () => window.removeEventListener("rimy:chat-phase", handlePhase);
+    }, []);
 
     /* ------------------------------------------------------------------ */
     /* Interacción directa                                                 */
     /* ------------------------------------------------------------------ */
 
     const handleInteract = useCallback(() => {
-        if (audio.blocked) {
-            void audio.enable();
-        }
-
-        if (
-            animation === "greeting" ||
-            animation === "fall" ||
-            animation === "annoyed"
-        ) {
+        if (chatOpenRef.current || modeRef.current === "docked" || animation === "greeting") {
+            dismissMessage();
+            window.dispatchEvent(new CustomEvent("rimy:toggle-chat"));
             return;
         }
 
@@ -591,29 +586,20 @@ export default function RimyController() {
             ];
 
         const accepted = request("happy", {
-            message: modeRef.current === "docked" ? undefined : text,
+            message: text,
             tone: "happy",
             duration: 1400,
             messageDuration: 3200,
         });
 
-        if (!accepted && animation === "idle" && modeRef.current !== "docked") {
+        if (!accepted && animation === "idle") {
             showMessage(text, "happy", 3200);
         }
 
-        // Al pulsar RIMY acoplada, abre/cierra el chat sobre su cabeza.
-        // Si está en el Hero y el usuario hace un toque simple, también permite abrir el chat tras acoplar o en vista móvil.
-        if (modeRef.current === "docked") {
-            dismissMessage();
-            window.dispatchEvent(new CustomEvent("rimy:toggle-chat"));
-        }
-    }, [animation, audio, dismissMessage, request, showMessage]);
+        window.dispatchEvent(new CustomEvent("rimy:toggle-chat"));
+    }, [animation, dismissMessage, request, showMessage]);
 
     const handleWave = useCallback(() => {
-        if (audio.blocked) {
-            void audio.enable();
-        }
-
         if (animation === "greeting") return;
 
         request("greeting", {
@@ -622,10 +608,10 @@ export default function RimyController() {
             duration: 2900,
             messageDuration: 3200,
         });
-    }, [animation, audio, request]);
+    }, [animation, request]);
 
     const handleEnableAudio = useCallback(() => {
-        void audio.enable();
+        audio.toggle();
     }, [audio]);
 
     useEffect(() => {
@@ -643,6 +629,38 @@ export default function RimyController() {
         window.addEventListener("rimy:chat-state", onChatState);
         return () => window.removeEventListener("rimy:chat-state", onChatState);
     }, [dismissMessage]);
+
+    useLayoutEffect(() => {
+        if (!chatOpen) return;
+        const shell = shellRef.current;
+        const slot = document.getElementById(RIMY_CHAT_SLOT_ID);
+        const panel = slot?.closest("#rimy-assistant");
+        if (!shell || !slot || !panel) return;
+
+        const placeInHeader = () => {
+            const { left, top, width, height } = slot.getBoundingClientRect();
+            const scale = Math.min(width / BASE_WIDTH, height / BASE_HEIGHT);
+            const x = left + (width - BASE_WIDTH * scale) / 2;
+            const y = top + (height - BASE_HEIGHT * scale) / 2;
+            shell.style.setProperty("--rimy-chat-transform", `translate3d(${x}px, ${y}px, 0) scale(${scale})`);
+        };
+
+        placeInHeader();
+        const observer = new ResizeObserver(placeInHeader);
+        observer.observe(panel);
+        observer.observe(slot);
+        const visualViewport = window.visualViewport;
+        window.addEventListener("resize", placeInHeader);
+        visualViewport?.addEventListener("resize", placeInHeader);
+        visualViewport?.addEventListener("scroll", placeInHeader);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("resize", placeInHeader);
+            visualViewport?.removeEventListener("resize", placeInHeader);
+            visualViewport?.removeEventListener("scroll", placeInHeader);
+            shell.style.removeProperty("--rimy-chat-transform");
+        };
+    }, [chatOpen]);
 
     // Expone el modo actual para que otros widgets (p. ej. el asistente)
     // puedan apartarse mientras RIMY protagoniza el Hero.
@@ -671,32 +689,35 @@ export default function RimyController() {
             ref={shellRef}
             className={`${styles.shell} ${
                 ready ? styles.shellReady : ""
-            } ${moving ? styles.moving : ""}`}
+            } ${moving ? styles.moving : ""} ${chatOpen ? styles.shellInChat : ""}`}
             style={shellStyle}
             data-rimy-mode={mode}
-            data-rimy-animation={animation}
+            data-rimy-animation={activeAnimation}
+            data-rimy-phase={chatPhase}
+            data-rimy-measured={narration.status === "speaking" && narration.measured ? "true" : undefined}
         >
             <button
                 type="button"
                 className={styles.mascotButton}
                 onClick={handleInteract}
-                aria-label="Interactuar con RIMY"
-                title="¡Tócame!"
+                aria-label={chatOpen ? "Minimizar chat de Rimy" : "Abrir chat de Rimy"}
+                aria-expanded={chatOpen}
+                aria-controls={chatOpen ? "rimy-assistant" : undefined}
             >
                 {useRive ? (
                     <RiveRimy
-                        animation={animation}
+                        animation={activeAnimation}
                         onUnavailable={() => setRiveFailed(true)}
                     />
                 ) : (
                     <RimyMascot
-                        animation={animation}
+                        animation={activeAnimation}
                         reducedMotion={reducedMotion}
                     />
                 )}
             </button>
 
-            {mode === "hero" &&
+            {mode === "hero" && !chatOpen &&
                 (audio.blocked || audio.muted || audio.speaking) && (
                     <div className={styles.heroAudio}>
                         <RimyAudio
@@ -708,7 +729,7 @@ export default function RimyController() {
                     </div>
                 )}
 
-            {mode === "docked" && !message && !moving && !chatOpen && (
+            {mode === "docked" && !layout.isMobile && !moving && !chatOpen && (
                 <RimyFloating
                     muted={audio.muted}
                     blocked={audio.blocked}
@@ -718,7 +739,7 @@ export default function RimyController() {
                 />
             )}
 
-            {message && !chatOpen && (
+            {message && !chatOpen && mode === "hero" && (
                 <RimySpeechBubble
                     message={message}
                     mode={mode}

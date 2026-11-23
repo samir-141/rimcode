@@ -19,8 +19,7 @@ export default function RimyHero() {
                 <div className="pointer-events-none absolute inset-x-3 bottom-5 h-16 rounded-[50%] bg-cyan-400/20 blur-2xl dark:bg-cyan-400/15" />
                 <div className="pointer-events-none absolute inset-4 rounded-[46%] border border-cyan-400/15" />
                 <div
-                    className="pointer-events-none absolute inset-9 animate-spin rounded-[46%] border border-dashed border-cyan-400/15 motion-reduce:animate-none"
-                    style={{ animationDuration: "52s" }}
+                    className="pointer-events-none absolute inset-9 rounded-[46%] border border-dashed border-cyan-400/15"
                 />
 
                 {/* Plataforma de luz */}
@@ -35,8 +34,8 @@ export default function RimyHero() {
                 </span>
             </div>
 
-            <p className="mt-1 font-mono text-[9px] tracking-[0.18em] text-[var(--header-muted)]/70 uppercase">
-                Tócame para interactuar
+            <p className="mt-1 text-xs text-[var(--header-muted)]">
+                Pulsa a Rimy para conversar
             </p>
         </div>
     );

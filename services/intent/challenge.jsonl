@@ -1,0 +1,135 @@
+{"mensaje": "Ola RIMY!", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Bueeenas", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "ola olaa", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Holap", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Hola, hola, RimCode", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Hola qué tal", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "hey rimy buenas", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Hoooola", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "buena tarde equipo", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Buenas días", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "holis Rimy", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "Buenas noces", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "buen dia programador", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "holas", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "wenaas", "intencion": "saludo", "split": "challenge"}
+{"mensaje": "¿Q tal tu dia?", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "¿Cmo te va hoy?", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "todo en orden contigo?", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "espero que estés bien Rimy", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "estás de buen humor hoy?", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "¿Cómo amaneciste, Rimy?", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "quisiera saber si andas bien", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "muchas graciass", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "grcs por la ayuda", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "bacan gracias por el dato", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "te agradezco brother", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "mil gracias rimy jeje", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "nos vidrios Rimy", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "chao amigo", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "bien hecho rimy", "intencion": "charla_social", "split": "challenge"}
+{"mensaje": "¿Como realiso mi pedido web?", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "kiero encargar un sitio", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "háganme una propuesta para mi negocio", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "dónde puedo iniciar el encargo", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "quisiera comprar el desarrollo de una web", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "pedir cotisación", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "cómo les hago el pedido", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "me gustaría mandar hacer mi landing", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "cómo paso mi pedido de desarrollo", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "quiero hacer trato para mi sitio", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "me animo a contratarles", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "mandame una propuestita de diseño", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "solicitar cotisación online", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "quiero que me den una cotización formal", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "aya, quiero pedir el servicio", "intencion": "cotizar", "split": "challenge"}
+{"mensaje": "kiero agendar una reu", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "ponganme una cita con ustedes", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "agenden una video llamada pls", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "necesito reservar fecha para conversar por zoom", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "separamos una hora para reunirnos?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "dónde está su agenda de citas?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "podemos cordinar una reunión", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "quisiera una reu para explicarles mi idea", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "me permiten reservar una llamada de trabajo?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "cuando nos podriamos juntar a conversar?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "me ayudas a programar una entrevista con el equipo?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "hay un link para agendar mi cita?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "tienen algún turno para una reunión?", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "quiero una reunioncita", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "reunámonos por meet", "intencion": "agendar_reunion", "split": "challenge"}
+{"mensaje": "como me cntacto con el de desarrollo", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "pasame el wasap del programador", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "komo le escribo a Samir", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "me das el mail del ing?", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "quiero comunicarme directo con quien programa", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "cuál es el fono del dev?", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "puedo hablar con algún humano de RimCode?", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "necesito ubicar al ingeniero", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "qué número marco para hablar con ustedes", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "envia el wsp de contacto", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "cual es su corrreo?", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "kiero contactar a jhoner", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "ponme en contacto directo con el desarrollador", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "hablar con una persona del equipo técnico", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "dame el cel donde escribirles", "intencion": "contactar_programador", "split": "challenge"}
+{"mensaje": "planes de hostin?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "que cuesta el hospedage de la pagina?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "necesito hospedar mi pag web", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "ofrecen host para sitios?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "cuanto es al mes solo por alojar mi sitio?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "quiero cotisar el osting para la web", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "cuáles son sus planes de alojamiento de sitios?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "pueden alojar mi landing si ya tengo el html?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "que hosting tiene rimcode?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "dime el importe de alojamiento de la web", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "como funciona el plan de hospedaje web", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "¿cobran host mensual?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "me interesa únicamente el servidor para mi web", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "tienen alojaminto web?", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "kostos de hosting", "intencion": "consultar_hosting", "split": "challenge"}
+{"mensaje": "kanto sale una landin?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "cuál es el presio desde el que diseñan sitios", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "me puedes decir la tarifa para desarrollar una pagina?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "cuánto cobran por hacer una pag web", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "a cuanto ta un sitio para mi empresa?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "qué tanto me costara desarrollar una app?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "me indican sus tarifas de diseño web?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "solo quisiera un estimado del precio de un ecommerce", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "costo aproximado de programar un sitio", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "¿Cuál es el monto mínimo por una página?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "que inversión necesitaría para hacer mi página", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "cuál es el precio referencial de una web basica?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "cuantó saldría el desarrollo de una tienda?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "komo cuanto sale una app?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "a cuanto ascendería un sitio responsive?", "intencion": "consultar_precios", "split": "challenge"}
+{"mensaje": "komo hago para resrvar", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "kiero una reserba", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "se pede reservar?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "se puede guardar un cupo?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "porfa separame algo", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "una reservacion porfa", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "ayudame con resrva", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "quisiera rreservar ahora", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "como axedo a la reserva?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "qué pasos sigo para hacer una reservita?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "podria apartarlo por aqui?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "deseo reservar algo", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "reserbar", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "quisiera saber si puedo reservar por aca", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "reservan por mensaje?", "intencion": "ambiguo_reserva", "split": "challenge"}
+{"mensaje": "que host presenta los premios de la tele", "intencion": "otro", "split": "challenge"}
+{"mensaje": "cuanto sale un taypa de arroz chaufa", "intencion": "otro", "split": "challenge"}
+{"mensaje": "cómo hago una resrva para cenar", "intencion": "otro", "split": "challenge"}
+{"mensaje": "agenda una cita con el veterinario", "intencion": "otro", "split": "challenge"}
+{"mensaje": "pasame el fono del ministerio", "intencion": "otro", "split": "challenge"}
+{"mensaje": "pide unas salchipapas xfa", "intencion": "otro", "split": "challenge"}
+{"mensaje": "quiero pedir una tarjeta al banco", "intencion": "otro", "split": "challenge"}
+{"mensaje": "hospedage para pasar la noche en cusco", "intencion": "otro", "split": "challenge"}
+{"mensaje": "cual es la diferencia entre ballenas y delfines", "intencion": "otro", "split": "challenge"}
+{"mensaje": "dame trucos para coser", "intencion": "otro", "split": "challenge"}
+{"mensaje": "pk no crece mi palta", "intencion": "otro", "split": "challenge"}
+{"mensaje": "canciones para hacer karaoke", "intencion": "otro", "split": "challenge"}
+{"mensaje": "busca hostal por aqui", "intencion": "otro", "split": "challenge"}
+{"mensaje": "cuántos planetas hay", "intencion": "otro", "split": "challenge"}
+{"mensaje": "tienes la biblia en quechua", "intencion": "otro", "split": "challenge"}

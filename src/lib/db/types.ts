@@ -170,26 +170,33 @@ export type Service = {
     id: string;
     name: string;
     description: string;
-    basePriceUSD: number;
-    contactLabel: string;
+    basePriceUSD: number | null;
+    basePricePEN?: number;
+    publicationPEN?: number;
+    legacyLabels: string[];
 };
 
 export type ServiceModule = {
     id: string;
     name: string;
-    priceUSD: number;
+    priceUSD: number | null;
 };
 
+type QuoteOption = { id: string; name: string; multiplier: number | null };
+
 export type ServicesData = {
+    audiences: string;
     services: Service[];
     modules: ServiceModule[];
-    delivery: {
-        standard: string;
-        express: string;
-        expressLabel: string;
-        expressMultiplier: number;
-        postLaunchSupportDays: number;
-    };
+    integrations: ServiceModule[];
+    complexities: QuoteOption[];
+    delivery: QuoteOption[];
+    infrastructure: {
+        id: string;
+        name: string;
+        period: "mes" | "año";
+        variants: { id: string; name?: string; amountPEN: number }[];
+    }[];
     disclaimer: string;
     helpText: string;
 };

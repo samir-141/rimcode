@@ -1,454 +1,377 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
-import RimyMascot from "@/components/rimy/RimyMascot";
 import { useNarration } from "@/components/rimy/useNarration";
-import {
-    pauseNarration,
-    resumeNarration,
-    speak,
-    stopNarration,
-} from "@/lib/rimy/narration";
+import { RIMY_CHAT_SLOT_ID } from "@/components/rimy/rimy-config";
 import { useCurrency } from "@/lib/currency";
 import { getRimy, getSettings } from "@/lib/db";
-import { answerLocally, type AnswerTable } from "@/lib/rimy/knowledge";
+import { recordRimyAction } from "@/lib/rimy/client-events";
+import type { ChatAction, ChatState, RecentTurn } from "@/lib/rimy/intent";
+import { pauseNarration, resumeNarration, setNarrationVolume, speakRimy, stopNarration } from "@/lib/rimy/narration";
+import type { AnswerTable } from "@/lib/rimy/knowledge";
+import type { ConversationContext } from "@/lib/rimy/conversation";
+import { QUOTE_SCENARIO_KEY, type LandingScenario } from "@/lib/quote";
+import Link from "next/link";
 
 type Message = {
     id: number;
     role: "bot" | "user";
     text: string;
     table?: AnswerTable;
-    animate?: boolean;
+    voiceGrant?: string;
+    scenario?: LandingScenario;
+    actions?: ChatAction[];
+    turnGrant?: string;
 };
 
-const rimy = getRimy();
-const settings = getSettings();
-const tts = rimy.tts;
-
-let messageId = 0;
-const nextId = () => {
-    messageId += 1;
-    return messageId;
-};
-
-function BotMessageContent({
-    text,
-    table,
-    animate,
-    onProgress,
-}: {
-    text: string;
+type ChatResult = {
+    ok: boolean;
+    reply?: string;
     table?: AnswerTable;
-    animate?: boolean;
-    onProgress?: () => void;
-}) {
-    const [visibleLength, setVisibleLength] = useState(
-        animate ? 0 : text.length
-    );
+    voiceGrant?: string;
+    suggestions?: string[];
+    context?: ConversationContext;
+    estado?: ChatState;
+    actions?: ChatAction[];
+    turnGrant?: string;
+    action?: "quote";
+    error?: string;
+};
 
-    useEffect(() => {
-        if (!animate) return;
+type Recognition = {
+    lang: string;
+    onresult: ((event: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null;
+    onerror: ((event: { error: string }) => void) | null;
+    onend: (() => void) | null;
+    start: () => void;
+    abort: () => void;
+};
 
-        const step = Math.max(4, Math.ceil(text.length / 16));
-        const timer = window.setInterval(() => {
-            setVisibleLength((prev) => {
-                const next = Math.min(text.length, prev + step);
-                onProgress?.();
-                if (next >= text.length) {
-                    window.clearInterval(timer);
-                }
-                return next;
-            });
-        }, 16);
+const { chat } = getRimy();
+const limits = getSettings().chat;
+const smallButton = "inline-flex min-h-9 items-center rounded-md border border-[var(--header-border)] px-2.5 py-1 text-xs hover:border-[var(--accent)]";
+const initialMessage: Message = { id: 0, role: "bot", text: chat.welcome };
 
-        return () => window.clearInterval(timer);
-    }, [animate, text, onProgress]);
-
-    const done = visibleLength >= text.length;
-    const shownText = done ? text : text.slice(0, visibleLength);
-
+function ChatTable({ table }: { table: AnswerTable }) {
     return (
-        <div className="max-w-[92%] space-y-2.5 rounded-2xl bg-zinc-100 px-3.5 py-2.5 text-[13px] leading-relaxed text-zinc-700 dark:bg-white/10 dark:text-zinc-200">
-            <p className="whitespace-pre-wrap">{shownText}</p>
-
-            {done && table && table.rows.length > 0 && (
-                table.headers.length === 3 && table.headers[0] === "Proyecto" ? (
-                    <div className="space-y-2">
-                        {table.rows.map(([name, category, status]) => (
-                            <div
-                                key={name}
-                                className="rounded-xl border border-zinc-200/90 bg-white/90 p-3 shadow-2xs dark:border-white/10 dark:bg-black/30"
-                            >
-                                <div className="flex items-start justify-between gap-2">
-                                    <p className="text-xs font-semibold leading-snug text-zinc-900 dark:text-white">
-                                        {name}
-                                    </p>
-                                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-lime-500/15 px-2 py-0.5 text-[10px] font-medium text-lime-700 dark:bg-lime-400/15 dark:text-lime-400">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
-                                        {status}
-                                    </span>
-                                </div>
-                                <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
-                                    {category}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <>
-                        {/* Vista cards apiladas en pantallas pequeñas (< sm) */}
-                        <div className="space-y-2 sm:hidden">
-                            {table.rows.map((row, rowIdx) => (
-                                <div
-                                    key={rowIdx}
-                                    className="space-y-1 rounded-xl border border-zinc-200 bg-white/80 p-2.5 text-[11px] dark:border-white/10 dark:bg-black/25"
-                                >
-                                    {row.map((cell, cellIdx) => (
-                                        <div
-                                            key={cellIdx}
-                                            className={
-                                                cellIdx === 0
-                                                    ? "font-semibold text-zinc-900 dark:text-white"
-                                                    : "flex items-start justify-between gap-2 text-zinc-600 dark:text-zinc-300"
-                                            }
-                                        >
-                                            {cellIdx > 0 && table.headers[cellIdx] && (
-                                                <span className="shrink-0 font-mono text-[9px] uppercase tracking-wider text-zinc-400">
-                                                    {table.headers[cellIdx]}:
-                                                </span>
-                                            )}
-                                            <span className={cellIdx > 0 ? "text-right" : ""}>
-                                                {cell}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+        <div className="mt-2 overflow-x-auto">
+            <table className="w-full border-collapse text-left text-xs">
+                <thead>
+                    <tr>{table.headers.map((header) => <th key={header} scope="col" className="border-b border-[var(--header-border)] p-2">{header}</th>)}</tr>
+                </thead>
+                <tbody>
+                    {table.rows.map((row, index) => (
+                        <tr key={index}>
+                            {row.map((cell, column) => (
+                                <td key={column} className="border-b border-[var(--header-border)] p-2 [overflow-wrap:anywhere]">{cell}</td>
                             ))}
-                        </div>
-
-                        {/* Vista tabla en tablet/desktop (sm+) */}
-                        <div className="hidden overflow-x-auto rounded-xl border border-zinc-200 bg-white/80 sm:block dark:border-white/10 dark:bg-black/25">
-                            <table className="w-full border-collapse text-left text-[11px]">
-                                <thead>
-                                    <tr className="border-b border-zinc-200 bg-zinc-50 text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
-                                        {table.headers.map((header) => (
-                                            <th
-                                                key={header}
-                                                className="px-2.5 py-1.5 font-semibold"
-                                            >
-                                                {header}
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-zinc-200/70 dark:divide-white/10">
-                                    {table.rows.map((row, rowIdx) => (
-                                        <tr key={rowIdx}>
-                                            {row.map((cell, cellIdx) => (
-                                                <td
-                                                    key={cellIdx}
-                                                    className={`px-2.5 py-1.5 align-top leading-snug ${
-                                                        cellIdx === 0
-                                                            ? "font-semibold text-zinc-900 dark:text-white"
-                                                            : "text-zinc-600 dark:text-zinc-300"
-                                                    }`}
-                                                >
-                                                    {cell}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </>
-                )
-            )}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }
 
 export default function RimBotAssistant() {
+    const pathname = usePathname();
+    const { currency } = useCurrency();
+    const narration = useNarration();
     const [open, setOpen] = useState(false);
     const [question, setQuestion] = useState("");
-    const { currency } = useCurrency();
-    const [suggestions, setSuggestions] = useState<string[]>(
-        rimy.chat.suggestions.slice(0, 4)
-    );
+    const [suggestions, setSuggestions] = useState(chat.suggestions.slice(0, 4));
+    const [messages, setMessages] = useState<Message[]>([initialMessage]);
     const [error, setError] = useState("");
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: nextId(),
-            role: "bot",
-            text: rimy.chat.welcome,
-            animate: false,
-        },
-    ]);
+    const [pending, setPending] = useState(false);
+    const [listening, setListening] = useState(false);
+    const [autoVoice, setAutoVoice] = useState(false);
+    const [volume, setVolume] = useState(100);
+    const [explaining, setExplaining] = useState(false);
 
+    const nextId = useRef(1);
+    const conversation = useRef<ConversationContext | undefined>(undefined);
+    const session = useRef<ChatState>({ ya_se_presento: true });
     const listRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const narration = useNarration();
-
-    const scrollToBottom = () => {
-        listRef.current?.scrollTo({
-            top: listRef.current.scrollHeight,
-            behavior: "smooth",
-        });
-    };
-
-    useEffect(() => {
-        if (!open) return;
-        scrollToBottom();
-        window.setTimeout(() => inputRef.current?.focus(), 100);
-    }, [messages, open]);
+    const openerRef = useRef<HTMLElement | null>(null);
+    const activeRequest = useRef<AbortController | null>(null);
+    const recognition = useRef<Recognition | null>(null);
+    const isOpen = useRef(false);
+    const voiceEnabled = useRef(false);
+    const speaking = narration.status === "speaking";
+    const paused = narration.status === "paused";
+    const loadingAudio = narration.status === "loading";
+    const voiceError = narration.status === "error" || narration.status === "unsupported";
+    const status = !open ? "idle" : speaking ? "speaking" : listening ? "listening" :
+        pending ? "searching" : loadingAudio ? "thinking" : error ? (error.startsWith("Sin conexión") ? "offline" : "error") :
+        explaining ? "explaining" : !autoVoice ? "muted" : "idle";
 
     useEffect(() => {
-        const toggle = () => setOpen((prev) => !prev);
+        function toggle() {
+            if (!isOpen.current) openerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            isOpen.current = !isOpen.current;
+            setOpen(isOpen.current);
+            if (!isOpen.current) {
+                recognition.current?.abort();
+                stopNarration();
+            }
+        }
         window.addEventListener("rimy:toggle-chat", toggle);
-        return () => {
-            window.removeEventListener("rimy:toggle-chat", toggle);
-        };
+        return () => window.removeEventListener("rimy:toggle-chat", toggle);
     }, []);
 
     useEffect(() => {
-        window.dispatchEvent(
-            new CustomEvent("rimy:chat-state", { detail: { open } })
-        );
+        window.dispatchEvent(new CustomEvent("rimy:chat-state", { detail: { open } }));
+        if (open) inputRef.current?.focus({ preventScroll: true });
     }, [open]);
 
-    const send = (value: string) => {
-        const trimmed = value.trim();
-        if (!trimmed) return;
+    useEffect(() => {
+        listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
+    }, [open, messages, pending]);
 
-        if (trimmed.length > settings.chat.maxMessageLength) {
-            setError(
-                `El mensaje supera el máximo de ${settings.chat.maxMessageLength} caracteres.`
-            );
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent("rimy:chat-phase", { detail: status }));
+        if (!explaining) return;
+        const timer = window.setTimeout(() => setExplaining(false), 1700);
+        return () => clearTimeout(timer);
+    }, [status, explaining]);
+
+    useEffect(() => () => {
+        activeRequest.current?.abort();
+        recognition.current?.abort();
+        stopNarration();
+    }, [pathname]);
+
+    function minimize() {
+        isOpen.current = false;
+        setOpen(false);
+        recognition.current?.abort();
+        stopNarration();
+        openerRef.current?.focus({ preventScroll: true });
+    }
+
+    function readMessage(message: Message, useDevice = false) {
+        const reference = message.text === chat.welcome ? { greeting: true as const } :
+            message.voiceGrant ? { grant: message.voiceGrant } : undefined;
+        speakRimy(message.text, reference, useDevice);
+    }
+
+    async function send(value: string) {
+        const message = value.trim();
+        if (!message || activeRequest.current) return;
+        if (message.length < limits.minMessageLength || message.length > limits.maxMessageLength) {
+            setError(`Escribe entre ${limits.minMessageLength} y ${limits.maxMessageLength} caracteres.`);
+            return;
+        }
+
+        stopNarration();
+        recognition.current?.abort();
+        const controller = new AbortController();
+        activeRequest.current = controller;
+        setPending(true);
+        setExplaining(false);
+        setError("");
+        const id = nextId.current++;
+        setMessages((previous) => [...previous.slice(-29), { id, text: message, role: "user" }]);
+        setQuestion("");
+
+        try {
+            const history: RecentTurn[] = messages.slice(-4).map(({ role, text }) => ({
+                rol: role === "bot" ? "asistente" : "usuario", contenido: text.slice(0, 600),
+            }));
+            const response = await fetch("/api/rimy/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message, currency, context: conversation.current, estado: session.current, historial_reciente: history }),
+                signal: controller.signal,
+            });
+            const result = await response.json() as ChatResult;
+            if (!response.ok || !result.ok || typeof result.reply !== "string") {
+                setError(result.error || "Rimy está ocupado. Intenta de nuevo.");
+                setQuestion((current) => current || message);
+                return;
+            }
+            const reply: Message = {
+                id: nextId.current++, role: "bot", text: result.reply,
+                table: result.table, voiceGrant: result.voiceGrant,
+                actions: result.actions, turnGrant: result.turnGrant,
+                scenario: result.action === "quote" && result.context?.topic === "landing" ? result.context : undefined,
+            };
+            conversation.current = result.context;
+            if (result.estado) session.current = result.estado;
+            setMessages((previous) => [...previous, reply]);
+            if (result.suggestions?.length) setSuggestions(result.suggestions.slice(0, 4));
+            setExplaining(true);
+            if (voiceEnabled.current && isOpen.current) readMessage(reply);
+        } catch {
+            if (!controller.signal.aborted) {
+                setError("Sin conexión con Rimy. Vuelve a intentarlo en un momento.");
+                setQuestion((current) => current || message);
+            }
+        } finally {
+            if (activeRequest.current === controller) {
+                activeRequest.current = null;
+                setPending(false);
+            }
+        }
+    }
+
+    function toggleMicrophone() {
+        if (recognition.current) {
+            recognition.current.abort();
+            return;
+        }
+
+        const browser = window as Window & { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition };
+        const Recognizer = browser.SpeechRecognition ?? browser.webkitSpeechRecognition;
+        if (!Recognizer) {
+            setError("El dictado no está disponible en este navegador.");
             return;
         }
 
         stopNarration();
         setError("");
-
-        const local = answerLocally(trimmed, currency);
-
-        const userMessage: Message = {
-            id: nextId(),
-            role: "user",
-            text: trimmed,
+        const instance = new Recognizer();
+        recognition.current = instance;
+        instance.lang = "es-PE";
+        instance.onresult = (event) => setQuestion(event.results[0][0].transcript.slice(0, limits.maxMessageLength));
+        instance.onerror = (event) => {
+            if (event.error !== "aborted") setError("El navegador no pudo usar el micrófono. Puedes escribir tu pregunta.");
         };
-
-        const botMessage: Message = {
-            id: nextId(),
-            role: "bot",
-            text: local.reply,
-            table: local.table,
-            animate: true,
+        instance.onend = () => {
+            recognition.current = null;
+            setListening(false);
         };
-
-        setMessages((current) => [...current, userMessage, botMessage]);
-        setQuestion("");
-
-        if (local.suggestions.length > 0) {
-            setSuggestions(local.suggestions.slice(0, 4));
+        try {
+            instance.start();
+            setListening(true);
+        } catch {
+            recognition.current = null;
+            setError("No se pudo iniciar el micrófono.");
         }
-    };
+    }
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        send(question);
-    };
+        void send(question);
+    }
 
-    const speakMessage = (text: string) => {
-        speak(text, {
-            lang: tts.lang,
-            rate: tts.rate,
-            pitch: tts.pitch,
-            volume: tts.volume,
-            sentencePauseMs: tts.sentencePauseMs,
-        });
-    };
-
-    const speaking = narration.status === "speaking";
-    const paused = narration.status === "paused";
-    const unsupported = narration.status === "unsupported";
+    function openAction(action: ChatAction, source: Message) {
+        recordRimyAction(source.turnGrant, action.id);
+        if ("message" in action) {
+            void send(action.message);
+            return;
+        }
+        if (action.id === "simulador" && source.scenario) {
+            try { sessionStorage.setItem(QUOTE_SCENARIO_KEY, JSON.stringify(source.scenario)); } catch { /* El evento cubre la landing abierta. */ }
+            window.dispatchEvent(new CustomEvent(QUOTE_SCENARIO_KEY, { detail: source.scenario }));
+        }
+        if (action.id === "simulador" || action.id === "formulario") minimize();
+    }
 
     if (!open) return null;
 
     return (
-        <div className="rimy-assistant fixed inset-x-0 bottom-0 z-[100] flex flex-col items-end sm:inset-auto sm:bottom-[158px] sm:right-6 lg:bottom-[186px]">
-            <section
-                className="relative flex max-h-[85dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-zinc-200 bg-white shadow-2xl sm:max-h-[min(600px,calc(100dvh-260px))] sm:w-[400px] sm:rounded-2xl dark:border-white/15 dark:bg-[#111827]"
-                aria-label="Asistente Virtual RIMY"
-                onWheel={(e) => e.stopPropagation()}
-            >
-                {/* ENCABEZADO */}
-                <div className="flex shrink-0 items-center gap-3 border-b border-zinc-100 px-4 py-3 dark:border-white/10">
-                    <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-cyan-100 p-1 dark:bg-cyan-950">
-                        <RimyMascot
-                            animation="happy"
-                            interactiveEyes={false}
-                            className="h-full w-full"
-                        />
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-bold text-zinc-900 dark:text-white">
-                            {rimy.chat.title}
-                        </p>
-                        <p className="flex items-center gap-1.5 text-[11px] text-lime-600 dark:text-lime-400">
-                            <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
-                            {rimy.chat.subtitle}
-                        </p>
-                    </div>
-
-                    <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        className="rounded-lg p-2 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-white/10 cursor-pointer"
-                        aria-label="Cerrar asistente"
-                    >
-                        ✕
-                    </button>
+        <section id="rimy-assistant" aria-labelledby="rimy-chat-title" onKeyDown={(event) => {
+            if (event.key === "Escape") minimize();
+        }} className="rimy-chat-panel fixed inset-x-0 bottom-0 z-[100] flex max-h-[calc(100dvh-72px)] w-full flex-col overflow-hidden rounded-t-2xl border border-[var(--header-border)] bg-[var(--background)] shadow-2xl sm:inset-x-auto sm:bottom-16 sm:right-4 sm:max-h-[min(640px,calc(100dvh-150px))] sm:w-[420px] sm:rounded-2xl">
+            <header className="flex shrink-0 items-center gap-2 border-b border-[var(--header-border)] px-3 py-1">
+                <div id={RIMY_CHAT_SLOT_ID} aria-hidden="true" className="size-12 shrink-0 sm:size-14" />
+                <div className="min-w-0 flex-1">
+                    <h2 id="rimy-chat-title" className="font-bold">{chat.title}</h2>
+                    <p className="text-xs text-[var(--header-muted)]">{chat.subtitle}</p>
                 </div>
-
-                {/* CONVERSACIÓN */}
-                <div
-                    ref={listRef}
-                    className="min-h-[140px] flex-1 space-y-3 overflow-y-auto p-3.5"
-                    style={{ overscrollBehavior: "contain" }}
-                    onWheel={(e) => e.stopPropagation()}
-                    aria-live="polite"
-                >
-                    {messages.map((message) => (
-                        <div
-                            key={message.id}
-                            className={`flex flex-col ${
-                                message.role === "user"
-                                    ? "items-end"
-                                    : "items-start"
-                            }`}
-                        >
-                            {message.role === "user" ? (
-                                <p className="max-w-[86%] whitespace-pre-wrap rounded-2xl bg-cyan-600 px-3.5 py-2.5 text-[13px] leading-relaxed text-white">
-                                    {message.text}
-                                </p>
-                            ) : (
-                                <>
-                                    <BotMessageContent
-                                        text={message.text}
-                                        table={message.table}
-                                        animate={message.animate}
-                                        onProgress={scrollToBottom}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            speakMessage(message.text)
-                                        }
-                                        className="mt-1 inline-flex items-center gap-1 px-1 font-mono text-[10px] text-zinc-400 transition hover:text-cyan-500 cursor-pointer"
-                                        aria-label="Escuchar esta respuesta"
-                                    >
-                                        <span aria-hidden="true">🔊</span>
-                                        Escuchar
-                                    </button>
-                                </>
+                <button type="button" onClick={minimize} className={`${smallButton} shrink-0`}>Minimizar</button>
+            </header>
+            <div ref={listRef} role="log" aria-label="Conversación con Rimy" aria-relevant="additions" tabIndex={0}
+                className="min-h-12 flex-1 space-y-3 overflow-y-auto overscroll-contain p-3">
+                {messages.map((message) => (
+                    <div key={message.id} className={message.role === "user" ? "flex justify-end" : "flex flex-col items-start"}>
+                        <div className={`min-w-0 max-w-[96%] rounded-xl p-2.5 text-sm leading-relaxed [overflow-wrap:anywhere] ${message.role === "user" ?
+                            "bg-cyan-800 text-white dark:bg-cyan-900" : "bg-black/5 dark:bg-white/10"}`}>
+                            <p className="whitespace-pre-wrap">{message.text}</p>
+                            {message.table && <ChatTable table={message.table} />}
+                            {!!message.actions?.length && (
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {message.actions.map((action) => "message" in action ? (
+                                        <button key={action.id} type="button" disabled={pending} className={`${smallButton} font-semibold`}
+                                            onClick={() => openAction(action, message)}>{action.label}</button>
+                                    ) : (
+                                        <Link key={action.id} href={action.href} onClick={() => openAction(action, message)}
+                                            target={action.id === "whatsapp" ? "_blank" : undefined} rel={action.id === "whatsapp" ? "noopener noreferrer" : undefined}
+                                            className={`${smallButton} font-semibold text-[var(--accent)]`}>{action.label}</Link>
+                                    ))}
+                                </div>
                             )}
                         </div>
-                    ))}
-
-                    {error && (
-                        <div
-                            role="alert"
-                            className="rounded-xl border border-red-200 bg-red-50 p-3 text-[11px] leading-relaxed text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
-                        >
-                            {error}
-                        </div>
-                    )}
-                </div>
-
-                {/* CONTROLES DE VOZ */}
-                {(speaking || paused || unsupported) && (
-                    <div className="flex shrink-0 items-center gap-2 border-t border-zinc-100 px-3 py-1.5 font-mono text-[10px] text-zinc-500 dark:border-white/10 dark:text-zinc-400">
-                        <span className="flex-1">
-                            {speaking && "🔊 Narrando respuesta..."}
-                            {paused && "⏸ Narración en pausa"}
-                            {unsupported &&
-                                "Este navegador no admite voz. Puedes leer la respuesta."}
-                        </span>
-                        {(speaking || paused) && (
-                            <>
-                                <button
-                                    type="button"
-                                    onClick={
-                                        speaking
-                                            ? pauseNarration
-                                            : resumeNarration
-                                    }
-                                    className="rounded-md border border-zinc-200 px-2 py-1 hover:border-cyan-400 dark:border-white/10 cursor-pointer"
-                                >
-                                    {speaking ? "Pausar" : "Continuar"}
+                        {message.role === "bot" && (
+                            <div className="flex flex-wrap gap-2">
+                                <button type="button" onClick={() => readMessage(message)}
+                                    className="min-h-9 px-2 text-xs font-semibold text-[var(--header-muted)] hover:text-[var(--header-text)]">
+                                    {narration.text === message.text && !voiceError ? "Volver a escuchar" : "Escuchar"}
                                 </button>
-                                <button
-                                    type="button"
-                                    onClick={stopNarration}
-                                    className="rounded-md border border-zinc-200 px-2 py-1 hover:border-red-400 dark:border-white/10 cursor-pointer"
-                                >
-                                    Detener
-                                </button>
-                            </>
+                                {(message.voiceGrant || message.text === chat.welcome) && voiceError && narration.text === message.text && narration.source === "natural" && (
+                                    <button type="button" onClick={() => readMessage(message, true)} className={smallButton}>Cambiar a voz del dispositivo</button>
+                                )}
+                            </div>
                         )}
                     </div>
-                )}
-
-                {/* SUGERENCIAS FAQ */}
-                {suggestions.length > 0 && (
-                    <div className="flex shrink-0 flex-wrap gap-1.5 border-t border-zinc-100 px-3 pt-2 pb-1 dark:border-white/10">
-                        {suggestions.map((suggestion) => (
-                            <button
-                                key={suggestion}
-                                type="button"
-                                onClick={() => send(suggestion)}
-                                className="rounded-full border border-zinc-200 px-2.5 py-1 text-[10px] text-zinc-600 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-white/10 dark:text-zinc-300 dark:hover:text-cyan-400 cursor-pointer"
-                            >
-                                {suggestion}
-                            </button>
-                        ))}
+                ))}
+                {pending && <p className="text-sm text-[var(--header-muted)]">Buscando información de RimCode…</p>}
+            </div>
+            {error && <p role="alert" className="px-3 py-1 text-sm text-red-700 dark:text-red-300">{error}</p>}
+            {(speaking || paused || loadingAudio || voiceError) && (
+                <div className="flex shrink-0 flex-wrap items-center gap-2 border-t border-[var(--header-border)] px-3 py-1 text-xs">
+                    <p role="status" className="flex-1 text-[var(--header-muted)]">
+                        {voiceError ? narration.error : loadingAudio ? "Preparando voz…" : paused ? "Voz en pausa" : "Rimy está hablando"}
+                    </p>
+                    {(speaking || paused) && <button type="button" className={smallButton}
+                        onClick={speaking ? pauseNarration : resumeNarration}>{speaking ? "Pausar" : "Continuar"}</button>}
+                    {!voiceError && <button type="button" className={smallButton} onClick={stopNarration}>Detener</button>}
+                </div>
+            )}
+            <details className="shrink-0 border-t border-[var(--header-border)] px-3 text-xs">
+                <summary className="flex min-h-9 cursor-pointer items-center font-semibold">Preguntas sugeridas y voz</summary>
+                <div className="max-h-[26dvh] space-y-2 overflow-y-auto overscroll-contain pb-2">
+                    <div className="flex flex-wrap gap-1">
+                        {suggestions.map((suggestion) => <button type="button" key={suggestion} disabled={pending}
+                            onClick={() => void send(suggestion)} className={smallButton}>{suggestion}</button>)}
                     </div>
-                )}
-
-                {/* FORMULARIO */}
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex shrink-0 gap-2 border-t border-zinc-100 p-2.5 dark:border-white/10"
-                >
-                    <input
-                        ref={inputRef}
-                        value={question}
-                        onChange={(event) => setQuestion(event.target.value)}
-                        placeholder={rimy.chat.inputPlaceholder}
-                        maxLength={settings.chat.maxMessageLength}
-                        className="min-w-0 flex-1 rounded-xl bg-zinc-100 px-3 py-2.5 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-cyan-500 dark:bg-white/5 dark:text-white"
-                        aria-label="Escribe tu pregunta sobre RimCode"
-                    />
-
-                    <button
-                        type="submit"
-                        disabled={!question.trim()}
-                        className="rounded-xl bg-cyan-600 px-4 text-white transition hover:bg-cyan-500 disabled:opacity-40 cursor-pointer"
-                        aria-label="Enviar mensaje"
-                    >
-                        ↑
-                    </button>
-                </form>
-            </section>
-
-            {/* Indicador visual apuntando hacia la cabeza de RIMY */}
-            <div
-                aria-hidden="true"
-                className="mr-10 -mt-1.5 hidden h-3 w-3 rotate-45 border-r border-b border-zinc-200 bg-white sm:block dark:border-white/15 dark:bg-[#111827] lg:mr-14"
-            />
-        </div>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                        <label className="flex items-center gap-2">
+                            <input type="checkbox" checked={autoVoice} onChange={(event) => {
+                                voiceEnabled.current = event.target.checked;
+                                setAutoVoice(event.target.checked);
+                                if (!event.target.checked) stopNarration();
+                            }} /> Reproducir respuestas
+                        </label>
+                        <label className="flex items-center gap-2">
+                            Volumen
+                            <input type="range" min={0} max={100} value={volume} className="w-20" onChange={(event) => {
+                                const value = event.target.valueAsNumber;
+                                setVolume(value);
+                                setNarrationVolume(value / 100);
+                            }} />
+                        </label>
+                        <button type="button" onClick={toggleMicrophone} className={smallButton}>
+                            {listening ? "Detener dictado" : "Dictar con micrófono"}
+                        </button>
+                    </div>
+                    <p className="text-[var(--header-muted)]">El navegador puede procesar el audio del dictado. RimCode recibe el texto cuando lo envías y puede registrar consultas y uso de botones para mejorar el chat. Evita incluir datos personales.</p>
+                </div>
+            </details>
+            <form onSubmit={onSubmit} className="flex shrink-0 gap-2 border-t border-[var(--header-border)] p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+                <input ref={inputRef} value={question} onChange={(event) => setQuestion(event.target.value)}
+                    placeholder={chat.inputPlaceholder} maxLength={limits.maxMessageLength}
+                    className="min-w-0 flex-1 rounded-xl bg-black/5 px-3 py-2.5 text-base text-[var(--foreground)] dark:bg-white/10"
+                    aria-label="Escribe tu pregunta sobre RimCode" />
+                <button type="submit" disabled={!question.trim() || pending}
+                    className="min-h-11 rounded-xl bg-cyan-800 px-3 text-sm font-semibold text-white hover:bg-cyan-900 disabled:opacity-50">
+                    Enviar
+                </button>
+            </form>
+        </section>
     );
 }

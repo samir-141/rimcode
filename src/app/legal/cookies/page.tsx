@@ -56,7 +56,7 @@ export default function CookiesPage() {
                         Puedes modificar o revocar tus preferencias de cookies en cualquier momento haciendo clic en el siguiente botón:
                     </p>
                     <div className="pt-1">
-                        <CookieSettingsTrigger className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-[var(--accent)] text-zinc-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer" />
+                        <CookieSettingsTrigger className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-[var(--accent)] text-[var(--accent-ink)] font-bold text-xs uppercase tracking-wider hover:opacity-90 transition cursor-pointer" />
                     </div>
                 </section>
 

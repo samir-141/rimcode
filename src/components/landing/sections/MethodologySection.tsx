@@ -103,7 +103,7 @@ export default function MethodologySection() {
                             block: "start",
                         });
                     }}
-                    className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[var(--accent)] text-zinc-950 hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer min-h-[44px] flex items-center justify-center shrink-0"
+                    className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[var(--accent)] text-[var(--accent-ink)] hover:opacity-90 transition-opacity whitespace-nowrap cursor-pointer min-h-[44px] flex items-center justify-center shrink-0"
                 >
                     Iniciar Proyecto ↗
                 </button>

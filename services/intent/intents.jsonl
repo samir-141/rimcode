@@ -1,0 +1,509 @@
+{"mensaje": "cuántas horas son diez días", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo te está yendo", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "cómo pronuncio love", "intencion": "otro", "split": "train"}
+{"mensaje": "hola de nuevo", "intencion": "saludo", "split": "train"}
+{"mensaje": "cómo amaneciste", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo saco una cita", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "hacer un encargo de web", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cómo ordeno el desarrollo", "intencion": "cotizar", "split": "train"}
+{"mensaje": "resuelve 2 más 2", "intencion": "otro", "split": "train"}
+{"mensaje": "podemos separarnos un tiempo para conversar", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "qué hosting ofrecen", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "como hago reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "que clima hara mañana", "intencion": "otro", "split": "train"}
+{"mensaje": "chau Rimy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo hago una reservacion", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "quiero una sesión estratégica", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero comenzar con mi app", "intencion": "cotizar", "split": "train"}
+{"mensaje": "bns dias", "intencion": "saludo", "split": "train"}
+{"mensaje": "plan de hosting básico", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "precio del erp", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "qué tal, Rimy", "intencion": "saludo", "split": "train"}
+{"mensaje": "todo bien contigo", "intencion": "charla_social", "split": "train"}
+{"mensaje": "estás bien", "intencion": "charla_social", "split": "train"}
+{"mensaje": "qué necesito para viajar de Perú a Chile", "intencion": "otro", "split": "train"}
+{"mensaje": "cotizacion xfa", "intencion": "cotizar", "split": "train"}
+{"mensaje": "en qué año se fundó Lima", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo hago ají de gallina", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero coordinar una cita", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "qué horario hay para una reunión", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "como stas hoy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "hola bot", "intencion": "saludo", "split": "train"}
+{"mensaje": "aló marciano de qué planeta eres", "intencion": "otro", "split": "train"}
+{"mensaje": "me ayudas a solicitar un presupuesto", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "fotos de carpinchos", "intencion": "otro", "split": "validation"}
+{"mensaje": "contacto del fundador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "se agradece", "intencion": "charla_social", "split": "train"}
+{"mensaje": "qué inversión requiere un sitio", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cual es la temperatura en el polo sur", "intencion": "otro", "split": "validation"}
+{"mensaje": "qué significa la palabra saudade", "intencion": "otro", "split": "train"}
+{"mensaje": "hablar con el equipo de desarrollo", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "quiero un servicio de hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hola gente", "intencion": "saludo", "split": "train"}
+{"mensaje": "quiero fijar fecha para reunirnos", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "muchas gracias", "intencion": "charla_social", "split": "train"}
+{"mensaje": "podemos coordinar para conversar mañana", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "se agradece la ayuda", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "donde me contacto", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "alo, alguien ahí", "intencion": "saludo", "split": "train"}
+{"mensaje": "¿Qué planes de host tienen?", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "qué cuestan los servicios de desarrollo", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "gracias por responder", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "ola", "intencion": "saludo", "split": "train"}
+{"mensaje": "qué cocinar para el almuerzo", "intencion": "otro", "split": "train"}
+{"mensaje": "ofrecen hospedaje web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuánto sale una bici usada", "intencion": "otro", "split": "validation"}
+{"mensaje": "me pueden alojar mi web", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "hola causa", "intencion": "saludo", "split": "train"}
+{"mensaje": "ustedes alojan páginas web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "ayuda con la reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "kiero agendar cita", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "su plan host más básico", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "a cuánto está una página simple", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "habrá partido el domingo", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo se toca el cajón", "intencion": "otro", "split": "train"}
+{"mensaje": "hay una referencia de cuánto vale una landing", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "quiero comunicarme por correo", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "coordina una sesión para ver el proyecto", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "puedo reservar ahora", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "quiero mover mi web a su hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "envíame su número", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "me pasas su contacto directo", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "precio de landing sin extras", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "me ayudas a reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "dónde encuentro el número de Jhoner", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "desde qué precio hacen webs", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuál es el número de RimCode", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cómo van las cosas contigo", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "dónde hay un banco cerca", "intencion": "otro", "split": "train"}
+{"mensaje": "puedes agendar una cita médica", "intencion": "otro", "split": "train"}
+{"mensaje": "dónde pago mi recibo de luz", "intencion": "otro", "split": "train"}
+{"mensaje": "hay host propio", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "necesito contratar hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "me explicas el alojamiento", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "dame un estimado de precio", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cómo se reserva con ustedes", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cuánto vale el desarrollo web", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "costo base para un sitio web", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "me interesa contratar", "intencion": "cotizar", "split": "train"}
+{"mensaje": "como me kontakto con el programador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cómo hago para reunirme con ustedes", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero hacerlo con ustedes", "intencion": "cotizar", "split": "train"}
+{"mensaje": "traduce perro al alemán", "intencion": "otro", "split": "train"}
+{"mensaje": "reserva una cita para el viernes", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "planes para hospedar mi página", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuál sería el monto de la página", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "qué costo tiene un ecommerce", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "puedo reservar una reunión", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "necesito coordinar una llamada", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cómo te encuentras", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo hago para reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "hey buenas tardes", "intencion": "saludo", "split": "train"}
+{"mensaje": "quiero hablar con alguien del equipo", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "¿Cómo hago una reserva?", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "ubica el río Amazonas en un mapa", "intencion": "otro", "split": "train"}
+{"mensaje": "necesito una cotización de un sistema", "intencion": "cotizar", "split": "train"}
+{"mensaje": "me das un rango de precios", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "pásame su whatsapp", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "oli", "intencion": "saludo", "split": "train"}
+{"mensaje": "disponibilidad para llamada de trabajo", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "podemos ver horarios para reunirnos", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "me dan una hora para reunirnos", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "buenazo gracias", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "qué jabón uso para la ropa", "intencion": "otro", "split": "train"}
+{"mensaje": "puedo comunicarme con ustedes", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cuál es el precio mensual del hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "por qué hay eclipses", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero asegurar un espacio", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "me orientas sobre cuánto cuesta el desarrollo", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "cuánto vive un loro", "intencion": "otro", "split": "train"}
+{"mensaje": "chévere, gracias", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo solicito un presupuesto", "intencion": "cotizar", "split": "train"}
+{"mensaje": "todavía no quiero comprar solo saber el precio", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "tienen alojamiento en servidor", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "qué hora es en España", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero solicitar una propuesta", "intencion": "cotizar", "split": "train"}
+{"mensaje": "genial, me ayudaste", "intencion": "charla_social", "split": "train"}
+{"mensaje": "puedo contratarles", "intencion": "cotizar", "split": "train"}
+{"mensaje": "me pueden hacer una cotización", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuál es la capital de Canadá", "intencion": "otro", "split": "train"}
+{"mensaje": "agenda cita plz", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "escríbeme un poema sobre el mar", "intencion": "otro", "split": "train"}
+{"mensaje": "cuánto cuesta rentar un cuarto", "intencion": "otro", "split": "validation"}
+{"mensaje": "wuenas", "intencion": "saludo", "split": "train"}
+{"mensaje": "pueden darme una reunión", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "necesito una cita con el equipo", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "¿Cómo estás?", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "quiero mandar a hacer una web", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "buen día, joven", "intencion": "saludo", "split": "train"}
+{"mensaje": "a cuánto está el kilo de pollo", "intencion": "otro", "split": "train"}
+{"mensaje": "quisiera apartar un lugar", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "ayúdame con la tabla del siete", "intencion": "otro", "split": "validation"}
+{"mensaje": "qué me recomiendas para alojar la landing", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hello", "intencion": "saludo", "split": "train"}
+{"mensaje": "cuánto cuesta un menú en Lima", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo cambio el idioma del televisor", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo hago una reserva en un hotel", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo bloqueo un cupo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "buenas tardes", "intencion": "saludo", "split": "train"}
+{"mensaje": "tienen calendario para una reunión", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "eres genial", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cuánto mide el Everest", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo saco el DNI", "intencion": "otro", "split": "train"}
+{"mensaje": "dónde puedo reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "dónde se reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "alojamiento para vacaciones en Ica", "intencion": "otro", "split": "train"}
+{"mensaje": "puedo hacer mi reservacion", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "tienen correo de contacto", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "que tal te va", "intencion": "charla_social", "split": "train"}
+{"mensaje": "necesito iniciar un encargo", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuántas calorías tiene una manzana", "intencion": "otro", "split": "validation"}
+{"mensaje": "me pasas su celular", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "qué tal va tu día", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "saludos", "intencion": "saludo", "split": "train"}
+{"mensaje": "un saludo", "intencion": "saludo", "split": "train"}
+{"mensaje": "por qué mi perro ladra", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero presupuesto para mi negocio", "intencion": "cotizar", "split": "train"}
+{"mensaje": "me dejas el dato del developer", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "me das el watsap", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "qué tan lejos queda Marte", "intencion": "otro", "split": "train"}
+{"mensaje": "cuál sería la inversión para una landing", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "qué tal le fue a Alianza Lima", "intencion": "otro", "split": "train"}
+{"mensaje": "mil gracias", "intencion": "charla_social", "split": "train"}
+{"mensaje": "quisiera arrancar el desarrollo con ustedes", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "hasta luego", "intencion": "charla_social", "split": "train"}
+{"mensaje": "agendemos una llamada el lunes", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero hablar con Samir", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "puedo hacer un pedido de una tienda", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "coticen mi proyecto porfa", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "qué bueno hablar contigo", "intencion": "charla_social", "split": "train"}
+{"mensaje": "quiero aprender a bailar marinera", "intencion": "otro", "split": "validation"}
+{"mensaje": "buenas nochs", "intencion": "saludo", "split": "train"}
+{"mensaje": "cómo hago un pedido de pizzas", "intencion": "otro", "split": "validation"}
+{"mensaje": "cuáles son las tarifas de RimCode", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cómo contrato el diseño de mi sitio", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "sepárame una cita", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "dónde hago mi solicitud de cotización", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "cuánto cuesta un pasaje hacia Arequipa", "intencion": "otro", "split": "train"}
+{"mensaje": "hola nuevamente", "intencion": "saludo", "split": "validation"}
+{"mensaje": "como estas ?", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "holaaa", "intencion": "saludo", "split": "train"}
+{"mensaje": "en qué bus llego a Pisco", "intencion": "otro", "split": "train"}
+{"mensaje": "coordinar llamada", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "¿Cómo realizo un pedido?", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "necesito que desarrollen mi web", "intencion": "cotizar", "split": "train"}
+{"mensaje": "buen trabajo Rimy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "contacto wssp del programador", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "quiero pedir una web", "intencion": "cotizar", "split": "train"}
+{"mensaje": "receta para hacer mazamorra", "intencion": "otro", "split": "validation"}
+{"mensaje": "cómo se hace un reclamo de agua", "intencion": "otro", "split": "train"}
+{"mensaje": "quién ganó el partido", "intencion": "otro", "split": "train"}
+{"mensaje": "que cobran de hosting nomas", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "reserva xfa", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cómo llevas la tarde", "intencion": "charla_social", "split": "train"}
+{"mensaje": "me pueden tomar una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "necesito escribir al programador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cómo riego un cactus", "intencion": "otro", "split": "train"}
+{"mensaje": "link para pedir presupuesto", "intencion": "cotizar", "split": "train"}
+{"mensaje": "wenas tardes", "intencion": "saludo", "split": "train"}
+{"mensaje": "cotiza mi tienda", "intencion": "cotizar", "split": "train"}
+{"mensaje": "quiero separar un cupo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "¿Cómo me contatcto con el programador?", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "cómo vas hoy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "necesito cotizar una mudanza", "intencion": "otro", "split": "train"}
+{"mensaje": "cuánto dinero necesito para una app", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "gracias amigo", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo les envío un email", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "prefiero hablar con una persona", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "puedo apartar algo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "vengo a solicitar presupuesto", "intencion": "cotizar", "split": "train"}
+{"mensaje": "por dónde empiezo a contratar", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuáles son sus precios", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "buenas nochess", "intencion": "saludo", "split": "validation"}
+{"mensaje": "cuánto cobran por el diseño", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "por dónde hago mi reserva", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "dónde hospedan la web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hasta pronto Rimy", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "buenas buenas", "intencion": "saludo", "split": "train"}
+{"mensaje": "planes de hospedaje y renovación", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "quiero iniciar mi proyecto", "intencion": "cotizar", "split": "train"}
+{"mensaje": "qué tan caro sale un sitio", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cómo hago el pedido", "intencion": "cotizar", "split": "train"}
+{"mensaje": "qué significa x al cuadrado", "intencion": "otro", "split": "train"}
+{"mensaje": "cuánto vale una tienda virtual", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuanto ta la web", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuánto tarda el avión a Cusco", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero reservar una videollamada", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "se pronostica lluvia en Puno", "intencion": "otro", "split": "train"}
+{"mensaje": "se puede congelar arroz", "intencion": "otro", "split": "train"}
+{"mensaje": "su tel porfa", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "se podrá hacer una reserva", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "dónde puedo adoptar un gato", "intencion": "otro", "split": "train"}
+{"mensaje": "pásame el WhatsApp del desarrollador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "qué tal estás", "intencion": "charla_social", "split": "train"}
+{"mensaje": "quiero una web para mi local", "intencion": "cotizar", "split": "train"}
+{"mensaje": "qué fechas tienen para reunirse", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "buenas con todos", "intencion": "saludo", "split": "train"}
+{"mensaje": "qué necesito para conectar mi impresora", "intencion": "otro", "split": "train"}
+{"mensaje": "tengo que pasear al perro", "intencion": "otro", "split": "train"}
+{"mensaje": "enviame su calendario de reuniones", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero saber el precio primero", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "me cotisan un sitio", "intencion": "cotizar", "split": "train"}
+{"mensaje": "ola buenas", "intencion": "saludo", "split": "validation"}
+{"mensaje": "quisiera agendar una reunión por Zoom", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero una junta por videollamada", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "qué plantas van en la sombra", "intencion": "otro", "split": "train"}
+{"mensaje": "precio de una web en soles", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "buenasss", "intencion": "saludo", "split": "train"}
+{"mensaje": "holis", "intencion": "saludo", "split": "train"}
+{"mensaje": "hasta otra", "intencion": "charla_social", "split": "train"}
+{"mensaje": "tienen un plan para alojar la web", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "me permiten hacer una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "quiero agendar al dentista", "intencion": "otro", "split": "validation"}
+{"mensaje": "buenas por acá", "intencion": "saludo", "split": "train"}
+{"mensaje": "hacer un pedido", "intencion": "cotizar", "split": "train"}
+{"mensaje": "quiero hacer una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "me puedes agendar para mañana", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "hay opción de reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "quiero encargar una página", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuánto sale que ustedes hospeden mi sitio", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "que te vaya bien", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cuídate", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo funciona un volcán", "intencion": "otro", "split": "train"}
+{"mensaje": "tienen reservas", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "quíero reselvar", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "una cita para hablar del proyecto", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "kiero reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "agendemos una videollamada", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "se puede agendar hoy", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "puedo mandarles un correo", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "les puedo reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "dame el costo del alojamiento web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "ey Rimy", "intencion": "saludo", "split": "train"}
+{"mensaje": "me agendas una reunion", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "quiero concertar un encuentro", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "Hola RimCode", "intencion": "saludo", "split": "train"}
+{"mensaje": "buenas estimados", "intencion": "saludo", "split": "train"}
+{"mensaje": "planes de internet doméstico", "intencion": "otro", "split": "validation"}
+{"mensaje": "cómo está tu día", "intencion": "charla_social", "split": "train"}
+{"mensaje": "qué planes tienen para turistas en Paracas", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero contactarme con mi banco", "intencion": "otro", "split": "validation"}
+{"mensaje": "dónde pido una cotización", "intencion": "cotizar", "split": "train"}
+{"mensaje": "presupuesto solo del hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "puedo separar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cómo contacto al programador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "ver precios", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "recomiéndame una película de terror", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero una llamada de consulta", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "precio de web corporativa", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "kmo andas", "intencion": "charla_social", "split": "train"}
+{"mensaje": "tienen wsp", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "hola equipo RimCode", "intencion": "saludo", "split": "validation"}
+{"mensaje": "cómo se hace para reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "información sobre alojamiento web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "bacán", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cuál es el costo de desarrollar una tienda", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cómo ubico a Samir por whatsapp", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "quien inventó el saxofón", "intencion": "otro", "split": "train"}
+{"mensaje": "dime cuánto cuesta su trabajo", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "andas bien", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cuéntame un chiste de gatos", "intencion": "otro", "split": "train"}
+{"mensaje": "haz una lista de canciones criollas", "intencion": "otro", "split": "train"}
+{"mensaje": "necesito alojamiento para mi sitio", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "me da hipo", "intencion": "otro", "split": "train"}
+{"mensaje": "buenos días", "intencion": "saludo", "split": "train"}
+{"mensaje": "todo bien por allá", "intencion": "charla_social", "split": "train"}
+{"mensaje": "busca un libro para niños", "intencion": "otro", "split": "train"}
+{"mensaje": "puedo pedir una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cuánto costaría una app a medida", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "muy buenas", "intencion": "saludo", "split": "train"}
+{"mensaje": "lista de precios", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "gracias por tu ayuda", "intencion": "charla_social", "split": "train"}
+{"mensaje": "quiero comprar una web para mi negocio", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cómo compro una landing", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuál es el mínimo para desarrollar un sitio", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "qué hay Rimy", "intencion": "saludo", "split": "validation"}
+{"mensaje": "busco una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "se cobra al mes el host", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "quiero ver sus tarifas", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "hola", "intencion": "saludo", "split": "train"}
+{"mensaje": "buen día Rimy", "intencion": "saludo", "split": "validation"}
+{"mensaje": "holi", "intencion": "saludo", "split": "train"}
+{"mensaje": "cómo emparejo unos audífonos", "intencion": "otro", "split": "train"}
+{"mensaje": "tkm Rimy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "dónde le escribo al desarrollador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "quiero contratar sus servicios", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cómo andas", "intencion": "charla_social", "split": "train"}
+{"mensaje": "necesito reservar una cita con el equipo", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "ejercicios para jugar vóley", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo les encargo una página", "intencion": "cotizar", "split": "train"}
+{"mensaje": "costo por el código", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "qué fue, Rimy", "intencion": "saludo", "split": "train"}
+{"mensaje": "me interesa reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "qué serie veo hoy", "intencion": "otro", "split": "train"}
+{"mensaje": "qué amable eres", "intencion": "charla_social", "split": "validation"}
+{"mensaje": "necesito hablar directamente con el técnico", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cómo corto un video", "intencion": "otro", "split": "train"}
+{"mensaje": "cuánto cobran por alojar un sitio", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "contactar ahora", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "limpiar la pantalla del monitor", "intencion": "otro", "split": "train"}
+{"mensaje": "horarios del Metropolitano", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero reunirnos para revisar el proyecto", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "presupesto para mi proyecto", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "hola hola", "intencion": "saludo", "split": "train"}
+{"mensaje": "cuánto es por una página básica", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "cómo llamo a los bomberos", "intencion": "otro", "split": "train"}
+{"mensaje": "hablar con el desarrollador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "hosting administrado para mi negocio", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hay opciones de hospedaje para la web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "quiero escribirle al ingeniero", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "con quién puedo hablar directamente", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "puedo reservar por acá", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "necesito cotizar una landing", "intencion": "cotizar", "split": "train"}
+{"mensaje": "estoy buscando quien haga mi sitio", "intencion": "cotizar", "split": "train"}
+{"mensaje": "quisiera programar una sesión", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cuánto cuesta el hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuál es la moneda de Japón", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo contacto al dueño de un restaurante", "intencion": "otro", "split": "train"}
+{"mensaje": "cuál es su tarifa habitual", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "tarifas de desarrollo", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "nos vemos", "intencion": "charla_social", "split": "train"}
+{"mensaje": "buen día", "intencion": "saludo", "split": "train"}
+{"mensaje": "buenas noches", "intencion": "saludo", "split": "train"}
+{"mensaje": "abrir simulador", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cómo programamos una llamada", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "me preparan una propuesta formal", "intencion": "cotizar", "split": "train"}
+{"mensaje": "quiero contactar con soporte humano", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "inventa una adivinanza", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo quitar una mancha de café", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo gestiono una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "puedo pagar el alojamiento por mes", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cómo empiezo a correr", "intencion": "otro", "split": "validation"}
+{"mensaje": "cual es el telefono de la comisaria", "intencion": "otro", "split": "validation"}
+{"mensaje": "agenda una reunión conmigo", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "precio de una sola pagina", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "dame el contacto del ingeniero", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "precio de hospedaje para mi sitio", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "deletrea esternocleidomastoideo", "intencion": "otro", "split": "train"}
+{"mensaje": "los planes del hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "puedo separar algo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "me explicas la reserva", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "costo de un sistema web", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "escríbanme cómo ubicar al dev", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "quisiera una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "en cuánto queda una landing", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "gracias Rimy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "pasos para contratar su servicio", "intencion": "cotizar", "split": "train"}
+{"mensaje": "pásame el número del técnico", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "quiero pedir comida a domicilio", "intencion": "otro", "split": "train"}
+{"mensaje": "dame algun canal para hablar con ustedes", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "un número para escribirles", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "me haces la tarea de historia", "intencion": "otro", "split": "validation"}
+{"mensaje": "cómo aparto", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "por que mi ropa huele mal", "intencion": "otro", "split": "validation"}
+{"mensaje": "cuánto cobran para crear mi web", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "host para mi página", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "quiero reservar vuelos a Tacna", "intencion": "otro", "split": "train"}
+{"mensaje": "holaa equipo", "intencion": "saludo", "split": "train"}
+{"mensaje": "te pasaste", "intencion": "charla_social", "split": "train"}
+{"mensaje": "a dónde voy para reservar", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "a qué hora juega Cristal", "intencion": "otro", "split": "validation"}
+{"mensaje": "quisiera saber qué hosting manejan", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "tengo que renovar mi brevete", "intencion": "otro", "split": "train"}
+{"mensaje": "fecha de nacimiento de Vallejo", "intencion": "otro", "split": "train"}
+{"mensaje": "qué host hay disponible", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "qué fecha es hoy", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo converso con una persona", "intencion": "contactar_programador", "split": "validation"}
+{"mensaje": "precio de alojar mi web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hosting de un torneo deportivo", "intencion": "otro", "split": "validation"}
+{"mensaje": "me puedes preparar una cotización", "intencion": "cotizar", "split": "train"}
+{"mensaje": "el host está incluido", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "qué es una coma", "intencion": "otro", "split": "train"}
+{"mensaje": "mi pez está quieto", "intencion": "otro", "split": "train"}
+{"mensaje": "cuentame la trama de la iliada", "intencion": "otro", "split": "validation"}
+{"mensaje": "dame números al azar", "intencion": "otro", "split": "train"}
+{"mensaje": "receta de ceviche", "intencion": "otro", "split": "train"}
+{"mensaje": "qué incluye su hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "puedo llamar al programador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "qué tal tu día", "intencion": "charla_social", "split": "train"}
+{"mensaje": "dónde se guarda mi página web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hostin para mi sitio", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuánto cuesta una landing", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuál es su número de teléfono", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "hey, buenas", "intencion": "saludo", "split": "validation"}
+{"mensaje": "necesito un contacto humano", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "canal directo de contacto", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "organizamos una reu corta", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "reunión por meet", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cómo puedo hacer mi reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cómo llego a Machu Picchu", "intencion": "otro", "split": "train"}
+{"mensaje": "hey", "intencion": "saludo", "split": "train"}
+{"mensaje": "puedo separar una cita", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "ustedes tienen servicio para hospedar páginas", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "dónde aparto", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "necesito hacer una reserva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cuanto sale una lading", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "grx", "intencion": "charla_social", "split": "train"}
+{"mensaje": "mail del programador", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "necesito un fondo de pantalla", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero agendar una reunión", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "ya tengo página y busco hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hay pago anual de hosting", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "hola por aqui", "intencion": "saludo", "split": "validation"}
+{"mensaje": "agendar reu", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cómo separo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "buenas tardess", "intencion": "saludo", "split": "validation"}
+{"mensaje": "cuanto cobran aprox", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "a dónde viajo en feriado", "intencion": "otro", "split": "validation"}
+{"mensaje": "como resrvo", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "agendamos una llamada para la próxima semana", "intencion": "agendar_reunion", "split": "validation"}
+{"mensaje": "cuántos gramos tiene una taza", "intencion": "otro", "split": "train"}
+{"mensaje": "cita para contar mi idea", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cuando nos podemos reunir", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "pueden armarme una propuesta", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cómo me comunico con el equipo", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "quiero hacer un encargo", "intencion": "cotizar", "split": "train"}
+{"mensaje": "dónde pido una reunión", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "cuanto saldria una página comercial", "intencion": "consultar_precios", "split": "validation"}
+{"mensaje": "hazme un crucigrama", "intencion": "otro", "split": "train"}
+{"mensaje": "quisiera reservar", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "calcula el área de un triángulo", "intencion": "otro", "split": "train"}
+{"mensaje": "por qué suena mi lavadora", "intencion": "otro", "split": "train"}
+{"mensaje": "hola rimy", "intencion": "saludo", "split": "train"}
+{"mensaje": "con qué correo los contacto", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cómo te va", "intencion": "charla_social", "split": "train"}
+{"mensaje": "cómo arreglo una silla rota", "intencion": "otro", "split": "train"}
+{"mensaje": "quiero cotizar por aquí", "intencion": "cotizar", "split": "validation"}
+{"mensaje": "cómo te sientes", "intencion": "charla_social", "split": "train"}
+{"mensaje": "holaaa RimCode", "intencion": "saludo", "split": "validation"}
+{"mensaje": "cuánto sale hacer una aplicación", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "buenas", "intencion": "saludo", "split": "train"}
+{"mensaje": "presupuesto para una landing", "intencion": "cotizar", "split": "train"}
+{"mensaje": "cuál es el medio de contacto", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "cuánto sale una página web", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuándo se puede reservar", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "quiero hacer una resrva", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "tienen servicio de alojamiento web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuál es el proceso para reservar", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "es posible reservar por este chat", "intencion": "ambiguo_reserva", "split": "validation"}
+{"mensaje": "quiero hacer una reservación", "intencion": "ambiguo_reserva", "split": "train"}
+{"mensaje": "cómo se juega ajedrez", "intencion": "otro", "split": "train"}
+{"mensaje": "osting precio mensual", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuanto cuesta su plan de alojamiento", "intencion": "consultar_hosting", "split": "validation"}
+{"mensaje": "quién escribió la ciudad y los perros", "intencion": "otro", "split": "train"}
+{"mensaje": "dame el correo de Samir", "intencion": "contactar_programador", "split": "train"}
+{"mensaje": "con qué alojamiento trabajan", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "cuál es el precio aproximado", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "cuánto tengo que pagar por una web", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "convierte metros a pies", "intencion": "otro", "split": "train"}
+{"mensaje": "quisiera contratar una página", "intencion": "cotizar", "split": "train"}
+{"mensaje": "me interesa contratar un electricista", "intencion": "otro", "split": "train"}
+{"mensaje": "cómo estás hoy", "intencion": "charla_social", "split": "train"}
+{"mensaje": "qué idioma se habla en Haití", "intencion": "otro", "split": "validation"}
+{"mensaje": "qué documentos piden para pasaporte", "intencion": "otro", "split": "train"}
+{"mensaje": "precio pf", "intencion": "consultar_precios", "split": "train"}
+{"mensaje": "qué tipo de hosting tienen", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "quiero reservar mesa para cuatro", "intencion": "otro", "split": "validation"}
+{"mensaje": "busco hosting para una web", "intencion": "consultar_hosting", "split": "train"}
+{"mensaje": "se puede programar una reunión virtual", "intencion": "agendar_reunion", "split": "train"}
+{"mensaje": "qué gusto saludarte", "intencion": "charla_social", "split": "train"}

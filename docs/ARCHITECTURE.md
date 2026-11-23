@@ -98,15 +98,16 @@ La narración (`src/lib/rimy/narration.ts`) es un singleton con `speak`, `pauseN
 
 ## 7. Chat y contacto
 
-- **Chat**: route handler `/api/rimy/chat`. Valida longitud, limita por IP y sanea el historial. Sin IA configurada responde con el motor local sobre `db/` y lo etiqueta. Con IA configurada llama a un endpoint compatible con OpenAI Chat Completions con un system prompt restringido al contexto documentado. Si el proveedor falla, devuelve error 502; no inventa una respuesta.
-- **Contacto**: route handler `/api/contact`. Valida en servidor, comprueba honeypot y tiempo mínimo, aplica rate limit y envía por Resend o webhook. Sin configuración devuelve 503 con la lista de variables faltantes. El cliente solo muestra éxito si el servidor devuelve `ok: true`.
+- El chat valida cuerpo, origen y longitud y comparte límites con el endpoint compatible. El motor recupera respuestas de `db/`. La IA opcional clasifica intenciones sobre candidatos autorizados. Una caída del proveedor conserva el modo local.
+- Contacto valida el formulario, controla ritmo e idempotencia y entrega por Resend o webhook. El cliente recibe errores públicos y confirma la entrega solo si el proveedor la aceptó.
+- Voz valida una autorización de síntesis antes de llamar al servicio Python. El cliente carga audio por interacción y el SVG puede usar su amplitud. [Arquitectura de voz](../audit/VOICE_ARCHITECTURE.md).
 
 ## 8. Decisiones de diseño
 
 - No se añadieron librerías de formularios, validación, correo o rate limiting: se mantiene el árbol de dependencias pequeño.
 - Los SVG de portada son imágenes de referencia, no capturas reales. La ficha lo indica.
 - Los campos sin documentación se representan como `""`, `[]` o `pending`; la UI los muestra como pendientes, no como datos reales.
-- El rate limit es en memoria y por instancia; para producción multirréplica debe migrarse a Redis/Upstash.
+- El rate limit usa memoria por defecto y admite Redis REST compartido mediante configuración.
 - `/api/rimbot` se conserva para no romper integraciones antiguas, pero la UI usa `/api/rimy/chat`.
 
 ## 9. Extensiones previstas

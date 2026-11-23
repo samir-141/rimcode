@@ -3,7 +3,7 @@
 interface BlockNavigatorProps {
     activeBlock: string;
     onNavigate: (id: string) => void;
-    blocks: { id: string; label: string; num: string }[];
+    blocks: { id: string; label: string }[];
 }
 
 export default function BlockNavigator({
@@ -27,7 +27,7 @@ export default function BlockNavigator({
 
     return (
         <aside
-            className="fixed right-3 xl:right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-center gap-2 p-2 rounded-full border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl shadow-2xl transition-all"
+            className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden 2xl:flex flex-col items-center gap-2 p-2 rounded-full border border-[var(--header-border)] bg-[var(--header-bg)]/80 backdrop-blur-xl shadow-2xl transition-all"
             aria-label="Navegación por bloques"
         >
             {/* BOTÓN SUBIR BLOQUE */}
@@ -66,9 +66,6 @@ export default function BlockNavigator({
 
                             {/* TOOLTIP FLOTANTE A LA IZQUIERDA */}
                             <span className="pointer-events-none absolute right-full mr-3.5 px-3 py-1 rounded-xl border border-[var(--header-border)] bg-[var(--header-bg)] text-[var(--header-text)] text-[11px] font-mono whitespace-nowrap opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 shadow-xl z-50">
-                                <span className="text-[var(--accent)] mr-1.5 font-bold">
-                                    {block.num}
-                                </span>
                                 {block.label}
                             </span>
                         </button>

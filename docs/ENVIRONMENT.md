@@ -11,9 +11,9 @@ Todas las variables se declaran en `.env.example` (versionado). Copia ese archiv
 | `NEXT_PUBLIC_APP_URL` | Sí | Recomendada | URL canónica para metadata, OG, canonical y JSON-LD |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Sí | No | Correo visible; si falta se usa `db/contact.json` |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Sí | No | WhatsApp comercial; si falta el canal se oculta |
-| `AI_API_KEY` | No | No | Clave del proveedor de IA |
-| `AI_MODEL` | No | No | Modelo de chat a usar |
-| `AI_BASE_URL` | No | No | Endpoint compatible con OpenAI; por defecto `https://api.openai.com/v1` |
+| `RIMY_INTENT_ENABLED`, `RIMY_INTENT_PORT` | No | Para ONNX | `1` habilita la inferencia en loopback. Puerto por defecto `8820` |
+| `RIMY_INTENT_THRESHOLD`, `RIMY_INTENT_THREADS` | No | No | Umbral y número de hilos para el proceso Python |
+| `RIMY_LOG_DIR`, `RIMY_LOG_SIGNING_KEY` | No | Para registrar turnos | Directorio absoluto privado y clave de al menos 32 caracteres |
 | `CONTACT_PROVIDER` | No | No | `resend` o `webhook`; si falta se autodetecta |
 | `RESEND_API_KEY` | No | Para Resend | Clave de Resend |
 | `CONTACT_EMAIL` | No | Para Resend | Bandeja que recibe las consultas |
@@ -21,6 +21,10 @@ Todas las variables se declaran en `.env.example` (versionado). Copia ese archiv
 | `CONTACT_WEBHOOK_URL` | No | Para webhook | Endpoint que recibe el JSON del formulario |
 | `CONTACT_WEBHOOK_SECRET` | No | No | Se envía como `Authorization: Bearer <secreto>` |
 | `NEXT_PUBLIC_RIMY_RIVE_SRC` | Sí | No | Archivo `.riv` opcional para el backend Rive |
+| `RIMY_TTS_ENABLED`, `RIMY_TTS_URL` | No | Para TTS | Activación del servicio y URL privada de síntesis |
+| `RIMY_TTS_TOKEN`, `RIMY_TTS_SIGNING_KEY` | No | Para TTS | Autenticación del servicio y firma de respuestas |
+| `RIMCODE_TRUSTED_IP_HEADER` | No | No | Encabezado de IP que sobrescribe un proxy de confianza |
+| `RIMCODE_REDIS_REST_URL`, `RIMCODE_REDIS_REST_TOKEN` | No | Para límites compartidos | URL HTTPS y token Redis REST |
 
 ## 2. Sitio
 
@@ -33,7 +37,7 @@ Todas las variables se declaran en `.env.example` (versionado). Copia ese archiv
 ### `NEXT_PUBLIC_CONTACT_EMAIL`
 
 - Correo que se muestra en la sección de contacto y en el chat.
-- Si falta, se usa `contacto@rimcode.com` de `db/contact.json`.
+- Si falta, se usa el correo definido en `db/contact.json`.
 - No es un secreto; puede ser público.
 
 ### `NEXT_PUBLIC_WHATSAPP_NUMBER`
@@ -42,38 +46,23 @@ Todas las variables se declaran en `.env.example` (versionado). Copia ese archiv
 - Si falta, el canal de WhatsApp queda **deshabilitado** y no se muestra el número placeholder.
 - No se valida contra WhatsApp; es responsabilidad del negocio.
 
-## 3. Chat con IA
+## 3. Intenciones y registro de Rimy
 
-Sin `AI_API_KEY` y `AI_MODEL`, el chat usa el **motor local documentado** sobre `db/*.json` y lo indica en la interfaz. No se simula una conexión.
-
-### `AI_API_KEY` y `AI_MODEL`
-
-- Deben definirse **ambas** para activar el modo IA.
-- `AI_MODEL` es el identificador exacto del proveedor (por ejemplo, el nombre de modelo que ofrece tu API compatible).
-- Si una falta, el chat sigue en modo local.
-
-### `AI_BASE_URL`
-
-- Endpoint compatible con OpenAI Chat Completions.
-- Debe incluir la versión si el proveedor la requiere; por ejemplo `https://api.openai.com/v1`.
-- El código añade `/chat/completions` y elimina una barra final.
-
-### Comportamiento ante fallos
-
-- Error del proveedor, timeout (20 s) o respuesta vacía → **502**.
-- No hay fallback a una respuesta inventada.
-- En desarrollo se devuelve `detail`; en producción se omite.
+- El proceso Python carga los archivos ONNX al arrancar. Next.js lo consulta en `127.0.0.1` cuando `RIMY_INTENT_ENABLED=1`. Si no obtiene una respuesta válida en 300 ms, usa las reglas locales.
+- Las variables `RIMY_INTENT_THRESHOLD` y `RIMY_INTENT_THREADS` se definen en el entorno del proceso Python. Sus valores por defecto son `0.55` y `2`.
+- Define `RIMY_LOG_DIR` fuera de `public/` y `RIMY_LOG_SIGNING_KEY` en Next.js para activar el JSONL. En una instalación con varios procesos, configura la misma clave para correlacionar los eventos que correspondan a un turno.
+- Las variables anteriores `RIMY_AI_ENABLED` y `AI_*` quedaron obsoletas. Consulta el [README de intenciones](../services/intent/README.md).
 
 ## 4. Contacto
 
-El formulario **no simula éxito**. Sin configuración válida responde **503** e indica las variables que faltan.
+Sin configuración válida el formulario devuelve un mensaje público genérico con código HTTP 503.
 
 ### Detección del proveedor
 
 1. Si `CONTACT_PROVIDER=resend` → Resend.
 2. Si `CONTACT_PROVIDER=webhook` → webhook.
 3. Si no se define: usa Resend cuando existe `RESEND_API_KEY`; si no, webhook cuando existe `CONTACT_WEBHOOK_URL`.
-4. Si no hay ninguno → 503 con variables requeridas.
+4. `CONTACT_PROVIDER=disabled` desactiva el envío.
 
 ### Opción A · Resend
 
@@ -127,6 +116,10 @@ Payload enviado:
 
 ## 5. RIMY
 
+Para levantar el servicio de voz y configurar secretos, consulta la [arquitectura de voz](../audit/VOICE_ARCHITECTURE.md).
+
+El chat y la ruta de intenciones aplican límites en memoria del proceso. Contacto y voz pueden compartir sus límites entre réplicas con las dos variables Redis REST y un encabezado de IP sobrescrito por tu proxy.
+
 ### `NEXT_PUBLIC_RIMY_RIVE_SRC`
 
 - Opcional. Ruta pública a un `.riv` con la State Machine `RimyMachine`.
@@ -146,7 +139,7 @@ Resultado:
 
 - Web completa.
 - Chat en modo local documentado.
-- Formulario de contacto responde 503 con variables faltantes (comportamiento honesto).
+- El formulario de contacto responde HTTP 503 hasta configurar su proveedor.
 
 ### Producción recomendada
 
@@ -155,9 +148,8 @@ NEXT_PUBLIC_APP_URL=https://rimcode.com
 NEXT_PUBLIC_CONTACT_EMAIL=contacto@rimcode.com
 NEXT_PUBLIC_WHATSAPP_NUMBER=51XXXXXXXXX
 
-AI_API_KEY=...
-AI_MODEL=...
-AI_BASE_URL=https://api.openai.com/v1
+RIMY_INTENT_ENABLED=1
+RIMY_INTENT_PORT=8820
 
 CONTACT_PROVIDER=resend
 RESEND_API_KEY=...
@@ -169,9 +161,8 @@ CONTACT_FROM_EMAIL=RimCode <no-reply@rimcode.com>
 
 | Síntoma | Causa probable |
 | --- | --- |
-| El chat dice “Modo local documentado” | Faltan `AI_API_KEY` o `AI_MODEL` |
-| El chat devuelve 502 | Clave/modelo inválido, cuota agotada o timeout |
-| El formulario devuelve 503 | Faltan variables del proveedor; revisa `missing` en la respuesta |
+| El chat reporta `intentSource: reglas` | Proceso ONNX desactivado, ocupado o no disponible |
+| El formulario devuelve 503 | Configuración incompleta, envío desactivado o límite compartido no disponible |
 | El formulario devuelve 502 | El proveedor rechazó el envío; revisa logs del servidor |
 | WhatsApp no aparece | Falta `NEXT_PUBLIC_WHATSAPP_NUMBER` |
 | Canonical apunta a localhost | Falta `NEXT_PUBLIC_APP_URL` en producción |

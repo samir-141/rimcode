@@ -1,0 +1,68 @@
+[saludo]
+hola|buenas|buenos días|buenas tardes|buenas noches|hola rimy|holaaa|holi|ola|wuenas
+qué tal, Rimy|alo, alguien ahí|hey|ey Rimy|hello|saludos|buen día|hola hola|ola rimy|bns dias
+hola de nuevo|buenas buenas|hola gente|muy buenas|holis|buenasss|holaa equipo|Hola RimCode|un saludo|buenas nochs
+hola bot|wenas tardes|buen día, joven|qué fue, Rimy|buenas con todos|hola causa|buenas por acá|oli|buenas estimados|hey buenas tardes
+---
+buenas tardess|hola nuevamente|holaaa RimCode|qué hay Rimy|hola equipo RimCode|buenas nochess|hola por aqui|hey, buenas|buen día Rimy|ola buenas
+[charla_social]
+cómo andas|cómo te va|todo bien contigo|cómo estás hoy|cómo te encuentras|cómo está tu día|qué tal estás|cómo te sientes|estás bien|cómo amaneciste
+qué tal tu día|qué gusto saludarte|gracias por tu ayuda|gracias Rimy|muchas gracias|chévere, gracias|eres genial|te pasaste|bacán|mil gracias
+andas bien|cómo llevas la tarde|qué bueno hablar contigo|grx|gracias amigo|tkm Rimy|hasta luego|nos vemos|chau Rimy|que te vaya bien
+todo bien por allá|que tal te va|kmo andas|como stas hoy|cómo vas hoy|buen trabajo Rimy|se agradece|genial, me ayudaste|cuídate|hasta otra
+---
+¿Cómo estás?|como estas ?|qué tal va tu día|cómo te está yendo|qué amable eres|buenazo gracias|se agradece la ayuda|cómo van las cosas contigo|gracias por responder|hasta pronto Rimy
+[cotizar]
+quiero contratar sus servicios|dónde pido una cotización|cómo compro una landing|estoy buscando quien haga mi sitio|me preparan una propuesta formal|necesito que desarrollen mi web|quiero encargar una página|quiero iniciar mi proyecto|quiero hacer un encargo|cómo hago el pedido
+me pueden hacer una cotización|cómo solicito un presupuesto|quiero presupuesto para mi negocio|quiero solicitar una propuesta|cotiza mi tienda|quisiera contratar una página|necesito una cotización de un sistema|quiero pedir una web|pasos para contratar su servicio|por dónde empiezo a contratar
+hacer un pedido|hacer un encargo de web|cotizacion xfa|presupuesto para una landing|me cotisan un sitio|quiero hacerlo con ustedes|puedo contratarles|quiero comprar una web para mi negocio|vengo a solicitar presupuesto|pueden armarme una propuesta
+necesito iniciar un encargo|cómo ordeno el desarrollo|quiero comenzar con mi app|me puedes preparar una cotización|necesito cotizar una landing|link para pedir presupuesto|quiero una web para mi local|cómo les encargo una página|abrir simulador|me interesa contratar
+---
+¿Cómo realizo un pedido?|me ayudas a solicitar un presupuesto|quiero mandar a hacer una web|coticen mi proyecto porfa|dónde hago mi solicitud de cotización|quisiera arrancar el desarrollo con ustedes|puedo hacer un pedido de una tienda|cómo contrato el diseño de mi sitio|quiero cotizar por aquí|presupesto para mi proyecto
+[agendar_reunion]
+quiero agendar una reunión|cómo programamos una llamada|podemos coordinar para conversar mañana|necesito una cita con el equipo|puedo reservar una reunión|tienen calendario para una reunión|agendemos una videollamada|quiero una llamada de consulta|agenda una reunión conmigo|puedo separar una cita
+quiero coordinar una cita|dónde pido una reunión|me dan una hora para reunirnos|quiero reunirnos para revisar el proyecto|se puede programar una reunión virtual|quisiera agendar una reunión por Zoom|qué fechas tienen para reunirse|una cita para hablar del proyecto|se puede agendar hoy|reserva una cita para el viernes
+quiero reservar una videollamada|cómo hago para reunirme con ustedes|coordinar llamada|me puedes agendar para mañana|enviame su calendario de reuniones|agendar reu|sepárame una cita|agendemos una llamada el lunes|quiero concertar un encuentro|cuando nos podemos reunir
+podemos ver horarios para reunirnos|me agendas una reunion|agenda cita plz|cita para contar mi idea|quiero una sesión estratégica|quisiera programar una sesión|disponibilidad para llamada de trabajo|organizamos una reu corta|necesito coordinar una llamada|reunión por meet
+---
+necesito reservar una cita con el equipo|cómo saco una cita|qué horario hay para una reunión|agendamos una llamada para la próxima semana|quiero una junta por videollamada|podemos separarnos un tiempo para conversar|quiero fijar fecha para reunirnos|pueden darme una reunión|coordina una sesión para ver el proyecto|kiero agendar cita
+[contactar_programador]
+cómo contacto al programador|quiero hablar con Samir|pásame el WhatsApp del desarrollador|tienen correo de contacto|cómo me comunico con el equipo|cuál es su número de teléfono|dame el contacto del ingeniero|necesito escribir al programador|me pasas su contacto directo|prefiero hablar con una persona
+quiero hablar con alguien del equipo|dónde le escribo al desarrollador|cuál es el número de RimCode|puedo comunicarme con ustedes|tienen wsp|envíame su número|dame el correo de Samir|necesito un contacto humano|puedo llamar al programador|contacto del fundador
+un número para escribirles|me das el watsap|quiero contactar con soporte humano|hablar con el desarrollador|me pasas su celular|contactar ahora|cuál es el medio de contacto|como me kontakto con el programador|pásame su whatsapp|cómo les envío un email
+su tel porfa|con qué correo los contacto|necesito hablar directamente con el técnico|dónde encuentro el número de Jhoner|escríbanme cómo ubicar al dev|mail del programador|hablar con el equipo de desarrollo|canal directo de contacto|donde me contacto|quiero escribirle al ingeniero
+---
+¿Cómo me contatcto con el programador?|dame algun canal para hablar con ustedes|me dejas el dato del developer|cómo ubico a Samir por whatsapp|puedo mandarles un correo|contacto wssp del programador|cómo converso con una persona|pásame el número del técnico|quiero comunicarme por correo|con quién puedo hablar directamente
+[consultar_hosting]
+qué hosting ofrecen|cuánto cuesta el hosting|tienen servicio de alojamiento web|planes para hospedar mi página|cuál es el precio mensual del hosting|hosting administrado para mi negocio|dónde se guarda mi página web|puedo pagar el alojamiento por mes|busco hosting para una web|información sobre alojamiento web
+qué incluye su hosting|ustedes alojan páginas web|hay opciones de hospedaje para la web|qué tipo de hosting tienen|cuánto cobran por alojar un sitio|necesito contratar hosting|qué host hay disponible|presupuesto solo del hosting|host para mi página|el host está incluido
+dónde hospedan la web|tienen alojamiento en servidor|plan de hosting básico|planes de hospedaje y renovación|quiero un servicio de hosting|qué me recomiendas para alojar la landing|ya tengo página y busco hosting|me explicas el alojamiento|ofrecen hospedaje web|su plan host más básico
+los planes del hosting|osting precio mensual|dame el costo del alojamiento web|quiero mover mi web a su hosting|hostin para mi sitio|con qué alojamiento trabajan|hay pago anual de hosting|precio de hospedaje para mi sitio|que cobran de hosting nomas|precio de alojar mi web
+---
+¿Qué planes de host tienen?|tienen un plan para alojar la web|cuánto sale que ustedes hospeden mi sitio|hay host propio|cuanto cuesta su plan de alojamiento|quisiera saber qué hosting manejan|ustedes tienen servicio para hospedar páginas|me pueden alojar mi web|se cobra al mes el host|necesito alojamiento para mi sitio
+[consultar_precios]
+cuánto cuesta una landing|cuánto sale una página web|cuál es el costo de desarrollar una tienda|cuánto cobran por el diseño|cuáles son sus precios|dame un estimado de precio|cuál es su tarifa habitual|qué cuestan los servicios de desarrollo|cuánto tengo que pagar por una web|precio de web corporativa
+precio de landing sin extras|a cuánto está una página simple|desde qué precio hacen webs|cuál es el mínimo para desarrollar un sitio|qué costo tiene un ecommerce|cuánto sale hacer una aplicación|quiero saber el precio primero|cuáles son las tarifas de RimCode|lista de precios|cuál es el precio aproximado
+dime cuánto cuesta su trabajo|en cuánto queda una landing|cuánto vale el desarrollo web|costo base para un sitio web|todavía no quiero comprar solo saber el precio|me das un rango de precios|cuánto costaría una app a medida|cuanto cobran aprox|precio de una web en soles|qué inversión requiere un sitio
+cuanto ta la web|cuanto sale una lading|precio pf|costo por el código|ver precios|cuánto vale una tienda virtual|tarifas de desarrollo|precio del erp|cuál sería el monto de la página|qué tan caro sale un sitio
+---
+cuánto es por una página básica|me orientas sobre cuánto cuesta el desarrollo|cuál sería la inversión para una landing|precio de una sola pagina|cuánto cobran para crear mi web|quiero ver sus tarifas|costo de un sistema web|cuánto dinero necesito para una app|cuanto saldria una página comercial|hay una referencia de cuánto vale una landing
+[ambiguo_reserva]
+quiero hacer una reserva|quisiera reservar|cómo se hace para reservar|me permiten hacer una reserva|dónde se reserva|puedo reservar por acá|hay opción de reserva|tienen reservas|cómo gestiono una reserva|quisiera una reserva
+puedo reservar ahora|necesito hacer una reserva|me ayudas a reservar|cómo hago para reservar|cómo puedo hacer mi reserva|quiero separar un cupo|puedo separar algo|dónde aparto|cómo aparto|quiero asegurar un espacio
+puedo separar|cómo separo|cómo se reserva con ustedes|puedo pedir una reserva|puedo hacer mi reservacion|quiero hacer una reservación|cómo hago una reservacion|me pueden tomar una reserva|me interesa reservar|les puedo reservar
+reserva xfa|kiero reservar|como resrvo|dónde puedo reservar|ayuda con la reserva|quiero hacer una resrva|puedo apartar algo|como hago reserva|busco una reserva|cómo bloqueo un cupo
+---
+¿Cómo hago una reserva?|se podrá hacer una reserva|por dónde hago mi reserva|a dónde voy para reservar|cuál es el proceso para reservar|quíero reselvar|cuándo se puede reservar|quisiera apartar un lugar|es posible reservar por este chat|me explicas la reserva
+[otro]
+cuál es la capital de Canadá|en qué año se fundó Lima|quién escribió la ciudad y los perros|qué significa la palabra saudade|ubica el río Amazonas en un mapa|cuál es la moneda de Japón|por qué hay eclipses|qué tan lejos queda Marte|cuánto mide el Everest|cómo funciona un volcán|quien inventó el saxofón
+receta de ceviche|cómo hago ají de gallina|cuántos gramos tiene una taza|qué cocinar para el almuerzo|se puede congelar arroz|cómo quitar una mancha de café|qué jabón uso para la ropa|por qué suena mi lavadora|cómo arreglo una silla rota|qué plantas van en la sombra|cómo riego un cactus
+cuéntame un chiste de gatos|escríbeme un poema sobre el mar|inventa una adivinanza|haz una lista de canciones criollas|recomiéndame una película de terror|qué serie veo hoy|quién ganó el partido|ejercicios para jugar vóley|qué tal le fue a Alianza Lima|habrá partido el domingo|cómo se juega ajedrez
+en qué bus llego a Pisco|cuánto tarda el avión a Cusco|cómo llego a Machu Picchu|qué necesito para viajar de Perú a Chile|cuánto cuesta un pasaje hacia Arequipa|dónde hay un banco cerca|cómo saco el DNI|tengo que renovar mi brevete|qué documentos piden para pasaporte|dónde pago mi recibo de luz|horarios del Metropolitano
+quiero reservar vuelos a Tacna|qué planes tienen para turistas en Paracas|quiero pedir comida a domicilio|cómo contacto al dueño de un restaurante|cuánto cuesta un menú en Lima|cómo hago una reserva en un hotel|puedes agendar una cita médica|cómo llamo a los bomberos|necesito cotizar una mudanza|me interesa contratar un electricista|alojamiento para vacaciones en Ica
+resuelve 2 más 2|qué significa x al cuadrado|calcula el área de un triángulo|cuántas horas son diez días|convierte metros a pies|fecha de nacimiento de Vallejo|busca un libro para niños|traduce perro al alemán|deletrea esternocleidomastoideo|qué es una coma|cómo pronuncio love
+me da hipo|tengo que pasear al perro|mi pez está quieto|qué hora es en España|qué fecha es hoy|cómo cambio el idioma del televisor|qué necesito para conectar mi impresora|cómo emparejo unos audífonos|limpiar la pantalla del monitor|cómo corto un video|necesito un fondo de pantalla
+que clima hara mañana|se pronostica lluvia en Puno|a cuánto está el kilo de pollo|cómo se hace un reclamo de agua|cuánto vive un loro|dónde puedo adoptar un gato|por qué mi perro ladra|cómo se toca el cajón|dame números al azar|hazme un crucigrama|aló marciano de qué planeta eres
+---
+quiero reservar mesa para cuatro|cuánto cuesta rentar un cuarto|quiero agendar al dentista|cual es el telefono de la comisaria|planes de internet doméstico|cómo hago un pedido de pizzas|hosting de un torneo deportivo|cuánto sale una bici usada|me haces la tarea de historia|cuentame la trama de la iliada|quiero contactarme con mi banco
+a qué hora juega Cristal|cual es la temperatura en el polo sur|por que mi ropa huele mal|fotos de carpinchos|quiero aprender a bailar marinera|cómo empiezo a correr|a dónde viajo en feriado|qué idioma se habla en Haití|receta para hacer mazamorra|cuántas calorías tiene una manzana|ayúdame con la tabla del siete

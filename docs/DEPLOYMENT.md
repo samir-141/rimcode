@@ -59,9 +59,9 @@ No añadas `next export`: la aplicación usa route handlers (`/api/contact`, `/a
 
 ### Limitaciones en Vercel
 
-- **Rate limit en memoria:** cada instancia/serverless function tiene su propio contador. Para un límite fiable entre réplicas, sustituye `src/lib/server/rate-limit.ts` por Redis/Upstash manteniendo la firma `rateLimit(key, limit, windowMs)`.
-- **Tiempo de ejecución:** los endpoints usan timeouts de 15 s (contacto) y 20 s (chat). Ajusta el límite de la función si tu plan es más restrictivo.
-- **IP del cliente:** `getClientIp` lee `x-forwarded-for`, `x-real-ip` y `cf-connecting-ip`. Detrás de un proxy propio, asegúrate de que reenvíe la IP real.
+- El límite en memoria corresponde a un proceso. Configura `RIMCODE_REDIS_REST_URL` y `RIMCODE_REDIS_REST_TOKEN` para compartir el conteo entre réplicas.
+- Configura `RIMCODE_TRUSTED_IP_HEADER` solo si el proxy sobrescribe ese encabezado con la IP de origen. Sin encabezado confiable se aplica un cupo común por API.
+- El límite de espera es de 15 s para correo, 300 ms para la inferencia local y 25 s para voz. Consulta los servicios de [intenciones](../services/intent/README.md) y [voz](../audit/VOICE_ARCHITECTURE.md).
 
 ## 5. Servidor Node propio (VPS, Docker, Render, Railway…)
 
@@ -117,9 +117,8 @@ Recomendado:
 NEXT_PUBLIC_CONTACT_EMAIL=contacto@rimcode.com
 NEXT_PUBLIC_WHATSAPP_NUMBER=51XXXXXXXXX
 
-AI_API_KEY=...
-AI_MODEL=...
-AI_BASE_URL=https://api.openai.com/v1
+RIMY_INTENT_ENABLED=1
+RIMY_INTENT_PORT=8820
 
 CONTACT_PROVIDER=resend
 RESEND_API_KEY=...
@@ -132,7 +131,7 @@ Notas:
 - **`NEXT_PUBLIC_*` se incrusta en el bundle en tiempo de build.** Si cambias una, hay que recompilar y redesplegar.
 - Las variables de servidor se leen al arrancar; reinicia el proceso tras cambiarlas.
 - No subas `.env.local` ni claves al repositorio.
-- Si el formulario y el chat no están configurados, el sitio funciona y lo indica honestamente (503/502 y modo local), pero no podrás recibir consultas ni usar IA.
+- El formulario devuelve 503 hasta configurar un proveedor. Arranca el [servicio ONNX de Rimy](../services/intent/README.md) en la misma máquina y espacio de red que Next.js. Rimy conserva las reglas locales si el servicio no está disponible. En hosting sin proceso Python persistente, deja `RIMY_INTENT_ENABLED=0`.
 
 ## 7. Checklist previo a publicar
 
@@ -150,7 +149,7 @@ Notas:
 - [ ] RIMY no se duplica al navegar entre landing y fichas.
 - [ ] TTS: pausa, reanudación, parada y alternativa textual.
 - [ ] Sin claves en `NEXT_PUBLIC_*` ni en el repositorio.
-- [ ] Rate limit revisado: en multirréplica, migrado a un almacén compartido.
+- [ ] En multirréplica, verificar el contador compartido y el encabezado de IP del proxy.
 
 ## 8. Verificación posterior
 

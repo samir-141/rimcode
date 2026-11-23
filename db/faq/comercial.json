@@ -32,7 +32,7 @@
         "tienen entrega express"
       ],
       "keywords": ["tarda", "tiempo", "plazo", "semanas", "demora", "duracion", "express", "estandar", "rapido"],
-      "answer": "Como referencia en nuestro simulador, la entrega estándar se estima entre 3 y 4 semanas y la modalidad express prioritaria entre 1 y 2 semanas según complejidad. El cronograma exacto se confirma tras definir el alcance técnico en la sesión inicial.",
+      "answer": "El tiempo depende de las funciones, las integraciones y las etapas de revisión. Podemos evaluar una entrega prioritaria. Tras conocer tu alcance técnico, definimos un cronograma en la propuesta.",
       "relatedQuestions": [
         "¿Cuánto cuesta desarrollar un sistema?",
         "¿Cómo trabajan?",
@@ -51,7 +51,7 @@
         "canales de atencion"
       ],
       "keywords": ["contratar", "contacto", "contactar", "contactarlos", "whatsapp", "correo", "email", "hablar", "escribir", "reunion", "telefono"],
-      "answer": "Puedes escribirnos directamente por nuestros canales oficiales o enviar tus requerimientos mediante el formulario de la sección Contacto (te responderemos en menos de 24 horas):",
+      "answer": "Cuéntanos qué necesitas resolver, quién usará el software y qué sistemas ya tienes. Puedes usar el formulario de Contacto o escribir por nuestros canales oficiales.",
       "tableType": "contact",
       "relatedQuestions": [
         "¿Cuánto cuesta desarrollar un sistema?",
